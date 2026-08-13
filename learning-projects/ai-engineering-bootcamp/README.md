@@ -7,11 +7,13 @@ Working demonstrations from the AI Engineering Bootcamp are being audited and do
 | # | Project | Status | Portfolio page |
 |---|---|---|---|
 | 1 | Prepare for an AI development project | Complete - evidence reconstructed | [View project](01-foundry-project-setup/) |
-| 2 | Create a generative AI chat application | Audit in progress | To be added |
-| 3 | Create a generative AI application that uses tools | Audit pending | To be added |
+| 2 | Create a generative AI chat application | Implementation complete - Azure validation blocked | [View project](02-generative-ai-chat-app/) |
+| 3 | Create a generative AI application that uses tools | Implementation prepared - Azure validation blocked | [View project](03-generative-ai-tools-app/) |
 | 4 | Build an AI agent | Not yet assessed | To be added |
 | 5 | Monitor and trace a generative AI agent | Not yet assessed | To be added |
 | 6 | Apply responsible-AI guardrails | Not yet assessed | To be added |
+
+See [Azure platform blocker audit](AZURE_PLATFORM_BLOCKER.md) for the deployment evidence affecting Projects 2 and 3.
 
 ## Planned coverage
 
