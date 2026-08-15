@@ -2,6 +2,9 @@
 
 > A prototype operations assistant that answers Chain of Responsibility questions from official regulatory documents, cross-references driver telematics, and routes specialised tasks through a multi-agent controller.
 
+📄 **New to this, or not a developer?** Start with the written paper - it explains the problem, the design, and the findings in plain prose without needing any code:
+**[Multi-Agent AI for Transport CoR Compliance (PDF, 5 pages)](docs/Multi-Agent-AI-for-Transport-CoR-Compliance.pdf)**
+
 ## Project status
 
 **Status:** Working prototype - runs end to end on simulated telematics with real regulatory source documents
@@ -79,6 +82,8 @@ flowchart TB
 
 ```text
 transport-cor-multi-agent/
+|-- docs/
+|   `-- Multi-Agent-AI-for-Transport-CoR-Compliance.pdf   # written paper (start here)
 |-- notebooks/
 |   |-- cor_transport_assistant.ipynb      # the integrated system (headline)
 |   |-- 01_weather_agent.ipynb             # precursor: single-agent + function calling
@@ -88,6 +93,17 @@ transport-cor-multi-agent/
 |-- requirements.txt
 `-- README.md
 ```
+
+### About the paper
+
+The paper was written as the capstone submission in July 2025. It has **not** been peer reviewed or published in any journal, and it is presented here as a student capstone artefact.
+
+Two edits were made before publishing it in this portfolio, both recorded in an editorial note on its first page:
+
+- **Eight academic citations were removed.** On review in August 2026 none could be located in any indexed source, and several paired real journal names with volume and year combinations that do not correspond (for example a 2022 date against a volume published in 2018). They are assessed as unreliable and were withdrawn rather than reproduced. The references that remain - the Heavy Vehicle National Law, three NHVR guides, and the synthetic dataset - were checked and are genuine.
+- **The author's personal email was removed**, replaced with the My Lane website.
+
+The paper's section 5.3 performance figures (2-3 second response times, 95% correct routing) were observed informally during development with no recorded methodology or sample size. They have been left in the document but are flagged in the editorial note as developer observations rather than measured results, and should not be read as benchmarks.
 
 ### Development progression
 
@@ -168,6 +184,7 @@ The lesson generalises beyond this project: in a regulated domain, a RAG system 
 3. Keyword-based intent routing is quick to build and easy to debug, but it does not survive real phrasing variation - the class-based coordinator was the better design.
 4. Retained cell outputs are far stronger portfolio evidence than a written claim that something worked.
 5. Committing credentials to a notebook is easy to do and hard to undo; environment-based configuration needed to be the starting position, not a cleanup step.
+6. Generated academic citations can look entirely convincing - real journal names, plausible volumes and page ranges - while referring to nothing at all. Anything cited in my own name gets verified before it is published, and the same scepticism applies to a model's references as to its regulatory answers.
 
 ## Attribution
 
