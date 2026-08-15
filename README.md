@@ -20,7 +20,8 @@ Hands-on assignments and demonstrations completed through structured AI engineer
 
 Independent applied-AI concepts and prototypes focused on operational decision support, transport safety, supply-chain analytics, and regulatory compliance.
 
-- Multi-Agent AI for Transport Chain of Responsibility Compliance - documentation and code review in progress
+- [Multi-Agent AI for Transport Chain of Responsibility Compliance](my-lane-projects/transport-cor-multi-agent/) - working prototype, published
+- DIFOT Root Cause Agent - in development
 - Additional projects will be added as their source code is recovered and prepared
 
 ### Earlier projects
