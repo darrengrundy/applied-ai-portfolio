@@ -42,3 +42,14 @@ The portfolio therefore does not claim a successful model response, streaming de
 ## Security
 
 Subscription IDs, tenant IDs, endpoint URLs, user identities, and policy resource IDs are intentionally excluded from this record. No keys or secrets were used or stored.
+
+## Update — 15 August 2026
+
+Re-ran diagnostics against Microsoft's own troubleshooting checklist for this error class before concluding it affects Homework 4-6 as well:
+
+- **Reproduced fresh**: a clean `gpt-5-mini/2025-08-07` GlobalStandard deployment attempt (capacity 1, same resource) returned the identical `InvalidResourceProperties: Failed to validate policies for model gpt-5-mini/2025-08-07` error, confirming the issue is still live.
+- **Azure Policy ruled out**: no policy assignments exist at the resource-group scope, and the only subscription-scope assignment is the default Security Center audit policy (audit-only, not a deny effect) — so a model-restriction or deployment-type-restriction policy is not the cause.
+- **Quota ruled out**: `OpenAI.GlobalStandard.gpt-5-mini` usage in the resource's region sits at 250 of a 2000-unit limit — far from exhausted.
+- **Corroborating external report**: this matches an actively open [Microsoft Q&A thread](https://learn.microsoft.com/en-au/answers/questions/5952608/azure-ai-foundry-deployment-fails-with-invalidreso) (August 2026) from other, unrelated users reporting the identical error on new deployments while existing deployments keep working. No Microsoft acknowledgement of root cause or fix timeline exists as of this update, and one affected user reports Microsoft Support was unable to help.
+
+**Conclusion**: this is assessed as a genuine Azure/Foundry platform issue rather than anything fixable from the subscription side. Homework 4-6 are expected to hit the same wall on any new language-model deployment and will be documented the same way — implementation complete, live validation pending — rather than blocked on a fix with no timeline.
