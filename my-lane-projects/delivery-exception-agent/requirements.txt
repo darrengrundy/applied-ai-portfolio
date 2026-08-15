@@ -1,0 +1,15 @@
+langchain==1.2.10
+langchain-openai==1.1.10
+langgraph==1.0.8
+langsmith==0.7.3
+langchain-community==0.4.1
+langchain-huggingface==1.2.0
+openai==2.21.0
+pandas==2.2.2
+numpy==2.0.2
+scikit-learn==1.6.1
+sentence-transformers==5.2.3
+pydantic==2.12.3
+langchain-chroma
+langchain-text-splitters
+pypdf

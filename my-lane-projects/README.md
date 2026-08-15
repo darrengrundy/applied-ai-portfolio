@@ -8,5 +8,6 @@ Focus areas include transport safety, Chain of Responsibility compliance, supply
 
 | Project | Status |
 |---|---|
+| [Multi-Agent Last-Mile Delivery Exception Handler](delivery-exception-agent/) | Complete - evaluated POC, LangGraph, typed-view PII isolation |
 | [Multi-Agent AI for Transport CoR Compliance](transport-cor-multi-agent/) | Working prototype - real regulatory RAG, simulated telematics |
 | DIFOT Root Cause Agent | In development - not yet published |
