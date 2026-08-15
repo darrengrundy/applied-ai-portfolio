@@ -38,6 +38,8 @@ Thumbs.db
 tmp/
 temp/
 output/
+agent_outputs/
+brochures/
 
 # Local or generated datasets and model artifacts
 data/private/
