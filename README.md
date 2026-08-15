@@ -14,6 +14,7 @@ Hands-on assignments and demonstrations completed through structured AI engineer
 
 - AI Engineering Bootcamp - project audit in progress
 - Microsoft AI Engineering - commencing soon
+- Quantic AI Engineering - commencing late August 2026
 
 ### My Lane projects
 
@@ -45,7 +46,8 @@ Each published project will include:
 applied-ai-portfolio/
 |-- learning-projects/
 |   |-- ai-engineering-bootcamp/
-|   `-- microsoft-ai-engineering/
+|   |-- microsoft-ai-engineering/
+|   `-- quantic-ai-engineering/
 |-- my-lane-projects/
 |   `-- transport-cor-multi-agent/
 |-- earlier-projects/
