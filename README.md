@@ -13,6 +13,7 @@ The portfolio focuses on applied solutions using Microsoft Foundry, Azure, Pytho
 Hands-on assignments and demonstrations completed through structured AI engineering programs. These projects show the development of core capabilities such as model deployment, conversational applications, tool use, retrieval, agents, observability, and responsible AI.
 
 - AI Engineering Bootcamp - project audit in progress
+- [QUT Data Analytics Capstone (IFQ721)](learning-projects/qut-data-analytics-capstone/) - multi-agent analytics framework over IoT telemetry
 - Microsoft AI Engineering - commencing soon
 - Quantic AI Engineering - commencing late August 2026
 
