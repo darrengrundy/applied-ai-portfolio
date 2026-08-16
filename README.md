@@ -62,7 +62,7 @@ applied-ai-portfolio/
 
 ## About
 
-I'm Darren Grundy, an AI Engineer in training with a background in data analytics, Power BI, supply-chain operations, and transport. I build practical AI solutions with Microsoft Foundry, Azure, and Python, with a particular interest in explainable operational decision support.
+I'm Darren Grundy, an operations leader seeking to insource AI Engineering into my lane (Transport & Logistics) by building practical AI solutions with Microsoft Foundry, Azure, and Python, with a particular interest in explainable operational decision support.
 
 For more information, visit [My Lane](https://mylaneai.com.au/).
 
