@@ -23,7 +23,7 @@ Independent applied-AI concepts and prototypes focused on operational decision s
 
 - [Multi-Agent Last-Mile Delivery Exception Handler](my-lane-projects/delivery-exception-agent/) - complete evaluated POC, published
 - [Multi-Agent AI for Transport Chain of Responsibility Compliance](my-lane-projects/transport-cor-multi-agent/) - working prototype, published
-- DIFOT Root Cause Agent - in development
+- Distribution LEAN Waste Multi-Agent System - in development
 - Additional projects will be added as their source code is recovered and prepared
 
 ### Earlier projects
