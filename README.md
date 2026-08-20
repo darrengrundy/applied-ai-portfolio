@@ -23,7 +23,7 @@ Independent applied-AI concepts and prototypes focused on operational decision s
 
 - [Multi-Agent Last-Mile Delivery Exception Handler](my-lane-projects/delivery-exception-agent/) - complete evaluated POC, published
 - [Multi-Agent AI for Transport Chain of Responsibility Compliance](my-lane-projects/transport-cor-multi-agent/) - working prototype, published
-- DIFOT Root Cause Agent - in development
+- Distribution LEAN Waste Multi-Agent System - in development
 - Additional projects will be added as their source code is recovered and prepared
 
 ### Earlier projects
@@ -62,7 +62,7 @@ applied-ai-portfolio/
 
 ## About
 
-I'm Darren Grundy, an AI Engineer in training with a background in data analytics, Power BI, supply-chain operations, and transport. I build practical AI solutions with Microsoft Foundry, Azure, and Python, with a particular interest in explainable operational decision support.
+I'm Darren Grundy, an operations leader seeking to insource AI Engineering into my lane (Transport & Logistics) by building practical AI solutions with Microsoft Foundry, Azure, and Python, with a particular interest in explainable operational decision support.
 
 For more information, visit [My Lane](https://mylaneai.com.au/).
 
