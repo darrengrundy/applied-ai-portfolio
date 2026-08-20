@@ -61,7 +61,7 @@ The exercise names and numbering follow the local AI-103 course pack retained in
 | # | Exercise | Portfolio status |
 |---:|---|---|
 | 4.1 | Develop a vision-enabled generative AI application | Planned |
-| 4.2 | Generate images with AI | Planned - shared with DAX #7 |
+| 4.2 | Generate images with AI | [Shared evidence - DAX #7](../ai-engineering-bootcamp/07-generate-images-with-ai/) |
 | 4.3 | Generate videos with Microsoft Foundry | Planned |
 | 4.4 | Analyze images with Content Understanding | Planned |
 | 4.5 | Create a multimodal analysis solution with Azure Content Understanding | Planned |
