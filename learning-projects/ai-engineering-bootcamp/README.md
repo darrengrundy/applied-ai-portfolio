@@ -2,6 +2,8 @@
 
 Working demonstrations from the DAX Institute AI Engineering Bootcamp are being audited and documented progressively. The current assignment register contains **10 graded assignments** across Weeks 1-8; Week 4 has no graded assignment.
 
+The separate [TDAI Weeks 1–8 coursework snapshot](tdai-coursework/) contains the 70 Python teaching and demonstration files completed and validated in VS Code, together with the supporting sample inputs and an execution-status audit. This coursework evidence complements the assignment pages below; it does not replace the separate Azure/MS Learn assignment tracker.
+
 ## Project status
 
 | Week | # | Assignment | Status | Portfolio page |
@@ -12,7 +14,7 @@ Working demonstrations from the DAX Institute AI Engineering Bootcamp are being 
 | 2 | 4 | Build and deploy an AI agent | Implementation prepared - Azure validation blocked | [View project](04-ai-agent/) |
 | 3 | 5 | Monitor and trace an AI agent | Implementation prepared - Azure validation blocked | [View project](05-agent-monitoring-tracing/) |
 | 5 | 6 | Apply guardrails | Plan documented - model deployment prerequisite blocked | [View project](06-responsible-ai-guardrails/) |
-| 6 | 7 | Generate images with AI | Next - not yet audited | Portfolio page to be added |
+| 6 | 7 | Generate images with AI | Complete - live Azure validation | [View project](07-generate-images-with-ai/) |
 | 7 | 8 | Translate text and speech | Related speech work retained - assignment audit pending | Portfolio page to be added |
 | 8 | 9 | Integrate an AI agent with Foundry IQ | Not yet started | Portfolio page to be added |
 | 8 | 10 | Build a workflow | Not yet started | Portfolio page to be added |

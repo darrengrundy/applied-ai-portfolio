@@ -1,0 +1,7 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/AzureOpenAIConnection.schema.json
+name: azure_open_ai_connection
+type: azure_open_ai
+api_key: "<provided by trainer>"
+api_base: "https://<your-foundry-resource>.openai.azure.com/"
+api_type: azure
+api_version: "2025-01-01-preview"
