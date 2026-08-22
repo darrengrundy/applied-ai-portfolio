@@ -4,6 +4,9 @@
 !.env.example
 config.json
 !config.example.json
+!learning-projects/ai-engineering-bootcamp/tdai-coursework/Week5/semantic-kernal/FunPlugin/Excuses/config.json
+!learning-projects/ai-engineering-bootcamp/tdai-coursework/Week5/semantic-kernal/FunPlugin/Joke/config.json
+!learning-projects/ai-engineering-bootcamp/tdai-coursework/Week5/semantic-kernal/FunPlugin/Limerick/config.json
 *.pem
 *.key
 secrets.*

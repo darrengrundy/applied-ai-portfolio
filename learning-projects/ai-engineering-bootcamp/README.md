@@ -2,6 +2,8 @@
 
 Working demonstrations from the DAX Institute AI Engineering Bootcamp are being audited and documented progressively. The current assignment register contains **10 graded assignments** across Weeks 1-8; Week 4 has no graded assignment.
 
+The separate [TDAI Weeks 1–8 coursework snapshot](tdai-coursework/) contains the 70 Python teaching and demonstration files completed and validated in VS Code, together with the supporting sample inputs and an execution-status audit. This coursework evidence complements the assignment pages below; it does not replace the separate Azure/MS Learn assignment tracker.
+
 ## Project status
 
 | Week | # | Assignment | Status | Portfolio page |

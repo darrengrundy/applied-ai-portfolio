@@ -12,7 +12,7 @@ The portfolio focuses on applied solutions using Microsoft Foundry, Azure, Pytho
 
 Hands-on assignments and demonstrations completed through structured AI engineering programs. These projects show the development of core capabilities such as model deployment, conversational applications, tool use, retrieval, agents, observability, and responsible AI.
 
-- [DAX AI Engineering Bootcamp](learning-projects/ai-engineering-bootcamp/) - 10-assignment tracker; Projects 1-7 documented or audited
+- [DAX AI Engineering Bootcamp](learning-projects/ai-engineering-bootcamp/) - Weeks 1-8 coursework validated in VS Code; 70 Python files preserved, with the Azure assignment tracker maintained separately
 - [QUT Data Analytics Capstone (IFQ721)](learning-projects/qut-data-analytics-capstone/) - multi-agent analytics framework over IoT telemetry
 - [Microsoft AI Engineering (AI-103)](learning-projects/microsoft-ai-engineering/) - 30-exercise tracker with shared DAX evidence mapped
 - Quantic AI Engineering - commencing late August 2026

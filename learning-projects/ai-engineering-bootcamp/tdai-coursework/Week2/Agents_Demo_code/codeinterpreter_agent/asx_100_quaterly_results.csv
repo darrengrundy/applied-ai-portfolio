@@ -1,0 +1,101 @@
+name,ASX_Code,sector,industry,revenue,operating_expenses,operating_profit,operating_profit_margin,depreciation,interest,profit_before_tax,tax,net_profit,EPS,profit_TTM,EPS_TTM
+AGL Energy,AGL,Utilities,Multi-Utilities,14200,12190,2010,14.1,950,145,915,275,640,0.95,640,0.95
+Altium Limited,ALU,Information Technology,Software,435,280,155,35.6,28,5,122,27,95,0.72,95,0.72
+Alumina Limited,AWC,Materials,Metals & Mining,1,465,-464,-46400,464,29,-134,-44,-90,-0.08,-90,-0.08
+Amcor,AMC,Materials,Containers & Packaging,21200,18450,2750,13,920,480,1350,270,1080,0.74,1080,0.74
+AMP Limited,AMP,Financials,Diversified Financials,2850,2550,300,10.5,45,22,260,62,198,0.08,255,0.1
+Ampol Limited,ALD,Energy,"Oil, Gas & Consumable Fuels",35700,34500,1200,3.4,470,338,392,118,274,1.15,-138,-0.58
+Ansell Limited,ANN,Health Care,Health Care Equipment,2003,1721,282,14.1,75,42,165,45,120,1.05,120,1.05
+ANZ Group Holdings,ANZ,Financials,Banking,21899,12880,9019,41.2,840,35,8144,2253,5891,1.95,5891,1.95
+APA Group,APA,Utilities,Gas Utilities,3204,1234,1970,61.5,967,680,323,224,99,0.08,99,0.08
+Aristocrat Leisure,ALL,Consumer Discretionary,"Hotels, Restaurants & Leisure",6290,4100,2190,34.8,320,115,1755,455,1300,2.02,1640,2.54
+Atlas Arteria,ALX,Industrials,Transportation Infrastructure,158,25,133,84.2,71,115,247,3,244,0.17,336,0.23
+Aurizon Holdings,AZJ,Industrials,Transportation,3950,3520,430,10.9,680,125,390,87,303,0.17,303,0.17
+Bank of Queensland,BOQ,Financials,Banks,1680,1140,540,32.1,75,10,455,132,323,0.19,323,0.19
+Bendigo & Adelaide Bank,BEN,Financials,Banks,1930,1250,680,35.2,85,12,583,175,408,0.4,408,0.4
+BHP Group,BHP,Materials,Mining,71180,41615,29565,41.5,8600,1450,19510,8840,10200,2.01,10200,2.01
+BlueScope Steel,BSL,Materials,Steel,16253,14801,1452,8.9,714,115,623,202,421,0.96,421,0.96
+Brambles,BXB,Industrials,Commercial Services & Supplies,9800,7800,2000,20.4,850,140,1010,300,710,0.51,710,0.51
+Brickworks,BKW,Materials,Building Products,1180,955,225,19.1,62,35,128,36,92,0.6,92,0.6
+CAR Group,CAR,Communication Services,Interactive Media,1252,648,604,48.2,120,85,399,113,286,0.76,286,0.76
+Challenger Limited,CGF,Financials,Diversified Financial Services,3110,1670,1440,46.3,17,1120,303,111,192,0.28,215,0.31
+Champion Iron,CIA,Materials,Mining,1490,980,510,34.2,125,38,347,187,160,0.31,160,0.31
+Charter Hall Group,CHC,Real Estate,Real Estate Mgmt & Dev,850,465,385,45.3,15,42,328,1,327,0.69,327,0.69
+Chorus Limited,CNU,Communication Services,Telecommunications,1010,315,695,68.8,450,145,100,28,72,0.17,72,0.17
+Cleanaway,CWY,Industrials,Commercial Services,3302,2891,411,12.5,332,118,256,60,196,0.09,196,0.09
+Cochlear Limited,COH,Health Care,Health Care Equipment,2258,1670,588,26,95,12,481,134,347,5.29,347,5.29
+Coles Group,COL,Consumer Staples,Consumer Staples Retailing,44300,42100,2200,5,1850,541,1659,479,1180,0.88,1180,0.88
+Commonwealth Bank,CBA,Financials,Banking,28290,12821,15469,54.7,950,120,14398,4282,10116,6.12,10116,6.12
+Computershare,CPU,Financials,Professional Services,4827,3100,1727,35.8,215,160,1352,411,941,1.6,980,1.66
+CSL Limited,CSL,Health Care,Biotechnology,22480,17800,4680,20.8,980,450,4250,950,3300,6.83,3300,6.83
+Domain Holdings,DHG,Communication Services,Interactive Media,391,265,126,32.2,35,12,79,30,49,0.08,55,0.09
+Evolution Mining,EVN,Materials,Mining,3820,2340,1480,38.7,710,120,650,195,455,0.23,455,0.23
+Fisher & Paykel,FPH,Health Care,Health Care Equipment,1837,1246,591,32.2,98,12,481,138,343,0.58,365,0.62
+Flight Centre,FLT,Consumer Discretionary,"Hotels, Restaurants & Leisure",2710,2421,289,10.7,145,45,289,80,209,0.95,209,0.95
+Fortescue,FMG,Materials,Mining,23610,14850,8760,37.1,2450,380,5930,1780,4150,1.35,4150,1.35
+Goodman Group,GMG,Real Estate,Real Estate,2500,188,2312,92.5,15,120,2177,511,1666,1.18,1666,1.18
+GPT Group,GPT,Real Estate,Equity Real Estate,1060,682,378,35.7,18,165,405,27,378,0.2,378,0.2
+Harvey Norman,HVN,Consumer Discretionary,Multiline Retail,4530,3777,753,16.6,210,65,753,235,518,0.42,518,0.42
+HUB24 Limited,HUB,Financials,Capital Markets,407,244,163,40,35,5,123,43,80,0.98,80,0.98
+IDP Education,IEL,Consumer Discretionary,Consumer Services,895,776,119,13.3,55,28,36,15,21,0.08,65,0.23
+RTX Group,RXG,Consumer Discretionary,Consumer Services,716,620,95,10.6,44,22,28,12,16,0.06,52,0.18
+IGO Limited,IGO,Materials,Mining,841,622,219,26,185,12,22,6,16,0.02,16,0.02
+Iluka Resources,ILU,Materials,Metals & Mining,1250,850,400,32,180,15,205,62,143,0.34,143,0.34
+Incitec Pivot,IPL,Materials,Chemicals,5600,5040,560,10,310,120,130,40,90,0.05,90,0.05
+Infratil Limited,IFT,Utilities,Multi-Utilities,3041,2169,872,28.7,412,155,-85,175,-260,-0.32,340,0.42
+Insurance Australia Group,IAG,Financials,Insurance,17850,16107,1743,9.8,145,110,1888,529,1359,0.57,1359,0.57
+James Hardie,JHX,Materials,Building Products,6174,4460,1714,27.8,344,17,1353,464,889,2.05,889,2.05
+JB Hi-Fi,JBH,Consumer Discretionary,Specialty Retail,10550,9856,694,6.6,235,12,682,220,462,4.23,462,4.23
+Lendlease Group,LLC,Industrials,Real Estate Mgmt & Dev,3100,2714,386,12.5,88,73,295,70,225,0.26,225,0.26
+Macquarie Group,MQG,Financials,Capital Markets,17402,12478,4924,28.3,1286,450,3188,1533,1655,8.85,3715,9.68
+Medibank Private,MPL,Financials,Insurance,8185,655,7530,92,85,12,884,265,619,0.23,619,0.23
+Metcash Limited,MTS,Consumer Staples,Consumer Staples Distribution,18200,17500,700,3.8,320,85,295,88,207,0.18,207,0.18
+Mineral Resources,MIN,Materials,Mining,4500,5306,-806,-17.9,850,150,-956,-219,-737,-3.81,-809,-4.59
+Mirvac Group,MGR,Real Estate,Equity Real Estate,2100,1450,650,31,25,165,460,122,338,0.09,472,0.12
+National Australia Bank,NAB,Financials,Banking,20813,9848,10965,52.7,810,23,10132,3002,7130,2.32,7130,2.32
+Netwealth Group,NWL,Financials,Capital Markets,324,161,163,50.3,12,1,150,33,117,0.48,117,0.48
+Newmont Corp,NEM,Materials,Mining,23200,14100,9100,39.2,3400,450,5250,1450,3800,3.32,4100,3.58
+NextDC,NXT,Information Technology,IT Services,427,211,216,50.6,185,92,-61,0,-61,-0.1,-61,-0.1
+Northern Star,NST,Materials,Mining,4850,3200,1650,34,880,65,705,211,494,0.43,494,0.43
+Southern Mining,SXM,Materials,Mining,3637,2400,1237,25,660,48,528,158,370,0,370,0.32
+Nufarm Limited,NUF,Materials,Chemicals,3440,3137,303,8.8,145,76,82,24,58,0.15,58,0.15
+Orica,ORI,Materials,Chemicals,8145,7353,792,9.7,425,145,310,148,162,0.34,485,1.03
+Origin Energy,ORG,Utilities,Multi-Utilities,17220,14940,2280,13.2,820,310,2150,670,1480,0.86,1480,0.86
+Pilbara Minerals,PLS,Materials,Mining,769,691,78,10.1,245,28,-196,-8,-188,-0.06,-188,-0.06
+Premier Investments,PMV,Consumer Discretionary,Specialty Retail,853,412,441,51.7,32,8,401,63,338,2.12,338,2.12
+Pro Medicus,PME,Health Care,Health Care Technology,161,55,106,65.8,8,1,97,28,69,0.66,82,0.78
+Qantas Airways,QAN,Industrials,Airlines,23823,21184,2639,11.1,2240,245,2394,789,1605,1.05,1605,1.05
+QBE Insurance,QBE,Financials,Insurance,31500,28200,3300,10.5,185,320,2795,780,2015,1.35,2150,1.44
+Ramsay Health Care,RHC,Health Care,Health Care Providers,17836,16480,1356,7.6,650,604,102,55,47,0.03,305,1.33
+REA Group,REA,Communication Services,Interactive Media & Services,1673,704,969,57.9,115,35,819,255,564,4.27,620,4.69
+Region Group,RGN,Real Estate,Retail REITs,375,115,260,69.3,2,85,173,1,172,0.15,172,0.15
+Reliance Worldwide,RWC,Industrials,Building Products,2038,1618,420,20.6,105,46,269,75,194,0.25,194,0.25
+Resmed CDI,RMD,Health Care,Health Care Equipment,7100,4500,2600,36.6,320,110,2170,450,1720,5.8,1720,5.8
+ResMed Inc,RMD,Health Care,Health Care Equipment,7100,4500,2600,36.6,320,110,2170,450,1720,5.8,1720,5.8
+Rio Tinto Limited,RIO,Materials,Mining,81200,48500,32700,40.3,7800,1200,23700,7200,16500,9.85,16500,9.85
+Sandfire Resources,SFR,Materials,Mining,1823,1004,819,44.9,430,65,324,97,227,0.5,227,0.5
+Santos,STO,Energy,"Oil, Gas & Consumable Fuels",7600,4800,2800,36.8,1500,320,980,280,700,0.22,700,0.22
+SEEK Limited,SEK,Communication Services,Interactive Media,1100,722,378,34.4,151,42,295,57,238,0.67,238,0.67
+Seven Group,SGH,Industrials,Industrial Conglomerates,10743,9206,1537,14.3,509,316,1221,385,836,2.27,836,2.27
+Sigma Healthcare,SIG,Health Care,Health Care Distribution,3600,3450,150,4.2,45,12,93,28,65,0.06,65,0.06
+Sonic Healthcare,SHL,Health Care,Health Care Providers & Services,9600,8100,1500,15.6,740,135,625,111,514,1.08,514,1.08
+Soul Pattinson,SOL,Financials,Multi-Sector Holdings,610,155,455,74.6,12,8,445,85,360,1.08,510,1.42
+South32,S32,Materials,Mining,8824,6816,2008,22.8,741,127,1140,645,495,0.11,495,0.11
+Steadfast Group,SDF,Financials,Insurance,1750,1220,530,30.3,65,42,423,127,296,0.27,296,0.27
+Stockland,SGP,Real Estate,Equity Real Estate,3205,2379,826,25.8,7,250,569,123,446,0.19,446,0.19
+Suncorp Group,SUN,Financials,Insurance,15009,11002,4007,26.7,182,125,2602,779,1823,1.44,1823,1.44
+Tabcorp Holdings,TAH,Consumer Discretionary,"Hotels, Restaurants & Leisure",2615,2223,392,15,203,120,69,32,37,0.02,37,0.02
+Telstra Group,TLS,Communication Services,Telecommunications,23500,14900,8600,36.6,5200,1100,2300,700,1600,0.19,2300,0.19
+TPG Telecom,TPG,Communication Services,Telecommunications,5500,3600,1900,34.5,1450,320,130,40,90,0.05,90,0.05
+Transurban Group,TCL,Industrials,Transportation Infrastructure,3732,947,2785,74.6,1350,1150,285,107,178,0.06,178,0.06
+Treasury Wine Estates,TWE,Consumer Staples,Beverages,2990,2392,598,20,162,98,436,128,308,0.54,308,0.54
+Vicinity Centres,VCX,Real Estate,Equity Real Estate,1320,580,740,56.1,12,185,543,14,529,0.12,529,0.12
+BGM Holding,BMH,Real Estate,Equity Real Estate,1452,638,814,61.7,13,203,597,15,581,0.1,581,0.1
+Wesfarmers,WES,Consumer Discretionary,Multiline Retail,44189,38550,5639,12.8,1620,450,3569,1012,2557,2.25,2557,2.25
+Westpac Banking Corp,WBC,Financials,Banking,21540,11200,10340,48,880,40,9420,2520,6900,2.04,6900,2.04
+Whitehaven Coal,WHC,Energy,"Oil, Gas & Consumable Fuels",5832,4477,1355,23.2,607,98,650,331,319,0.4,649,0.81
+WiseTech Global,WTC,Information Technology,Software,778,369,409,52.6,125,13,271,58,213,0.64,213,0.64
+Woodside Energy,WDS,Energy,"Oil, Gas & Consumable Fuels",21000,12800,8200,39,4800,650,2750,780,1970,1.04,1970,1.04
+Woolworths Group,WOW,Consumer Staples,Consumer Staples Retailing,67922,61921,6001,8.8,2778,710,2513,802,1711,1.4,1711,1.4
+Worley,WOR,Industrials,Professional Services,12050,11227,823,6.8,215,133,475,135,340,0.78,409,0.82
+Xero,XRO,Information Technology,Software,2100,1459,641,30.5,210,45,386,115,271,1.78,295,1.94
