@@ -4,12 +4,12 @@
 
 ## Project status
 
-**Status:** Implementation complete - live Azure validation pending
+**Status:** Scripts updated with API key auth fallback — ready for local run
 
 **Context:** AI Engineering Bootcamp assignment
 
 **Implemented:** July 2026  
-**Audited:** August 2026
+**Updated:** August 2026
 
 ## Problem
 
@@ -17,14 +17,14 @@ This exercise demonstrates how an application outside the Microsoft Foundry port
 
 ## Solution
 
-Two Python clients were implemented: a synchronous client that streams response text as it is generated, and an asynchronous client that awaits model responses without a blocking SDK call. Both use the Responses API, retain conversation state through `previous_response_id`, and authenticate through Microsoft Entra ID rather than an embedded API key.
+Two Python clients were implemented: a synchronous client that streams response text as it is generated, and an asynchronous client that awaits model responses without a blocking SDK call. Both use the Responses API, retain conversation state through `previous_response_id`, and support two authentication paths: an Azure OpenAI API key (when `AZURE_OPENAI_API_KEY` is set) or Microsoft Entra ID via `DefaultAzureCredential` (when no key is configured).
 
 ## Architecture
 
 ```mermaid
 flowchart LR
     User["Console user"] --> App["Python chat client"]
-    App --> Identity["DefaultAzureCredential"]
+    App --> Identity["DefaultAzureCredential\nor API key"]
     Identity --> Entra["Microsoft Entra ID"]
     App --> API["Azure OpenAI-compatible Responses API"]
     API --> Model["Foundry model deployment"]
@@ -33,12 +33,12 @@ flowchart LR
 
 ## Key capabilities
 
-- Entra ID token-based authentication
+- Dual authentication: API key or Entra ID token via `DefaultAzureCredential`
 - OpenAI Responses API integration
-- conversation continuity using previous response IDs
-- incremental output through streaming events
-- synchronous and asynchronous client patterns
-- explicit validation of required configuration
+- Conversation continuity using previous response IDs
+- Incremental output through streaming events
+- Synchronous and asynchronous client patterns
+- Explicit validation of required configuration
 
 ## Repository structure
 
@@ -54,17 +54,18 @@ flowchart LR
 
 ## Setup
 
-Prerequisites include Python 3.13, Azure CLI, access to a Microsoft Foundry project, and a compatible deployed model.
+Prerequisites include Python 3.13, Azure CLI (for Entra ID auth) or an Azure OpenAI API key, access to a Microsoft Foundry project, and a compatible deployed model.
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 Copy-Item .env.example .env
-az login
+# Edit .env: set AZURE_OPENAI_ENDPOINT, MODEL_DEPLOYMENT, and optionally AZURE_OPENAI_API_KEY
+# If using Entra ID auth instead of an API key: az login
 ```
 
-Update `.env` with the Azure OpenAI endpoint and exact deployment name, then run:
+Run the clients:
 
 ```powershell
 python src/chat_app.py
@@ -73,20 +74,22 @@ python src/chat_async.py
 
 ## Testing and evidence
 
-The recovered implementation was compared with the Microsoft Learning exercise in August 2026. Static review confirms that the required synchronous, contextual, streaming, and asynchronous patterns are present.
+Live terminal output is pending — the scripts must be run locally against an active Azure OpenAI deployment. The shared class resource `tdai-foundry` with deployment `gpt-4o-mini` is the intended target; the `.env` must be configured with the endpoint and API key before running.
 
-Live model invocation remains pending. The retained July test reached Azure successfully but returned `DeploymentNotFound`. A read-only Azure audit on 13 August 2026 found no active language-model deployment beneath the intended Foundry resource. This is recorded as a platform/deployment blocker rather than a successful demonstration.
+Static review confirms that all required patterns are present: synchronous streaming (`chat_app.py`), asynchronous `await` (`chat_async.py`), `previous_response_id` for conversation context, and the `build_client`/`build_async_client` factory functions for dual auth.
+
+A previous attempt in July 2026 reached Azure successfully but returned `DeploymentNotFound`, recorded as a platform/deployment blocker at the time. The auth approach was subsequently updated to support direct API key authentication alongside the original Entra ID path.
 
 ## Known limitations
 
-- No successful model response has yet been retained as evidence.
+- No live terminal output has been retained as evidence yet.
 - Conversation state exists only for the lifetime of the process.
 - The console interface does not include retry, telemetry, content-safety display, or persistent history.
-- Model availability, API behavior, and Foundry portal terminology may change while these services are evolving.
+- Model availability, API behaviour, and Foundry portal terminology may change while these services are evolving.
 
 ## Security and responsible AI
 
-- The application uses Entra ID authentication and does not require an API key.
+- The application supports Entra ID authentication and does not require an API key to be embedded.
 - `.env` is excluded from Git and only `.env.example` is published.
 - Endpoint URLs, tenant identifiers, subscription identifiers, and response IDs are not included in this portfolio.
 - A production implementation would add explicit safety controls, monitoring, rate limits, user notices, and error categorisation.
@@ -98,6 +101,7 @@ Live model invocation remains pending. The retained July test reached Azure succ
 3. `previous_response_id` provides a concise mechanism for conversational continuity.
 4. Streaming improves perceived responsiveness for longer answers.
 5. Working code and a successful cloud deployment are separate completion criteria.
+6. `DefaultAzureCredential` and a direct API key can be offered as interchangeable auth paths from a single factory function, making the client usable with or without `az login`.
 
 ## Attribution
 
