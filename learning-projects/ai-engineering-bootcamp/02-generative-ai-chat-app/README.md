@@ -74,11 +74,21 @@ python src/chat_async.py
 
 ## Testing and evidence
 
-Live terminal output is pending — the scripts must be run locally against an active Azure OpenAI deployment. The shared class resource `tdai-foundry` with deployment `gpt-4o-mini` is the intended target; the `.env` must be configured with the endpoint and API key before running.
+`chat_app.py` — synchronous streaming client, run on 24 August 2026 against `tdai-foundry / gpt-4o-mini`:
 
-Static review confirms that all required patterns are present: synchronous streaming (`chat_app.py`), asynchronous `await` (`chat_async.py`), `previous_response_id` for conversation context, and the `build_client`/`build_async_client` factory functions for dual auth.
+```text
+Enter a prompt (or type "quit" to exit): What is the capital of France?
+The capital of France is Paris.
 
-A previous attempt in July 2026 reached Azure successfully but returned `DeploymentNotFound`, recorded as a platform/deployment blocker at the time. The auth approach was subsequently updated to support direct API key authentication alongside the original Entra ID path.
+Enter a prompt (or type "quit" to exit): What country is it in?
+Paris is in France.
+
+Enter a prompt (or type "quit" to exit): quit
+```
+
+The second exchange confirms `previous_response_id` is working: the model answered without the user repeating context from the first turn.
+
+`chat_async.py` — asynchronous client. Static review confirms the required `async def main`, `await client.responses.create`, and `asyncio.run(main())` patterns are present alongside the same API key / Entra ID dual-auth factory. A separate live run is a remaining step.
 
 ## Known limitations
 
