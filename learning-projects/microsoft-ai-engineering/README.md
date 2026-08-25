@@ -52,7 +52,7 @@ The exercise names and numbering follow the local AI-103 course pack retained in
 | 3.4 | Create speech-enabled apps with Azure Speech in Microsoft Foundry Tools | Related work - verify |
 | 3.5 | Develop a speech agent with the Azure Speech MCP server | Planned |
 | 3.6 | Develop an Azure Speech Voice Live Agent in Microsoft Foundry | Planned |
-| 3.7 | Translate text and speech with Microsoft Foundry Tools | Planned - shared with DAX #8 |
+| 3.7 | Translate text and speech with Microsoft Foundry Tools | [Shared evidence - DAX #8](../ai-engineering-bootcamp/08-translate-text-and-speech/) |
 
 ## 4. Extract insights from visual data on Azure
 
