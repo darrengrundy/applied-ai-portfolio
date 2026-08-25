@@ -15,7 +15,7 @@ The separate [TDAI Weeks 1–8 coursework snapshot](tdai-coursework/) contains t
 | 3 | 5 | Monitor and trace an AI agent | Implementation prepared - Azure validation blocked | [View project](05-agent-monitoring-tracing/) |
 | 5 | 6 | Apply guardrails | Complete - live Azure validation | [View project](06-responsible-ai-guardrails/) |
 | 6 | 7 | Generate images with AI | Complete - live Azure validation | [View project](07-generate-images-with-ai/) |
-| 7 | 8 | Translate text and speech | Related speech work retained - assignment audit pending | Portfolio page to be added |
+| 7 | 8 | Translate text and speech | Complete - live Azure validation | [View project](08-translate-text-and-speech/) |
 | 8 | 9 | Integrate an AI agent with Foundry IQ | Not yet started | Portfolio page to be added |
 | 8 | 10 | Build a workflow | Not yet started | Portfolio page to be added |
 
