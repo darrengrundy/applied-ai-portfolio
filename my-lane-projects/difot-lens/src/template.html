@@ -1,0 +1,504 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: control-room page — KPI strip, tabbed workspace; the map is the hero, charts are small multiples underneath. */
+:root{
+  --bg:#f3f5f4; --surface:#fcfcfb; --surface-2:#eceeec; --ink:#14202b; --ink-2:#4b5560; --muted:#838b90;
+  --line:#dde1df; --accent:#1d6b84; --accent-ink:#ffffff; --map-bg:#e7ebea; --state-line:#9aa6a8;
+  --good:#2a78d6; --mid:#b9bcb8; --bad:#e34948; --ref:#a9aeac;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1417; --surface:#161d21; --surface-2:#1e272c; --ink:#e9eeee; --ink-2:#b4bec0; --muted:#7f898c;
+  --line:#28323700; --line:#2a3438; --accent:#4fa7c2; --accent-ink:#071216; --map-bg:#11181c; --state-line:#3f4b50;
+  --good:#3987e5; --mid:#5a605e; --bad:#e66767; --ref:#5c6466; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1417; --surface:#161d21; --surface-2:#1e272c; --ink:#e9eeee; --ink-2:#b4bec0; --muted:#7f898c;
+  --line:#2a3438; --accent:#4fa7c2; --accent-ink:#071216; --map-bg:#11181c; --state-line:#3f4b50;
+  --good:#3987e5; --mid:#5a605e; --bad:#e66767; --ref:#5c6466; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:40px;line-height:1;text-transform:uppercase;letter-spacing:.03em}
+h2{font-size:24px;line-height:1.1}
+h3{font-size:17px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+p{margin:0;max-width:68ch}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:12px}
+.plate{display:inline-block;font-family:var(--f-display);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:2px 8px;border-radius:3px;margin-bottom:6px}
+.scope{color:var(--ink-2);font-size:13px;text-align:right}
+.banner{border:1px dashed var(--accent);color:var(--ink-2);border-radius:6px;padding:8px 12px;font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.kpi{background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.kpi .l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.kpi .v{font-family:var(--f-display);font-size:30px;font-weight:600;line-height:1.05}
+.kpi .s{font-size:12px;color:var(--ink-2)}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;border:1px solid currentColor}
+.chip.bad{color:var(--bad)} .chip.good{color:var(--good)}
+nav.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+nav.tabs button{font:600 15px var(--f-display);letter-spacing:.08em;text-transform:uppercase;background:none;border:0;color:var(--muted);padding:8px 14px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs button:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.panel{display:flex;flex-direction:column;gap:16px}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}
+.mapbox{position:relative;height:600px;border-radius:6px;overflow:hidden;background:var(--map-bg);border:1px solid var(--line)}
+.mapbox canvas{outline:none}
+.overlay{position:absolute;left:12px;top:12px;display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:calc(100% - 24px)}
+.when{font-family:var(--f-display);font-size:34px;font-weight:600;line-height:1;text-transform:uppercase;letter-spacing:.03em}
+.whensub{font-size:12px;color:var(--ink-2)}
+.legend{position:absolute;left:12px;bottom:12px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px 10px;font-size:11px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+.ramp{width:180px;height:8px;border-radius:2px;background:linear-gradient(90deg,var(--bad),var(--mid),var(--good))}
+.ramp-l{display:flex;justify-content:space-between;width:180px}
+.backbtn{position:absolute;right:12px;top:12px}
+#map.flow{--ink:#eef3f4;--ink-2:#a9b6ba;--surface:#0b1216;--line:#22303a}
+#map.flow .legend{background:rgba(11,18,22,.85)}
+#map .overlay,#map .legend{color:var(--ink-2)} #map .when{color:var(--ink)}
+.skey{display:flex;align-items:flex-end;gap:10px}.skey span{display:flex;flex-direction:column;align-items:center;gap:3px}.skey i{border-radius:50%;border:1.2px solid var(--ink-2)}
+.ball{display:inline-block;width:9px;height:9px;border-radius:50%;box-shadow:inset -2px -2px 0 rgba(0,0,0,.25)}
+.fkey{display:flex;flex-direction:column;gap:3px}.fkey span{display:flex;align-items:center;gap:6px}.fkey i{width:16px;height:3px;border-radius:2px;box-shadow:0 0 6px currentColor}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:6px 12px;font:500 13px var(--f-body);color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:5px;padding:6px 12px;font:500 13px var(--f-body);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);min-width:84px}
+select{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:5px;padding:6px 8px;font:13px var(--f-body)}
+input[type=range]{flex:1;min-width:160px;accent-color:var(--accent)}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.srow{display:grid;grid-template-columns:38px minmax(0,1fr) 48px;align-items:center;gap:8px;font-size:13px;cursor:pointer;border-radius:3px;padding:2px 4px}
+.srow:hover{background:var(--surface-2)}
+.srow .b{height:8px;border-radius:0 2px 2px 0;background:var(--surface-2);position:relative}
+.srow .b i{position:absolute;inset:0 auto 0 0;border-radius:0 4px 4px 0}
+.srow .b .t{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--ink-2)}
+.note{font-size:12px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card .cv{position:relative;height:200px}
+.card.sm .cv{height:120px}
+.card .head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card .big{font-family:var(--f-display);font-size:22px;font-weight:600}
+.finding{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
+.finding .n{font-family:var(--f-display);font-size:28px;font-weight:700;line-height:1;color:var(--accent);min-width:64px}
+.callouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.tw{overflow-x:auto}
+.tag{font-size:11px;font-weight:600;padding:1px 6px;border-radius:3px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.tag.det{background:var(--ink);color:var(--bg)}
+.mermaidbox{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;overflow-x:auto}
+ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+@media (max-width:980px){.mapgrid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.callouts,.grid3{grid-template-columns:1fr 1fr}.grid4{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2,.grid3,.callouts{grid-template-columns:1fr}.mapbox{height:440px}h1{font-size:32px}.scope{text-align:left}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div><span class="plate" id="plate"></span><h1 id="h1"></h1></div>
+  <div class="scope" id="scope"></div>
+</header>
+
+<div class="banner" id="banner" hidden></div>
+<div class="kpis" id="kpis"></div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" data-tab="map" aria-selected="true">Network map</button>
+  <button role="tab" data-tab="trends" aria-selected="false">Trends</button>
+  <button role="tab" data-tab="rca" aria-selected="false">Root-cause signals</button>
+  <button role="tab" data-tab="agents" aria-selected="false">Agent design</button>
+</nav>
+
+<section class="panel" id="p-map">
+  <div class="controls">
+    <div class="seg" id="mode">
+      <button data-m="states" aria-pressed="true">States</button>
+      <button data-m="flow" aria-pressed="false">Freight flow</button>
+      <button data-m="points" aria-pressed="false">Postcodes</button>
+    </div>
+    <span id="metricwrap" class="controls" style="gap:6px"><label class="note" for="metric">Colour by</label>
+    <select id="metric"><option value="difot">DIFOT</option><option value="cps">Cost per shipment</option><option value="cpkg">Cost per kg</option></select></span>
+    <span id="speedwrap" class="controls" style="gap:6px" hidden><label class="note" for="speed">Speed</label><select id="speed"><option value="1">1 day / sec</option><option value="2" selected>2 days / sec</option><option value="4">4 days / sec</option><option value="7">1 week / sec</option></select></span>
+    <button class="btn primary" id="play">▶ Play</button>
+    <input type="range" id="slider" min="0" max="290" value="0" step="1" aria-label="Date">
+  </div>
+  <div class="mapgrid">
+    <div class="mapbox" id="map">
+      <div class="overlay"><div class="when" id="when"></div><div class="whensub" id="whensub"></div></div>
+      <button class="btn backbtn" id="back" hidden>← Australia</button>
+      <div class="legend"><div id="legtitle">DIFOT</div><div id="rampbox" style="display:flex;flex-direction:column;gap:4px"><div class="ramp" id="ramp"></div><div class="ramp-l mono" id="rampl"></div></div><div id="flowkey" class="fkey" hidden><span><i style="background:#46beff"></i>On time</span><span><i style="background:#ff563a"></i>Late</span><span><i style="background:#ebebe1"></i>Not yet delivered</span></div><div id="sizekey" class="fkey" hidden><span><b class="ball" style="background:var(--good)"></b>On time</span><span><b class="ball" style="background:var(--bad)"></b>Late</span><span class="note">Glow under each pile = postcode DIFOT</span></div><div id="legh"></div></div>
+    </div>
+    <div class="side">
+      <h3 id="sidetitle">DIFOT by state</h3>
+      <div id="staterows" style="display:flex;flex-direction:column;gap:4px"></div>
+      <p class="note" id="sidenote">Bar = DIFOT, tick = 90% target. Click a state to zoom in to its delivery postcodes.</p>
+      <p class="note">Drag to pan, scroll to zoom, right-drag (or two-finger drag) to tilt and rotate.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="p-trends" hidden>
+  <div class="card"><div class="head"><h3>National DIFOT, on-time and volume · weekly</h3><span class="note">Weeks by consignment date</span></div><div class="cv" style="height:240px"><canvas id="c-nat"></canvas></div></div>
+  <h2>DIFOT by receiver state</h2>
+  <div class="grid4" id="statemult"></div>
+  <h2>Distance and cost</h2>
+  <p class="note">Distance is estimated: straight-line from sender postcode to receiver postcode × 1.25 road factor. Cost is the carrier's TotalCharge (ex fuel/GST treatment as exported).</p>
+  <div class="grid4">
+    <div class="card sm"><div class="head"><h3>Cost / shipment</h3><span class="big" id="v-cps"></span></div><div class="cv"><canvas id="c-cps"></canvas></div></div>
+    <div class="card sm"><div class="head"><h3>Cost / kg</h3><span class="big" id="v-cpkg"></span></div><div class="cv"><canvas id="c-cpkg"></canvas></div></div>
+    <div class="card sm"><div class="head"><h3>Cost / km</h3><span class="big" id="v-cpkm"></span></div><div class="cv"><canvas id="c-cpkm"></canvas></div></div>
+    <div class="card sm"><div class="head"><h3>Avg km / shipment</h3><span class="big" id="v-km"></span></div><div class="cv"><canvas id="c-km"></canvas></div></div>
+  </div>
+  <div class="card"><p id="costnote"></p></div>
+</section>
+
+<section class="panel" id="p-rca" hidden>
+  <div class="callouts" id="callouts"></div>
+  <div class="grid3">
+    <div class="card"><h3>How late are the failures?</h3><div class="cv"><canvas id="c-late"></canvas></div><p class="note">Business days past carrier ETA (weekends excluded).</p></div>
+    <div class="card"><h3>DIFOT by promised transit</h3><div class="cv"><canvas id="c-svc"></canvas></div><p class="note">Business days from consignment to ETA. 5 = 5 or more.</p></div>
+    <div class="card"><h3>DIFOT by origin site</h3><div class="cv"><canvas id="c-orig"></canvas></div><p class="note">Bar labels show consignment count.</p></div>
+    <div class="card"><h3>Weekly volume vs DIFOT</h3><div class="cv"><canvas id="c-vol"></canvas></div><p class="note" id="corrnote"></p></div>
+    <div class="card"><h3>DIFOT by remoteness</h3><div class="cv"><canvas id="c-rem"></canvas></div><p class="note">ABS remoteness class of receiver postcode.</p></div>
+    <div class="card"><h3>DIFOT by ETA weekday</h3><div class="cv"><canvas id="c-dow"></canvas></div><p class="note">Day the carrier promised delivery.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>What this file can explain</h3><ul class="plain">
+      <li>Where failures cluster: origin site, lane, receiver state, postcode, remoteness.</li>
+      <li>When: week, ETA weekday, volume surges.</li>
+      <li>What kind: service promise (1-day vs 5-day), carton vs pallet, size of the miss in business days.</li>
+      <li>Cost drivers: charged vs dead kg, distance mix, cost per lane.</li></ul></div>
+    <div class="card"><h3>What it can't, yet</h3><ul class="plain">
+      <li>No carrier reason codes or scan events, so a true cause (missed linehaul, futile delivery, receiver closed) has to come from the carrier's tracking or exception feed.</li>
+      <li>ETA is the carrier's own date, not your contracted SLA. Contract transit times should be the yardstick.</li>
+      <li>In-full is item count only. Damage and SKU shortages sit in claims and returns data.</li>
+      <li>Public holidays aren't removed yet, so a few holiday weeks overstate lateness.</li></ul></div>
+  </div>
+</section>
+
+<section class="panel" id="p-agents" hidden>
+  <div class="card"><h2>Architecture</h2><p>Same pattern as the delivery-exception agent: deterministic code owns every number and every routing decision; LLM agents only segment, explain and draft, and a critic checks each claim against the metrics engine before anything reaches a person.</p></div>
+  <div class="mermaidbox"><pre class="mermaid">
+flowchart LR
+  A[Carrier connote exports, scan events, POD] --> P[Ingest and preprocessor - deterministic]
+  P --> M[(Metrics engine - DIFOT, cost, km - deterministic)]
+  M --> O{Orchestrator - deterministic router}
+  O --> S[Failure segmentation agent]
+  S --> R[RCA agent - RAG over SLA, rate card, ops notes]
+  R --> C[Critic - every claim cites a metric]
+  C -->|revise, max 2| R
+  C -->|approved| W[Reporting and carrier-claim agent]
+  O --> V[Viz query agent - plain English to map view]
+  V --> UI[Map, time-lapse and trend views]
+  M --> UI
+  W --> H([Human approves pack or claim])
+  </pre></div>
+  <div class="card"><h3>Agent roster</h3><div class="tw"><table>
+    <thead><tr><th>Node</th><th>Type</th><th>Job</th><th>Borrowed from exception agent</th></tr></thead>
+    <tbody>
+      <tr><td>Ingest and preprocessor</td><td><span class="tag det">Code</span></td><td>Merge overlapping exports, dedupe connotes, parse dd/mm dates, geocode postcodes, compute business-day lateness with state holidays, flag open and bad-date rows.</td><td>Preprocessor: dedupe, consolidate, noise filter</td></tr>
+      <tr><td>Metrics engine</td><td><span class="tag det">Code</span></td><td>The only source of numbers: DIFOT, on-time, in-full, cost per shipment, kg, km, by any cut. Agents call it as a tool and can't invent figures.</td><td>Deterministic rule engine as the authority</td></tr>
+      <tr><td>Orchestrator</td><td><span class="tag det">Code</span></td><td>Decides which node runs next from state; enforces revision caps and escalation.</td><td>Deterministic router, 10-step priority order</td></tr>
+      <tr><td>Failure segmentation</td><td><span class="tag">LLM + stats</span></td><td>Runs lift analysis across origin, lane, receiver, transit promise, weekday, volume week, remoteness; ranks the clusters that explain most failures.</td><td>Resolution agent's classification step</td></tr>
+      <tr><td>RCA agent</td><td><span class="tag">LLM + RAG</span></td><td>For each cluster, proposes cause categories (carrier linehaul, DC cut-off missed, receiver closed, booking/address, ETA set too tight, volume surge) with evidence from scan events and the SLA.</td><td>RAG over the ops playbook</td></tr>
+      <tr><td>Critic</td><td><span class="tag">LLM</span></td><td>Rejects any claim without a metric behind it; sends back up to twice, then marks "needs human".</td><td>Critic with capped revision loop</td></tr>
+      <tr><td>Viz query agent</td><td><span class="tag">LLM</span></td><td>Turns "show QLD in September, deliveries from one origin site" into a validated view spec for the map. It never touches raw data.</td><td>New</td></tr>
+      <tr><td>Reporting and carrier claims</td><td><span class="tag">LLM</span></td><td>Drafts the weekly carrier review and credit/claim requests. Only node that sees customer names and contract rates.</td><td>Communication agent, PII isolation by typed view</td></tr>
+    </tbody></table></div></div>
+  <div class="grid2">
+    <div class="card"><h3>Build phases</h3><ul class="plain">
+      <li><b>1. Metrics and visuals.</b> Preprocessor, metrics engine and these views. No LLM. Reconcile DIFOT against your current report.</li>
+      <li><b>2. Segmentation and critic.</b> Ranked failure clusters with plain-English summaries and figures checked by the critic.</li>
+      <li><b>3. RCA with scan events.</b> Connect the carrier tracking/exception feed; label 100 failures by hand as ground truth.</li>
+      <li><b>4. Ask the map and carrier packs.</b> Natural-language views, weekly carrier pack, draft claims.</li></ul></div>
+    <div class="card"><h3>Evaluation</h3><ul class="plain">
+      <li>Metric reconciliation: engine vs a hand-built Excel pivot, exact match.</li>
+      <li>RCA accuracy vs 100 hand-labelled failures, by cause category.</li>
+      <li>Claim grounding rate: share of critic-approved statements traceable to a metric call.</li>
+      <li>Portfolio version: anonymised sites, scaled costs, shifted dates, so the demo can be public.</li></ul></div>
+  </div>
+</section>
+</div>
+
+<script src="https://unpkg.com/deck.gl@8.9.35/dist.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+const CFG=__CFG__;
+const D=__DATA__;
+const AUS=__AUS__;
+const T=__TRIPS__;
+const PW=__PW__;
+const $=s=>document.querySelector(s);
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'];
+const STATES=['NSW','VIC','QLD','SA','WA','TAS','NT','ACT'];
+const pct=(v,d=1)=>v==null?'–':(v*100).toFixed(d)+'%';
+const money=(v,d=2)=>'$'+Number(v).toLocaleString('en-AU',{minimumFractionDigits:d,maximumFractionDigits:d});
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function hex(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
+function mix(a,b,t){return a.map((x,i)=>Math.round(x+(b[i]-x)*t))}
+let PAL={};
+function readPal(){PAL={good:hex(css('--good')),mid:hex(css('--mid')),bad:hex(css('--bad')),line:hex(css('--state-line')),ink:hex(css('--ink')),map:css('--map-bg')}}
+// diverging: 65% red · 82% grey · 95% blue
+function difotColor(v,a=230){if(v==null)return [...PAL.mid,60];let c;if(v<.82){const t=Math.max(0,(v-.65)/.17);c=mix(PAL.bad,PAL.mid,t)}else{const t=Math.min(1,(v-.82)/.13);c=mix(PAL.mid,PAL.good,t)}return [...c,a]}
+// sequential for cost (single hue, light->dark of --good)
+function seqColor(v,lo,hi,a=230){if(v==null)return [...PAL.mid,60];const t=Math.max(0,Math.min(1,(v-lo)/(hi-lo)));return [...mix(PAL.mid,PAL.good,t),a]}
+
+// ---------- header & KPIs ----------
+$('#plate').textContent=CFG.plate||'Prototype';$('#h1').textContent=CFG.title||'DIFOT Lens';
+if(CFG.banner){$('#banner').innerHTML=CFG.banner;$('#banner').hidden=false}
+const K=D.kpi;
+$('#scope').innerHTML=`${K.n.toLocaleString()} consignments · ${K.start} – ${K.end}<br>${K.open.toLocaleString()} still open excluded from DIFOT`;
+const first=D.nat.slice(0,4),last=D.nat.slice(-4);
+const avg=(a,k)=>a.reduce((s,x)=>s+x[k],0)/a.length;
+const kp=[
+ ['DIFOT',pct(K.difot),`<span class="chip bad">▼ ${((avg(first,'difot')-avg(last,'difot'))*100).toFixed(1)} pts</span> first 4 wks vs last 4`],
+ ['On time',pct(K.ot),`${K.fails.toLocaleString()} failed consignments`],
+ ['In full',pct(K.inf),'Delivered items ≥ consigned'],
+ ['Freight spend',money(K.spend/1e6,2)+'M',`${money(K.cps)} per shipment`],
+ ['Cost per kg',money(K.cpkg,3),`${money(avg(first,'cpkg'),2)} → ${money(avg(last,'cpkg'),2)}`],
+ ['Avg distance',Math.round(K.avgkm)+' km',`${Math.round(avg(first,'avgkm'))} → ${Math.round(avg(last,'avgkm'))} km, est. road`]];
+$('#kpis').innerHTML=kp.map(([l,v,s])=>`<div class="kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>`).join('');
+
+// ---------- tabs ----------
+const built={};
+function show(t){document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
+ ['map','trends','rca','agents'].forEach(x=>$('#p-'+x).hidden=x!==t);
+ if(t==='trends'&&!built.trends){buildTrends();built.trends=1}
+ if(t==='rca'&&!built.rca){buildRCA();built.rca=1}
+ if(t==='map'&&deckgl)deckgl.redraw(true);
+ try{history.replaceState(null,'','#'+t)}catch(e){}}
+document.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>show(b.dataset.tab));
+
+// ---------- map ----------
+let deckgl=null,mode='states',metric='difot',day=0,focus=null,playing=false,lastTs=0,speed=2;
+const W=D.weeks.length,LASTDAY=T.days-1,DAY0=new Date('2026-01-05T00:00:00');
+$('#slider').max=LASTDAY;
+const wkOf=dd=>Math.max(0,Math.min(W-1,Math.floor(dd/7)));
+const dateOf=dd=>new Date(DAY0.getTime()+Math.floor(dd)*864e5);
+const monthOf=dd=>Math.min(9,dateOf(dd).getMonth());
+const origin=Object.fromEntries(D.origins.map(o=>[o.name,o]));
+// hand-placed labels so neighbouring sites don't collide
+const LAB=CFG.labels||{};
+const sb={NSW:[147,-32.5,5.6],VIC:[144.8,-37,6.3],QLD:[145,-21,4.6],SA:[136,-31.5,5],WA:[121,-26,4.5],TAS:[146.6,-42,6.6],NT:[133.5,-19.5,4.9],ACT:[149.05,-35.4,8.3]};
+function baseZoom(){const m=$('#map');const w=m.clientWidth||800,h=m.clientHeight||600;return Math.min(Math.log2(w*360/(44*512)),Math.log2(h*360/(46*512)))+0.1}
+function stateVal(s,i){const r=D.stateWeek[s][i];return {n:r[0],difot:r[1],cps:r[2],cpkg:r[3],km:r[4]}}
+function colorFor(v){if(metric==='difot')return difotColor(v.difot);if(metric==='cps')return seqColor(v.cps,40,160);return seqColor(v.cpkg,.3,1.6)}
+
+// ---- postcode piles: one sphere per consignment, heaped at its delivery postcode ----
+let curZoom=4;
+function piles(){
+ const f0=Math.min(W-1,Math.floor(day/7)),f1=Math.min(W-1,f0+1);let fr=Math.min(1,Math.max(0,day/7-f0));fr=fr<.6?0:(fr-.6)/.4;fr=fr*fr*(3-2*fr);
+ const r=focus?3.4:2.1,dd=2*r*.9,balls=[],halos=[];
+ D.postcodes.forEach((p,i)=>{if(focus&&p[2]!==focus)return;
+  const n0=PW.n[i][f0],n1=PW.n[i][f1];const n=Math.round(n0+(n1-n0)*fr);if(!n)return;
+  const q0=n0?PW.f[i][f0]/n0:null,q1=n1?PW.f[i][f1]/n1:null;const a=q0??q1,b=q1??q0;const q=a+(b-a)*fr;
+  const cl=Math.cos(p[3]*Math.PI/180),mpp=40075016*cl/(512*Math.pow(2,curZoom));
+  const Rb=dd*Math.sqrt(n)*.6;
+  halos.push({p:[p[4],p[3]],r:Rb+r*2.5,v:1-q});
+  for(let j=0;j<n;j++){const u=(j+.5)/n,rho=Rb*Math.sqrt(u),th=j*2.39996+i;
+   const x=rho*Math.cos(th),y=rho*Math.sin(th),z=(Rb-rho)*1.15+r;
+   balls.push({p:[p[4]+x*mpp/(111320*cl),p[3]+y*mpp/110540,z*mpp],late:hash(i*997+j)<q,i})}});
+ return {balls,halos,r}}
+
+// ---- freight flow: one particle per consignment, travelling over its real transit days ----
+const FLOW_COL=[[70,190,255],[255,86,58],[235,235,225]];
+const hash=i=>{let x=Math.imul(i^0x9e3779b9,0x85ebca6b);x^=x>>>13;x=Math.imul(x,0xc2b2ae35);x^=x>>>16;return (x>>>0)/4294967296};
+const chunks=[];// trips grouped by dispatch week
+(function(){for(let i=0;i<T.s.length;i++){const k=Math.floor(T.s[i]/7);(chunks[k]=chunks[k]||[]).push(i)}})();
+const built_={};
+function chunkData(k){if(built_[k])return built_[k];const out=[];const idx=chunks[k]||[];
+ for(const i of idx){const a=T.P[T.o[i]],b=T.P[T.d[i]];const dx=b[0]-a[0],dy=b[1]-a[1];const len=Math.hypot(dx,dy);if(len<0.05)continue;
+  const j=hash(i),j2=hash(i+7919);const dep=T.s[i]+0.45+j*0.3;let arr=T.s[i]+T.t[i]+0.3+j2*0.35;if(arr<=dep+0.15)arr=dep+0.15+j2*0.2;
+  const bend=(0.10+0.08*j2)*len;const cx=(a[0]+b[0])/2-dy/len*bend,cy=(a[1]+b[1])/2+dx/len*bend;
+  const path=[],ts=[];const N=Math.max(5,Math.min(14,Math.round(len*1.1)));
+  for(let n=0;n<=N;n++){const u=n/N,v=1-u;path.push([v*v*a[0]+2*v*u*cx+u*u*b[0],v*v*a[1]+2*v*u*cy+u*u*b[1]]);ts.push(dep+(arr-dep)*u)}
+  out.push({path,ts,f:T.f[i]})}
+ return built_[k]=out}
+function flowLayers(){const k=Math.floor(day/7);const L=[];
+ for(let c=Math.max(0,k-2);c<=k;c++){if(!chunks[c])continue;
+  L.push(new deck.TripsLayer({id:'flow'+c,data:chunkData(c),getPath:d=>d.path,getTimestamps:d=>d.ts,getColor:d=>FLOW_COL[d.f],
+   opacity:.9,widthMinPixels:2.2,jointRounded:true,capRounded:true,trailLength:0.55,fadeTrail:true,currentTime:day,
+   parameters:{depthTest:false,blend:true,blendFunc:[770,1]}}))}
+ return L}
+function flowStats(){const i=Math.floor(day);const n=T.deliv[i]||0,l=T.late[i]||0;return {tr:T.transit[i]||0,n,l}}
+
+function layers(){
+ const L=[];const wk=wkOf(day),mo=monthOf(day);const flow=mode==='flow';
+ L.push(new deck.GeoJsonLayer({id:'states',data:AUS,pickable:mode==='states',stroked:true,filled:true,
+  extruded:mode==='states',wireframe:false,lineWidthMinPixels:1,getLineColor:flow?[52,70,80,255]:[...PAL.line,255],
+  getFillColor:f=>mode==='states'?colorFor(stateVal(f.properties.s,wk)):flow?[16,24,30,255]:[...PAL.line,mode==='points'&&focus&&f.properties.s!==focus?25:45],
+  getElevation:f=>mode==='states'?stateVal(f.properties.s,wk).n*170:0,
+  material:{ambient:.55,diffuse:.6,shininess:20},
+  transitions:{getElevation:500,getFillColor:500},
+  updateTriggers:{getFillColor:[wk,mode,metric,focus,PAL.good],getElevation:[wk,mode],getLineColor:mode}}));
+ if(flow){
+  L.push(...flowLayers());
+  L.push(new deck.ScatterplotLayer({id:'orig',data:D.origins,getPosition:o=>[o.lon,o.lat],getRadius:o=>14000+Math.sqrt(o.n)*120,radiusMinPixels:4,
+   getFillColor:[255,255,255,40],stroked:true,getLineColor:[255,255,255,220],lineWidthMinPixels:1.5,pickable:true,parameters:{depthTest:false}}));
+ }
+ if(flow||mode==='states'){
+  L.push(new deck.TextLayer({id:'origt',data:D.origins,getPosition:o=>[o.lon,o.lat],getText:o=>o.name,getSize:12,
+   getColor:flow?[235,240,240,255]:[...PAL.ink,255],getPixelOffset:o=>(LAB[o.name]||[[12,0]])[0],getTextAnchor:o=>(LAB[o.name]||[0,'start'])[1],getAlignmentBaseline:'center',
+   fontFamily:'IBM Plex Sans, sans-serif',fontWeight:600,outlineWidth:4,outlineColor:flow?[5,9,12,255]:[...hex(css('--map-bg')),255],fontSettings:{sdf:true},
+   parameters:{depthTest:false},visible:flow,updateTriggers:{getColor:mode,outlineColor:[mode,PAL.map]}}));
+ }
+ if(mode==='points'){
+  const P_=piles();
+  L.push(new deck.ScatterplotLayer({id:'halo',data:P_.halos,radiusUnits:'pixels',getPosition:h=>h.p,getRadius:h=>h.r,
+   getFillColor:h=>difotColor(h.v,55),stroked:false,parameters:{depthTest:false}}));
+  L.push(new deck.ScatterplotLayer({id:'spheres',data:P_.balls,pickable:true,billboard:true,radiusUnits:'pixels',getRadius:P_.r,
+   getPosition:d=>d.p,getFillColor:d=>d.late?[...PAL.bad,255]:[...PAL.good,255],stroked:true,lineWidthUnits:'pixels',getLineWidth:0.7,
+   getLineColor:d=>d.late?[...mix(PAL.bad,[0,0,0],.35),255]:[...mix(PAL.good,[0,0,0],.35),255]}));
+ }
+ return L;
+}
+function tooltip({object,layer}){
+ if(!object)return null;const wk=wkOf(day),mo=monthOf(day);let h='';
+ if(layer.id==='states'){const s=object.properties.s,v=stateVal(s,wk);h=`<b>${s}</b> · week of ${fmtW(wk)}<br>DIFOT ${pct(v.difot)}<br>${v.n.toLocaleString()} consignments<br>${v.cps?money(v.cps):'–'} / shipment · ${v.cpkg?money(v.cpkg,3):'–'} / kg<br>avg ${v.km??'–'} km`}
+ else if(layer.id==='spheres'){const p=D.postcodes[object.i],n=PW.n[object.i][wk],f=PW.f[object.i][wk];h=`<b>${p[1]} ${p[0]}</b> (${p[2]})<br>Week of ${fmtW(wk)}: ${n} consignments, ${f} late<br>DIFOT ${pct(n?1-f/n:null)}`}
+ else if(layer.id==='orig'){h=`<b>${object.name}</b><br>${object.n.toLocaleString()} consignments YTD<br>DIFOT ${pct(object.difot)}`}
+ else return null;
+ return {html:h,style:{background:css('--surface'),color:css('--ink'),border:'1px solid '+css('--line'),borderRadius:'4px',fontFamily:'IBM Plex Sans, sans-serif',fontSize:'12px',padding:'8px 10px',lineHeight:'1.45'}};
+}
+function fmtW(i){return new Date(D.weeks[i]+'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short'})}
+function view(lon,lat,zoom,pitch=45,bearing=-8){return {longitude:lon,latitude:lat,zoom,pitch,bearing,transitionDuration:900,transitionInterpolator:new deck.FlyToInterpolator()}}
+function initMap(){
+ readPal();curZoom=baseZoom();
+ deckgl=new deck.Deck({parent:$('#map'),initialViewState:{longitude:134,latitude:-29,zoom:baseZoom(),pitch:40,bearing:-6},
+  controller:true,layers:layers(),onViewStateChange:({viewState})=>{if(Math.abs(viewState.zoom-curZoom)>.12){curZoom=viewState.zoom;if(mode==='points')deckgl.setProps({layers:layers()})}},getTooltip:tooltip,
+  onClick:({object,layer})=>{if(layer&&layer.id==='states'&&object)zoomState(object.properties.s)},
+  style:{position:'absolute',inset:0}});
+ ['.overlay','.legend','#back'].forEach(s=>{const e=$('#map').querySelector(s);e.style.zIndex=2;$('#map').appendChild(e)});
+ render();
+}
+function zoomState(s){focus=s;setMode('points',true);const[lon,lat,z]=sb[s];deckgl.setProps({initialViewState:view(lon,lat,z+baseZoom()-3.4,52,-12)});$('#back').hidden=false}
+$('#back').onclick=()=>{focus=null;$('#back').hidden=true;deckgl.setProps({initialViewState:view(134,-29,baseZoom(),40,-6)});render()};
+function setMode(m,keep){mode=m;if(!keep&&focus){focus=null;$('#back').hidden=true;deckgl.setProps({initialViewState:view(134,-29,baseZoom(),40,-6)})}
+ if(m==='points'&&!keep)deckgl.setProps({initialViewState:view(140,-30,baseZoom()+0.35,50,-12)});
+ if(m==='flow'&&!keep)deckgl.setProps({initialViewState:view(140,-30,baseZoom()+0.15,25,0)});
+ document.querySelectorAll('#mode button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
+ $('#metricwrap').hidden=m!=='states';$('#speedwrap').hidden=m!=='flow';render()}
+document.querySelectorAll('#mode button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+$('#metric').onchange=e=>{metric=e.target.value;render()};
+$('#speed').onchange=e=>{speed=+e.target.value};
+$('#slider').oninput=e=>{day=+e.target.value;render()};
+const RATE={states:9,points:3.5};
+function tick(ts){if(!playing)return;const dt=lastTs?Math.min(.1,(ts-lastTs)/1000):0;lastTs=ts;
+ const before=mode==='flow'?null:(mode==='states'?wkOf(day):monthOf(day));
+ day+=dt*(mode==='flow'?speed:RATE[mode]);if(day>=LASTDAY){day=LASTDAY;stop()}
+ $('#slider').value=Math.floor(day);
+ if(mode==='flow'||mode==='points'||before!==(mode==='states'?wkOf(day):monthOf(day))||!playing)render();
+ if(playing)requestAnimationFrame(tick)}
+function stop(){playing=false;$('#play').textContent='▶ Play'}
+$('#play').onclick=()=>{if(playing){stop();return}if(day>=LASTDAY-1)day=0;playing=true;lastTs=0;$('#play').textContent='❚❚ Pause';requestAnimationFrame(tick)};
+function render(){
+ const wk=wkOf(day),mo=monthOf(day);const n=D.nat[wk];const flow=mode==='flow';
+ $('#map').classList.toggle('flow',flow);$('#map').style.background=flow?'#05090c':PAL.map;
+ if(mode==='states'){$('#when').textContent='Week of '+fmtW(wk);$('#whensub').textContent=`National DIFOT ${pct(n.difot)} · ${n.n.toLocaleString()} consignments · height = volume`}
+ else if(flow){const st=flowStats();$('#when').textContent=dateOf(day).toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'});
+  $('#whensub').innerHTML=`<span class="mono">${st.tr.toLocaleString()}</span> in transit · <span class="mono">${st.n.toLocaleString()}</span> delivered today` + (st.n?` · <span class="mono">${pct(st.l/st.n,0)}</span> late`:'')}
+ else{$('#when').textContent='Week of '+fmtW(wk)+(focus?' · '+focus:'');$('#whensub').textContent=`1 sphere = 1 consignment, piled at its delivery postcode · ${(focus?stateVal(focus,wk).n:n.n).toLocaleString()} this week`}
+ const isCost=mode==='states'&&metric!=='difot';
+ $('#rampbox').hidden=flow||mode==='points';$('#sizekey').hidden=mode!=='points';$('#flowkey').hidden=!flow;
+ $('#legtitle').textContent=flow?'Each line is one consignment':mode==='points'?'Each sphere is one consignment':isCost?(metric==='cps'?'Cost per shipment':'Cost per kg'):'DIFOT';
+ $('#ramp').style.background=isCost?`linear-gradient(90deg,${css('--mid')},${css('--good')})`:`linear-gradient(90deg,${css('--bad')},${css('--mid')},${css('--good')})`;
+ $('#rampl').innerHTML=isCost?(metric==='cps'?'<span>$40</span><span>$100</span><span>$160+</span>':'<span>$0.30</span><span>$0.95</span><span>$1.60+</span>'):'<span>≤65%</span><span>82%</span><span>≥95%</span>';
+ $('#legh').textContent=mode==='states'?'Height: weekly consignments':flow?'Moves from dispatch to actual delivery date':'';
+ if(!flow||!playing||Math.floor(day)!==render._d){render._d=Math.floor(day);side(wk,mo)}
+ if(deckgl)deckgl.setProps({layers:layers()});
+}
+function side(wk,mo){let rows;
+ if(mode==='points'&&focus){
+  $('#sidetitle').textContent=`Worst ${focus} postcodes · week of ${fmtW(wk)}`;
+  rows=D.postcodes.map((p,i)=>[p,i]).filter(([p,i])=>p[2]===focus&&PW.n[i][wk]>=8).map(([p,i])=>({k:p[0],lab:p[1],v:1-PW.f[i][wk]/PW.n[i][wk],n:PW.n[i][wk]})).sort((a,b)=>a.v-b.v||b.n-a.n).slice(0,8);
+  $('#staterows').innerHTML=rows.map(r=>`<div class="srow" title="${r.lab}"><span class="mono">${r.k}</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.lab} <span class="note">${r.n}</span></span><span class="mono">${pct(r.v,0)}</span></div>`).join('')||'<p class="note">No postcode with 8+ consignments this week.</p>';
+  $('#sidenote').textContent='Postcodes with at least 8 consignments in the week, worst DIFOT first. Grey number = consignments.';
+  return}
+ const monthly=false;
+ $('#sidetitle').textContent=`DIFOT by state · week of ${fmtW(wk)}`;
+ rows=STATES.map(s=>{let v,nn;if(!monthly){const x=stateVal(s,wk);v=x.difot;nn=x.n}else{let n2=0,f2=0;D.postcodes.forEach(p=>{if(p[2]===s){n2+=p[5][mo][0];f2+=p[5][mo][1]}});v=n2?1-f2/n2:null;nn=n2}return {s,v,nn}});
+ $('#staterows').innerHTML=rows.map(r=>{const w=r.v==null?0:Math.max(0,(r.v-.5)/.5*100);const c=difotColor(r.v);return `<div class="srow" data-s="${r.s}" title="${r.nn} consignments"><span style="font-weight:600">${r.s}</span><span class="b"><i style="width:${w}%;background:rgb(${c[0]},${c[1]},${c[2]})"></i><span class="t" style="left:80%"></span></span><span class="mono" style="text-align:right">${pct(r.v,0)}</span></div>`}).join('')+'<p class="note mono" style="display:flex;justify-content:space-between;padding:0 4px 0 50px"><span>50%</span><span>100%</span></p>';
+ $('#sidenote').textContent='Bar shows DIFOT from 50 to 100%; the tick marks the 90% target. Click a state to see its delivery postcodes.';
+ document.querySelectorAll('.srow[data-s]').forEach(e=>e.onclick=()=>zoomState(e.dataset.s));
+}
+
+// ---------- charts ----------
+const charts=[];
+function chartBase(){Chart.defaults.font.family='IBM Plex Sans, system-ui, sans-serif';Chart.defaults.font.size=11;Chart.defaults.color=css('--muted');Chart.defaults.borderColor=css('--line');
+ Chart.defaults.plugins.tooltip.backgroundColor=css('--surface');Chart.defaults.plugins.tooltip.titleColor=css('--ink');Chart.defaults.plugins.tooltip.bodyColor=css('--ink-2');Chart.defaults.plugins.tooltip.borderColor=css('--line');Chart.defaults.plugins.tooltip.borderWidth=1}
+const wkLabels=()=>D.weeks.map((_,i)=>fmtW(i));
+function mk(id,cfg){const c=new Chart($(id),cfg);charts.push(c);return c}
+const scaleX={grid:{display:false},ticks:{maxTicksLimit:6,maxRotation:0}};
+function lineOpts(yfmt,min,max,extra={}){return {responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw==null?'–':yfmt(c.raw)}`}}},
+ scales:{x:scaleX,y:{min,max,ticks:{callback:yfmt,maxTicksLimit:5},grid:{color:css('--line')}}},elements:{point:{radius:0,hoverRadius:4},line:{borderWidth:2,tension:.25}},...extra}}
+function buildTrends(){
+ chartBase();const lab=wkLabels();
+ {const k1=avg(last,'avgkm')/avg(first,'avgkm')-1,c1=avg(last,'cpkm')/avg(first,'cpkm')-1,g1=avg(last,'cpkg')/avg(first,'cpkg')-1;
+  $('#costnote').innerHTML=`<b>Reading the cost lines together:</b> from the first four weeks to the last four, average distance changed ${(k1*100).toFixed(0)}%, cost per km ${(c1*100).toFixed(0)}% and cost per kg ${(g1*100).toFixed(0)}%. `+(c1<0&&k1>0?'Falling cost per km alongside longer average trips is a mix shift toward longer lanes, not cheaper rates. ':'')+'Read cost per km per lane, not as a network average.'}const blue=css('--good'),ref=css('--ref'),org=css('--accent');
+ mk('#c-nat',{type:'bar',data:{labels:lab,datasets:[
+  {type:'line',label:'DIFOT',data:D.nat.map(x=>x.difot*100),borderColor:blue,yAxisID:'y'},
+  {type:'line',label:'90% target',data:D.nat.map(()=>90),borderColor:ref,borderDash:[4,4],borderWidth:1,yAxisID:'y'}]},
+  options:lineOpts(v=>v.toFixed(0)+'%',60,100,{plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:12,boxHeight:2}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw.toFixed(1)}%`,afterBody:it=>`Consignments: ${D.nat[it[0].dataIndex].n.toLocaleString()}`}}}})});
+ const SH=STATES.filter(s=>D.stateTot[s]);
+ $('#statemult').innerHTML=SH.map(s=>{const t=D.stateTot[s];return `<div class="card sm"><div class="head"><h3>${s}</h3><span class="big">${pct(t.difot)}</span></div><div class="cv"><canvas id="sm-${s}"></canvas></div><span class="note">${t.n.toLocaleString()} cons · ${money(t.cps)} / shipment · ${t.avgkm} km avg</span></div>`}).join('');
+ SH.forEach(s=>mk('#sm-'+s,{type:'line',data:{labels:lab,datasets:[
+  {label:'National',data:D.nat.map(x=>x.difot*100),borderColor:ref,borderWidth:1.5},
+  {label:s,data:D.stateWeek[s].map(r=>r[1]==null?null:r[1]*100),borderColor:blue,spanGaps:true}]},options:lineOpts(v=>v.toFixed(0)+'%',50,100)}));
+ const m=[['#c-cps','cps',v=>'$'+v.toFixed(0),'#v-cps',v=>money(v)],['#c-cpkg','cpkg',v=>'$'+v.toFixed(2),'#v-cpkg',v=>money(v,3)],['#c-cpkm','cpkm',v=>'$'+v.toFixed(3),'#v-cpkm',v=>money(v,3)],['#c-km','avgkm',v=>v.toFixed(0),'#v-km',v=>Math.round(v)+' km']];
+ m.forEach(([id,k,f,vid,vf])=>{$(vid).textContent=vf(D.nat[D.nat.length-1][k]);mk(id,{type:'line',data:{labels:lab,datasets:[{label:$(vid).previousElementSibling.textContent,data:D.nat.map(x=>x[k]),borderColor:blue,fill:true,backgroundColor:blue+'1f'}]},options:lineOpts(f,undefined,undefined)})});
+}
+function barOpts(fmt,min,max,horiz,extra={}){return {responsive:true,maintainAspectRatio:false,indexAxis:horiz?'y':'x',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},
+ scales:{[horiz?'y':'x']:{grid:{display:false}},[horiz?'x':'y']:{min,max,ticks:{callback:fmt,maxTicksLimit:5},grid:{color:css('--line')}}},...extra}}
+function buildRCA(){
+ chartBase();const blue=css('--good');
+ const bar=(data,colors)=>({data,backgroundColor:colors||blue,borderRadius:4,borderSkipped:'start',maxBarThickness:36});
+ const tot=D.lateDist.reduce((s,x)=>s+x[1],0);
+ const ld=[['In-full miss',D.lateDist.filter(x=>x[0]<=0).reduce((s,x)=>s+x[1],0)],...[1,2,3,4].map(k=>[k+' day',(D.lateDist.find(x=>x[0]===k)||[0,0])[1]]),['5+ days',(D.lateDist.find(x=>x[0]===5)||[0,0])[1]]];
+ mk('#c-late',{type:'bar',data:{labels:ld.map(x=>x[0]),datasets:[bar(ld.map(x=>x[1]/tot*100))]},options:barOpts(v=>v.toFixed(0)+'%',0,100)});
+ mk('#c-svc',{type:'bar',data:{labels:D.svc.map(x=>x[0]+(x[0]===5?'+ ':' ')+'day'),datasets:[bar(D.svc.map(x=>x[2]*100),D.svc.map(x=>{const c=difotColor(x[2]);return `rgb(${c[0]},${c[1]},${c[2]})`}))]},options:barOpts(v=>v.toFixed(0)+'%',50,100)});
+ const od=D.origDifot;
+ mk('#c-orig',{type:'bar',data:{labels:od.map(x=>`${x[0]} (${(x[1]/1000).toFixed(1)}k)`),datasets:[bar(od.map(x=>x[2]*100),od.map(x=>{const c=difotColor(x[2]);return `rgb(${c[0]},${c[1]},${c[2]})`}))]},options:barOpts(v=>v.toFixed(0)+'%',50,100,true)});
+ mk('#c-vol',{type:'scatter',data:{datasets:[{data:D.volScatter.map(x=>({x:x[0],y:x[1]*100})),backgroundColor:blue,pointRadius:4,pointHoverRadius:6,borderColor:css('--surface'),borderWidth:1}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.x.toLocaleString()} cons · DIFOT ${c.raw.y.toFixed(1)}%`}}},scales:{x:{title:{display:true,text:'Consignments per week'},grid:{color:css('--line')}},y:{min:60,max:100,ticks:{callback:v=>v+'%'},grid:{color:css('--line')}}}}});
+ $('#corrnote').textContent=`Correlation r = ${D.volCorr}. Busier weeks deliver worse.`;
+ const ro=['Major Cities of Australia','Inner Regional Australia','Outer Regional Australia','Remote Australia','Very Remote Australia'];
+ const rem=ro.map(k=>D.remote.find(x=>x[0]===k)).filter(Boolean);
+ mk('#c-rem',{type:'bar',data:{labels:rem.map(x=>x[0].replace(' of Australia','').replace(' Australia','')),datasets:[bar(rem.map(x=>x[2]*100),rem.map(x=>{const c=difotColor(x[2]);return `rgb(${c[0]},${c[1]},${c[2]})`}))]},options:barOpts(v=>v.toFixed(0)+'%',50,100)});
+ const dn=['Mon','Tue','Wed','Thu','Fri'];const dw=D.etaDow.filter(x=>x[0]<5);
+ mk('#c-dow',{type:'bar',data:{labels:dw.map(x=>dn[x[0]]),datasets:[bar(dw.map(x=>x[2]*100),dw.map(x=>{const c=difotColor(x[2]);return `rgb(${c[0]},${c[1]},${c[2]})`}))]},options:barOpts(v=>v.toFixed(0)+'%',50,100)});
+ // callouts
+ const big=od[0];const share=big[1]/od.reduce((s,x)=>s+x[1],0);
+ const s1=D.svc.find(x=>x[0]===1),s5=D.svc.find(x=>x[0]===5);
+ const svcTot=D.svc.reduce((s,x)=>s+x[1],0),s1share=s1[1]/svcTot;
+ const maj=D.remote.find(x=>x[0].startsWith('Major')),outer=D.remote.find(x=>x[0].startsWith('Outer'));
+ const dDrop=(avg(first,'difot')-avg(last,'difot'))*100,vGrow=avg(last,'n')/avg(first,'n');
+ const cpkgCh=(avg(last,'cpkg')/avg(first,'cpkg')-1)*100,kmCh=avg(last,'avgkm')/avg(first,'avgkm')-1,cpkmCh=avg(last,'cpkm')/avg(first,'cpkm')-1;
+ const C=[
+  [pct(K.oneday,0),'of failures are exactly one business day late. That is a systematic pattern, typically a missed cut-off or linehaul connection, rather than random delays.'],
+  [pct(s1[2],0),`DIFOT on next-day promises, vs ${pct(s5[2],0)} on 5+ day lanes. Next-day ETAs carry ${pct(s1share,0)} of all freight.`],
+  [pct(big[2],0),`DIFOT out of ${big[0]}, which ships ${pct(share,0)} of all consignments${big[2]<K.difot?', the biggest single lever on the national number':''}.`],
+  ['r = '+D.volCorr,`between weekly volume and DIFOT. Weekly volume ${vGrow>=1.9?'more than doubled':vGrow>=1.1?'grew '+((vGrow-1)*100).toFixed(0)+'%':'changed '+((vGrow-1)*100).toFixed(0)+'%'} from the first four weeks to the last four, while DIFOT ${dDrop>=0?'fell '+dDrop.toFixed(0):'rose '+(-dDrop).toFixed(0)} points.`],
+  [pct(maj[2],0),`DIFOT into major cities, ${maj[2]<outer[2]?'below':'above'} outer regional (${pct(outer[2],0)}).${maj[2]<outer[2]?' Metro runs and short lanes carry the failures.':''}`],
+  [(cpkgCh>=0?'+':'')+cpkgCh.toFixed(0)+'%',`cost per kg, first four weeks vs last four.${cpkmCh<0&&kmCh>0?' Cost per km fell only because average distance grew.':''}`]];
+ $('#callouts').innerHTML=C.map(([n,t])=>`<div class="card finding"><span class="n">${n}</span><p>${t}</p></div>`).join('');
+}
+function rebuild(){readPal();charts.splice(0).forEach(c=>c.destroy());const t=built;built.trends=built.rca=0;
+ const cur=document.querySelector('nav.tabs button[aria-selected="true"]').dataset.tab;if(cur==='trends'){buildTrends();built.trends=1}if(cur==='rca'){buildRCA();built.rca=1}
+ if(deckgl){$('#map').style.background=PAL.map;render()}}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',rebuild);
+new MutationObserver(rebuild).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+$('#slider').value=0;$('#slider').max=LASTDAY;
+initMap();
+const h=(location.hash||'').slice(1);if(['trends','rca','agents','map'].includes(h))show(h);
+</script>
