@@ -45,7 +45,7 @@ def destinations(rng):
     pc = pd.read_csv(REF, dtype={'postcode': str}, low_memory=False)
     pc['RA_2021_NAME'] = pc.RA_2021_NAME.fillna(pc.RA_2016.map(RA_CODES))   # NT has no 2021 class in the source
     pc = pc[(pc.lat.abs() > 1) & (pc.type == 'Delivery Area') & pc.RA_2021_NAME.isin(RA_W) & pc.state.isin(STATE_SHARE)].copy()
-    pc = pc[~pc.postcode.isin(['4875', '4009', '4014', '4207', '3047', '3175', '2175'])]   # Torres Strait (shared coordinate) + keep clear of real-world reference sites
+    pc = pc[pc.postcode != '4875']                                   # skip Torres Strait (shared coordinate)
     pc['la'] = pd.to_numeric(pc.Lat_precise, errors='coerce').fillna(pc.lat)
     pc['lo'] = pd.to_numeric(pc.Long_precise, errors='coerce').fillna(pc.long)
     pc = pc.sort_values('locality').groupby('postcode').head(1)       # one delivery suburb per postcode
