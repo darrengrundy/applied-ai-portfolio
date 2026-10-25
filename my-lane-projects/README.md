@@ -10,4 +10,5 @@ Focus areas include transport safety, Chain of Responsibility compliance, supply
 |---|---|
 | [Multi-Agent Last-Mile Delivery Exception Handler](delivery-exception-agent/) | Complete - evaluated POC, LangGraph, typed-view PII isolation |
 | [Multi-Agent AI for Transport CoR Compliance](transport-cor-multi-agent/) | Working prototype - real regulatory RAG, simulated telematics |
+| [DIFOT Lens - freight service and cost visualisation](difot-lens/) | Working demo - deterministic metrics + deck.gl map, synthetic data; agent layer designed |
 | Distribution LEAN Waste Multi-Agent System | In development - not yet published |
