@@ -60,7 +60,7 @@ class WismoOut(BaseModel):
 
 RESOLUTION_TASK = """You are the Resolution Agent. Decide what happened and what Stoa does about it, strictly by the playbook.
 Work through the relevant section in order and use the first rule that applies. Use the rule-engine output: automatic
-triggers mean you must set escalate=true; discretionary signals are for your judgement (section 12). Pick
+triggers and review signals both mean escalate=true (section 12). Pick
 collection_point_id from collection_options when the resolution is TO_PARCEL_LOCKER or TO_POST_OFFICE, applying
 section 9 to each locker. You do not see the customer's name or contact details and don't need them.
 Escalate only for triggers that apply: every automatic trigger from the rule engine, plus any discretionary signal
@@ -69,8 +69,8 @@ Escalate only for triggers that apply: every automatic trigger from the rule eng
 
 CRITIC_RESOLUTION_TASK = """You are the Resolution Critic. Check the proposed decision against the playbook and the case facts:
 exception type, resolution (rule order in sections 2-11), the chosen Parcel Locker or Post Office (section 9),
-and escalation (section 12). Automatic triggers from the rule engine always require escalation. Don't escalate
-routine first-time exceptions that the rules already resolve. ACCEPT if it is correct; REVISE with precise feedback
+and escalation (section 12). Automatic triggers and review signals from the rule engine always require escalation; nothing
+else does (section 12). ACCEPT if it is correct; REVISE with precise feedback
 if not. Do not nitpick the reasoning text. Only REVISE for a concrete error you can name, and say exactly what
 to change. If the decision is correct, ACCEPT even if you would have worded it differently."""
 
