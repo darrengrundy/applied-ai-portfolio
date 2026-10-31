@@ -83,6 +83,8 @@ def main():
     ap.add_argument("--data", default=str(PROJECT / "data"))
     ap.add_argument("--out", default=str(PROJECT / "demo" / "index.html"))
     ap.add_argument("--note", default="", help="Optional banner, e.g. for a preview build")
+    ap.add_argument("--aud-rate", type=float, default=1.43,
+                    help="AUD per USD for showing costs (Anthropic bills in USD; mid-market rate 31 Oct 2026 was 1.426)")
     a = ap.parse_args()
     D, R = Path(a.data), Path(a.run)
 
@@ -187,7 +189,7 @@ def main():
         size = len(json.dumps(cases, separators=(",", ":"), default=str)) + 3_000_000
         if size < 14_500_000:
             break
-    payload = {"note": a.note, "node_labels": NODE_LABEL, "story": story, "cities": cities, "cases": cases, "wismo": W, "tour": tour, "summary": summary,
+    payload = {"fx": a.aud_rate, "note": a.note, "node_labels": NODE_LABEL, "story": story, "cities": cities, "cases": cases, "wismo": W, "tour": tour, "summary": summary,
                "labels": LABEL, "res_labels": RES_LABEL}
     html = (PROJECT / "src" / "demo_template.html").read_text(encoding="utf-8")
     html = html.replace("__DATA__", json.dumps(payload, separators=(",", ":"), default=str))

@@ -258,6 +258,7 @@ const fmtT=m=>{m=Math.round(m);let h=Math.floor(m/60),mm=m%60;const ap=h>=12?'pm
 const t12=m=>fmtT(m).join(' ');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const num=n=>n.toLocaleString('en-AU');
+const aud=(usd,d)=>'A$'+(usd*(D.fx||1)).toFixed(d);
 
 // ---------------- data prep ----------------
 const CASES=D.cases;
@@ -379,7 +380,7 @@ function open(i,doFly){
   $('#dhead').innerHTML=`<span class="pill" style="color:${c.complaint?'var(--cust)':'var(--flare)'}">${esc(c.label)}</span>
     <span class="t">${esc(c.resl)}${c.pt?': '+esc(c.pt):''}</span>
     <span class="muted">${esc(c.suburb)} · ${c.city==='MEL'?'Melbourne':'Sydney'} · ${t12(c.t)} · parcel ${esc(c.id)}${c.type==='TRADE'?' · trade account':c.tier!=='STANDARD'?' · '+c.tier.toLowerCase()+' customer':''}</span>
-    <span><span class="pill" style="color:${col}">${c.esc?'Handed to a team leader':'Sorted, no person needed'}</span> <span class="muted mono">decided in ${c.sec} s · US$${c.cost.toFixed(4)}</span></span>
+    <span><span class="pill" style="color:${col}">${c.esc?'Handed to a team leader':'Sorted, no person needed'}</span> <span class="muted mono">decided in ${c.sec} s · ${aud(c.cost,4)}</span></span>
     ${c.esc&&c.why.length?`<span class="muted">Why: ${c.why.map(esc).join('; ')}</span>`:''}`;
   $('#tl').innerHTML=c.tl.map(([m,code,note])=>{const k=code==='CUSTOMER'?'cust':['SCANNED','OUT_FOR_DELIVERY','DELIVERED'].includes(code)?'':'exc';
     const name=code==='CUSTOMER'?'Customer':(D.labels[code]||({SCANNED:'Sorted at depot',OUT_FOR_DELIVERY:'Out for delivery',DELIVERED:'Delivered'}[code]||code));
@@ -432,11 +433,11 @@ function endOfDay(){
   const s=D.summary,m=s.metrics||{};
   const pctNoPerson=s.cases?Math.round(100*(s.cases-s.escalated)/s.cases):0;
   const k=[[num(s.cases),'exceptions sorted by the agents'],[pctNoPerson+'%','needed no person'],[s.sec_avg+' s','average from scan to customer message'],
-    ['US$'+(s.cost/Math.max(1,s.cases)).toFixed(4),'AI cost per exception ('+(s.model||'Claude')+')']];
+    [aud(s.cost/Math.max(1,s.cases),4),'AI cost per exception ('+(s.model||'Claude')+')']];
   if(m.resolution_accuracy_pct!=null)k.push([m.resolution_accuracy_pct+'%','decisions matching the playbook answer'],[m.escalation_accuracy_pct+'%','escalation calls correct'],
     [m.tone_accuracy_pct+'%','messages in the right tone'],[String(m.messages_leaking_internal_detail??0),'messages leaking driver notes or GPS']);
   $('#kpis').innerHTML=k.map(([v,l])=>`<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${esc(l)}</div></div>`).join('');
-  $('#endnote').textContent=`${num(s.parcels)} parcels, ${num(s.cases)} exceptions, ${num(s.complaints)} customer complaints. Total AI cost US$${s.cost.toFixed(2)}.`;
+  $('#endnote').textContent=`${num(s.parcels)} parcels, ${num(s.cases)} exceptions, ${num(s.complaints)} customer complaints. Total AI cost ${aud(s.cost,2)}.`;
   Chart.defaults.color=css('--ink-2');Chart.defaults.font.family='"IBM Plex Sans", system-ui, sans-serif';Chart.defaults.borderColor=css('--line');
   const bar=(id,obj,lab,color)=>{const e=Object.entries(obj).sort((a,b)=>b[1]-a[1]);new Chart($(id),{type:'bar',
     data:{labels:e.map(x=>lab[x[0]]||x[0]),datasets:[{data:e.map(x=>x[1]),backgroundColor:color,borderRadius:2,barThickness:12}]},
@@ -444,6 +445,7 @@ function endOfDay(){
   bar('#ch-code',s.by_code,D.labels,css('--flare'));bar('#ch-res',s.by_res,D.res_labels,css('--sorted'));bar('#ch-esc',s.esc_reasons,{},css('--person'));
   const notes=[`Decisions are checked against a labelled answer for every exception. The labels come from the same written playbook the agents read, so the score measures how faithfully the agents follow policy.`,
     `Flares stay red for a few minutes on the map so you can see them. Real decisions took ${s.sec_avg} seconds on average.`,
+    `Costs are Anthropic API charges, billed in US dollars and shown in Australian dollars at ${D.fx} AUD per USD.`,
     `Carded parcels go to Australia Post (Parcel Lockers and Post Offices) as a demo assumption, because it is the network everyone recognises.`];
   $('#notes').innerHTML=notes.map(n=>`<p style="margin:0">${esc(n)}</p>`).join('');
   $('#foot').textContent='Built by My Lane AI · mylaneai.com.au';
