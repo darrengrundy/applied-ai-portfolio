@@ -17,7 +17,7 @@ TBC
 ```bash
 pip install -r requirements.txt
 python ref/get_reference.py                 # Australian postcode table
-python synthetic/generate.py --out data     # one seeded delivery day (Stoa & Co., 10 Feb 2026)
+python synthetic/generate.py --out data     # one seeded delivery day (Stoa & Co., Fri 27 Feb 2026)
 ```
 
 ## Attribution
