@@ -1,0 +1,465 @@
+<title>Where's My Stuff?</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: night control room. Two city maps side by side are the hero; a parcel drawer slides over them;
+   the scorecard and the "ask it" phone sit underneath. Single dark look by design (a city at night). */
+:root{
+  --night:#070b10; --surface:#0e151c; --surface-2:#15202a; --line:#22303c;
+  --ink:#eaf0f4; --ink-2:#a6b4bf; --muted:#6f7f8b;
+  --lamp:#f2a93b;     /* van trails: sodium streetlight */
+  --done:#4f9fd8;     /* delivered */
+  --flare:#ff5a4f;    /* exception, not yet sorted */
+  --sorted:#3cc9a7;   /* sorted by the agents */
+  --person:#f7c548;   /* handed to a person */
+  --storm:#9b8cff; --fire:#ff7a1a; --cust:#ff7ac6;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--night)}
+body{background:var(--night);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px;max-width:1500px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;margin:0;letter-spacing:.01em;text-wrap:balance}
+h1{font-size:40px;line-height:1}
+h2{font-size:26px}
+h3{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+a{color:var(--done)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:2px}
+
+header.top{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-end;justify-content:space-between}
+.brand .kicker{font:600 12px var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--lamp)}
+.brand p{margin:6px 0 0;color:var(--ink-2);max-width:62ch}
+.brand .note{color:var(--person);font-weight:600}
+.clock{display:flex;align-items:baseline;gap:10px}
+.clock .t{font:600 52px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.clock .d{font-size:12px;color:var(--ink-2);line-height:1.3}
+
+.counters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}
+.ctr{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 12px;min-width:0}
+.ctr .v{font:600 28px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.ctr .l{font-size:12px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+
+.stage{position:relative;margin-top:12px;height:clamp(440px,68vh,760px);border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--night)}
+#deck{position:absolute;inset:0}
+.cityhud{position:absolute;top:10px;pointer-events:none;display:flex;flex-direction:column;gap:2px;max-width:46%}
+.cityhud.mel{left:12px}.cityhud.syd{left:calc(50% + 12px)}
+.cityhud .n{font:700 22px/1 var(--f-display);letter-spacing:.12em;text-transform:uppercase}
+.cityhud .s{font-size:12px;color:var(--ink-2)}
+.cityhud .temp{font:600 15px var(--f-mono)}
+.divider{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
+.caption{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(7,11,16,.88);border:1px solid var(--line);
+  border-radius:6px;padding:8px 14px;font:600 20px var(--f-display);letter-spacing:.03em;max-width:90%;text-align:center;pointer-events:none}
+.legend{position:absolute;left:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:var(--ink-2);background:rgba(7,11,16,.8);padding:6px 10px;border-radius:5px;max-width:calc(50% - 24px)}
+.legend span{display:flex;align-items:center;gap:5px}
+
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:10px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:7px 14px;cursor:pointer;font-weight:500}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--lamp);color:#1b1306;border-color:var(--lamp)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--surface);padding:7px 11px;cursor:pointer;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--night)}
+#scrub{flex:1 1 220px;accent-color:var(--lamp);min-width:0}
+
+.feed{margin-top:10px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.feed .item{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sorted);border-radius:5px;padding:6px 10px;font-size:12.5px;cursor:pointer;min-width:0}
+.feed .item.esc{border-left-color:var(--person)}
+.feed .item .h{display:flex;justify-content:space-between;gap:8px;color:var(--ink-2);font-size:11.5px}
+.feed .item .b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* parcel drawer */
+.drawer{position:absolute;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);border-left:1px solid var(--line);
+  overflow-y:auto;padding:16px 16px 24px;display:flex;flex-direction:column;gap:14px;box-shadow:-20px 0 40px rgba(0,0,0,.45);z-index:5}
+.drawer .x{position:sticky;top:0;align-self:flex-end;margin-bottom:-36px;z-index:2}
+.pill{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font:600 11px var(--f-body);letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid currentColor}
+.dhead{display:flex;flex-direction:column;gap:6px;padding-right:60px}
+.dhead .t{font:600 30px/1.05 var(--f-display)}
+.dgrid{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:12.5px}
+.tl li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px}
+.tl .w{font-family:var(--f-mono);color:var(--ink-2)}
+.tl .c{font-weight:600}
+.tl li.cust .c{color:var(--cust)}
+.tl li.exc .c{color:var(--flare)}
+.relay{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.relay li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;padding:6px 0;opacity:.25;transition:opacity .35s}
+.relay li.on{opacity:1}
+.relay .node{width:12px;height:12px;border-radius:50%;margin-top:4px;background:var(--ink-2);position:relative}
+.relay .node::after{content:"";position:absolute;left:5px;top:14px;width:2px;height:calc(100% + 14px);background:var(--line)}
+.relay li:last-child .node::after{display:none}
+.relay li.det .node{border-radius:2px;background:var(--ink)}
+.relay li.llm .node{background:var(--lamp)}
+.relay li.rev .node{background:var(--flare)}
+.relay .nm{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font-weight:600}
+.relay .meta{font:11px var(--f-mono);color:var(--muted)}
+.relay .tx{font-size:12.5px;color:var(--ink-2)}
+.badge{font:600 10px var(--f-body);letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:3px;background:var(--surface-2);color:var(--ink-2)}
+.badge.pii{background:var(--cust);color:#2a0b1d}
+
+.phone{width:230px;max-width:100%;border:2px solid #2c3a46;border-radius:30px;padding:14px 10px 18px;background:#05080b;display:flex;flex-direction:column;gap:8px;min-height:380px}
+.phone .notch{width:70px;height:6px;border-radius:4px;background:#1c2630;align-self:center}
+.phone .who{font-size:11px;color:var(--muted);text-align:center}
+.bubble{background:#1f2c38;border-radius:14px 14px 14px 4px;padding:8px 10px;font-size:12.5px;line-height:1.4;white-space:pre-wrap}
+.bubble.me{background:#2a4f6e;border-radius:14px 14px 4px 14px;align-self:flex-end}
+.email{background:#eef2f5;color:#13202b;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.4;white-space:pre-wrap;max-height:300px;overflow:auto}
+.email b{display:block;margin-bottom:4px}
+.call{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:20px;text-align:center}
+.call .big{font:600 34px var(--f-mono)}
+.toggle{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-2)}
+
+section.below{margin-top:34px;display:flex;flex-direction:column;gap:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;min-width:0}
+.kpi .v{font:600 34px/1.05 var(--f-display);font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12px;color:var(--ink-2)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.cv{position:relative;height:240px}
+.ask{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px;align-items:start}
+.qs{display:flex;flex-direction:column;gap:6px}
+.qs button{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:8px 10px;cursor:pointer}
+.qs button[aria-pressed="true"]{border-color:var(--lamp)}
+.qs .qt{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px}
+.flow .st{background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:6px 10px}
+.flow .st.det{border-color:var(--ink-2)}
+.flow .st.llm{border-color:var(--lamp)}
+.flow .ar{color:var(--muted)}
+.notes{color:var(--ink-2);font-size:13px;max-width:90ch;display:flex;flex-direction:column;gap:6px}
+footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+@media (max-width:980px){
+  .counters{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .feed{grid-template-columns:minmax(0,1fr)}
+  .feed .item:nth-child(n+3){display:none}
+  .grid3,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ask{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:700px){
+  .ctr:last-child{grid-column:span 2}
+  h1{font-size:32px}.clock .t{font-size:40px}
+  .counters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stage{height:clamp(560px,86vh,820px)}
+  .divider{left:0;right:0;top:50%;bottom:auto;width:auto;height:1px}
+  .cityhud.syd{left:12px;top:calc(50% + 10px)}
+  .legend{display:none}
+  .dgrid{grid-template-columns:minmax(0,1fr)}
+  .phone{width:100%}
+  .grid3,.kpis{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.relay li{transition:none}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <div class="kicker">My Lane AI · Last-mile exception agents</div>
+    <h1>Where's my stuff?</h1>
+    <p class="note" id="note" hidden></p>
+    <p>One synthetic delivery day for an online retailer, Stoa &amp; Co., across Melbourne and Sydney. Every failed delivery is sorted by AI agents, and the customer hears what happens next before they have to ask.</p>
+  </div>
+  <div class="clock"><span class="t mono" id="clk">7:00</span><span class="d"><span id="ampm">am</span><br>Fri 27 Feb 2026<br>last business day of the month</span></div>
+</header>
+
+<div class="counters" aria-live="off">
+  <div class="ctr"><div class="v mono" id="c-del">0</div><div class="l"><i class="dot" style="background:var(--done)"></i>Delivered</div></div>
+  <div class="ctr"><div class="v mono" id="c-exc">0</div><div class="l"><i class="dot" style="background:var(--flare)"></i>Couldn't be delivered</div></div>
+  <div class="ctr"><div class="v mono" id="c-ok">0</div><div class="l"><i class="dot" style="background:var(--sorted)"></i>Sorted by the agents</div></div>
+  <div class="ctr"><div class="v mono" id="c-esc">0</div><div class="l"><i class="dot" style="background:var(--person)"></i>Handed to a person</div></div>
+  <div class="ctr"><div class="v mono" id="c-msg">0</div><div class="l"><i class="dot" style="background:var(--cust)"></i>Customers told first</div></div>
+</div>
+
+<div class="stage" id="stage">
+  <div id="deck"></div>
+  <div class="divider"></div>
+  <div class="cityhud mel"><span class="n">Melbourne</span><span class="temp" id="t-mel">24°</span><span class="s" id="e-mel"></span></div>
+  <div class="cityhud syd"><span class="n">Sydney</span><span class="temp" id="t-syd">23°</span><span class="s" id="e-syd"></span></div>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--lamp)"></i>Van</span>
+    <span><i class="dot" style="background:var(--done)"></i>Delivered</span>
+    <span><i class="dot" style="background:var(--flare)"></i>Problem</span>
+    <span><i class="dot" style="background:var(--sorted)"></i>Sorted</span>
+    <span><i class="dot" style="background:var(--person)"></i>To a person</span>
+    <span><i class="dot" style="background:var(--cust)"></i>Customer complaint</span>
+  </div>
+  <div class="caption" id="caption" hidden></div>
+  <aside class="drawer" id="drawer" hidden aria-label="Parcel detail">
+    <button class="btn x" id="close">Close</button>
+    <div class="dhead" id="dhead"></div>
+    <div class="dgrid">
+      <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+        <div><h3>Tracking</h3><ul class="tl" id="tl"></ul></div>
+        <div><h3>What the agents did</h3><ol class="relay" id="relay"></ol></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:stretch">
+        <h3>The customer's phone</h3>
+        <label class="toggle"><input type="checkbox" id="without"> Show it without agents</label>
+        <div class="phone" id="phone"></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="controls">
+  <button class="btn primary" id="tour">Play the 90-second tour</button>
+  <button class="btn" id="play">Play</button>
+  <div class="seg" role="group" aria-label="Speed">
+    <button data-s="4" aria-pressed="false">Slow</button><button data-s="10" aria-pressed="true">Normal</button><button data-s="24" aria-pressed="false">Fast</button>
+  </div>
+  <input type="range" id="scrub" min="330" max="1290" value="420" aria-label="Time of day">
+</div>
+<div class="feed" id="feed"></div>
+
+<section class="below">
+  <div><h2>End of day</h2><p class="muted" id="endnote" style="margin:4px 0 0"></p></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="grid3">
+    <div class="card"><h3>What went wrong</h3><div class="cv"><canvas id="ch-code"></canvas></div></div>
+    <div class="card"><h3>What the agents decided</h3><div class="cv"><canvas id="ch-res"></canvas></div></div>
+    <div class="card"><h3>Why a person was needed</h3><div class="cv"><canvas id="ch-esc"></canvas></div></div>
+  </div>
+
+  <div><h2>Ask it: "Where's my parcel?"</h2><p class="muted" style="margin:4px 0 0">Real questions from the day, answered from the tracking scans as they stood at that moment.</p></div>
+  <div class="ask"><div class="qs" id="qs"></div><div class="phone" id="askphone"></div></div>
+
+  <div><h2>How it works</h2></div>
+  <div class="flow">
+    <span class="st det">Scans and customer messages</span><span class="ar">→</span>
+    <span class="st det">Preprocessor: dedupe, read delays, block injected instructions</span><span class="ar">→</span>
+    <span class="st det">Rule engine: must-escalate cases, no AI</span><span class="ar">→</span>
+    <span class="st llm">Resolution agent + critic (playbook)</span><span class="ar">→</span>
+    <span class="st llm">Message agent + critic (only step with the customer's name)</span><span class="ar">→</span>
+    <span class="st det">Customer told / team leader alerted</span>
+  </div>
+  <div class="notes" id="notes"></div>
+</section>
+<footer><span>Synthetic data: Stoa &amp; Co., its customers and parcels are fictional. Parcel Locker and Post Office locations are illustrative.</span><span id="foot"></span></footer>
+</div>
+
+<script src="https://unpkg.com/deck.gl@8.9.35/dist.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+const D=__DATA__;
+const $=s=>document.querySelector(s);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const hex=h=>{h=h.replace('#','');return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16))};
+const C={lamp:hex(css('--lamp')),done:hex(css('--done')),flare:hex(css('--flare')),sorted:hex(css('--sorted')),person:hex(css('--person')),storm:hex(css('--storm')),fire:hex(css('--fire')),cust:hex(css('--cust')),ink:hex(css('--ink')),muted:hex(css('--muted'))};
+const RESOLVE_MIN=8;            // flares stay red this many demo-minutes so they can be seen; real decisions take seconds
+const fmtT=m=>{m=Math.round(m);let h=Math.floor(m/60),mm=m%60;const ap=h>=12?'pm':'am';h=h%12||12;return [h+':'+String(mm).padStart(2,'0'),ap]};
+const t12=m=>fmtT(m).join(' ');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=n=>n.toLocaleString('en-AU');
+
+// ---------------- data prep ----------------
+const CASES=D.cases;
+CASES.forEach((c,i)=>{c.i=i;c.done=c.t+RESOLVE_MIN});
+const CITY={};
+for(const k of ['MEL','SYD']){
+  const s=D.cities[k];const pts=[];
+  for(let i=0;i<s.x.length;i++)pts.push({p:[s.x[i],s.y[i]],t:s.c[i]<0?s.t[i]:1e5});
+  CITY[k]={pts,vans:s.vans.map(v=>({path:v.p,ts:v.t})),cases:CASES.filter(c=>c.city===k),depots:s.depots,points:s.points};
+}
+const delT=[];for(const k in CITY)for(const p of CITY[k].pts)if(p.t<1e5)delT.push(p.t);delT.sort((a,b)=>a-b);
+const excT=CASES.map(c=>c.t).sort((a,b)=>a-b);
+const okT=CASES.filter(c=>!c.esc).map(c=>c.done).sort((a,b)=>a-b);
+const escT=CASES.filter(c=>c.esc).map(c=>c.done).sort((a,b)=>a-b);
+const msgT=CASES.filter(c=>c.msg).map(c=>c.done).sort((a,b)=>a-b);
+const upto=(arr,t)=>{let lo=0,hi=arr.length;while(lo<hi){const m=(lo+hi)>>1;if(arr[m]<=t)lo=m+1;else hi=m}return lo};
+const byDone=[...CASES].sort((a,b)=>a.done-b.done);
+const S=D.story;
+const temps=k=>{const tt=S.temps[k];return m=>{const h=m/60,a=Math.floor(h),b=a+1,f=h-a;const va=tt[a]??tt[Object.keys(tt)[0]],vb=tt[b]??va;return va+(vb-va)*f}};
+const tMel=temps('MEL'),tSyd=temps('SYD');
+const BRK=S.breakdowns.map(b=>({...b,m:b.at*60}));
+const LABELS={MEL:[{p:[144.963,-37.814],t:'CBD'},{p:[145.36,-37.86],t:'Dandenong Ranges'},{p:[144.733,-37.83],t:'Truganina depot'},{p:[145.212,-38.03],t:'Dandenong South depot'},{p:[144.945,-37.625],t:'Somerton depot'}],
+  SYD:[{p:[151.209,-33.869],t:'CBD'},{p:[151.003,-33.815],t:'Parramatta'},{p:[151.105,-33.815],t:'Ryde'},{p:[150.852,-33.80],t:'Eastern Creek depot'},{p:[151.198,-33.955],t:'Botany depot'},{p:[151.18,-33.80],t:'Artarmon depot'}]};
+
+// ---------------- deck ----------------
+let T=420,playing=false,speed=10,selected=null,last=performance.now(),tourOn=false;
+const narrow=()=>innerWidth<=700;
+const home={MEL:{longitude:145.02,latitude:-37.84,zoom:9.2,pitch:40,bearing:-6},SYD:{longitude:151.03,latitude:-33.85,zoom:9.2,pitch:40,bearing:-6}};
+let vs={MEL:{...home.MEL},SYD:{...home.SYD}};
+function views(){const n=narrow();return ['MEL','SYD'].map((k,i)=>new deck.MapView({id:k,controller:true,
+  x:n?0:(i?'50%':0),y:n?(i?'50%':0):0,width:n?'100%':'50%',height:n?'50%':'100%'}))}
+const deckgl=new deck.Deck({parent:$('#deck'),views:views(),viewState:vs,controller:true,
+  onViewStateChange:({viewId,viewState})=>{vs={...vs,[viewId]:viewState};deckgl.setProps({viewState:vs})},
+  layerFilter:({layer,viewport})=>layer.id.startsWith(viewport.id+'-'),
+  getCursor:({isHovering})=>isHovering?'pointer':'grab',
+  onClick:info=>{if(info.object&&info.object.id){open(info.object.i,false)}},
+  getTooltip:({object})=>object&&object.label?{html:`<b>${esc(object.label)}</b><br>${esc(object.suburb)} · ${t12(object.t)}<br>${esc(object.resl)}`,
+    style:{background:'#0e151c',color:'#eaf0f4',border:'1px solid #22303c',fontFamily:'IBM Plex Sans, sans-serif',fontSize:'12px',padding:'6px 9px'}}:null});
+addEventListener('resize',()=>deckgl.setProps({views:views()}));
+const filt=new deck.DataFilterExtension({filterSize:1});
+function layers(){
+  const L=[];
+  for(const k of ['MEL','SYD']){
+    const c=CITY[k];
+    L.push(new deck.ScatterplotLayer({id:k+'-base',data:c.pts,getPosition:d=>d.p,radiusUnits:'pixels',getRadius:1,getFillColor:[60,82,100,70]}));
+    L.push(new deck.ScatterplotLayer({id:k+'-del',data:c.pts,getPosition:d=>d.p,radiusUnits:'pixels',getRadius:1.6,getFillColor:[...C.done,170],
+      extensions:[filt],getFilterValue:d=>d.t,filterRange:[0,T]}));
+    if(k==='SYD'){const a=stormAlpha();if(a>0)L.push(new deck.ScatterplotLayer({id:k+'-storm',data:[S.storm],getPosition:s=>[s.centre[1],s.centre[0]],
+      getRadius:s=>s.radius_km*1000,getFillColor:[...C.storm,Math.round(70*a)],stroked:true,getLineColor:[...C.storm,Math.round(200*a)],lineWidthMinPixels:1.5,
+      updateTriggers:{getFillColor:T,getLineColor:T}}))}
+    if(k==='MEL'&&T>=S.fire.at*60&&S.fire.hull.length){const pulse=.65+.35*Math.sin(performance.now()/350);
+      L.push(new deck.PolygonLayer({id:k+'-fire',data:[{h:S.fire.hull}],getPolygon:d=>d.h,getFillColor:[...C.fire,Math.round(80*pulse)],
+        getLineColor:[...C.fire,220],lineWidthMinPixels:1.5,updateTriggers:{getFillColor:performance.now()}}))}
+    L.push(new deck.TripsLayer({id:k+'-vans',data:c.vans,getPath:d=>d.path,getTimestamps:d=>d.ts,getColor:C.lamp,widthMinPixels:1.3,
+      trailLength:18,currentTime:T,opacity:.9,capRounded:true,jointRounded:true,fadeTrail:true}));
+    const live=c.cases;
+    L.push(new deck.ScatterplotLayer({id:k+'-cases',data:live,pickable:true,getPosition:d=>[d.x,d.y],radiusUnits:'pixels',
+      extensions:[filt],getFilterValue:d=>d.t,filterRange:[0,T+0.01],
+      getRadius:d=>{const age=T-d.t;return age<RESOLVE_MIN?3+5*(1-age/RESOLVE_MIN):d.esc?2.4:1.7},
+      getFillColor:d=>T<d.done?(d.complaint?[...C.cust,240]:[...C.flare,240]):d.esc?[...C.person,230]:[...C.sorted,150],
+      stroked:true,getLineColor:d=>T<d.done?[...C.flare,120]:[0,0,0,0],lineWidthUnits:'pixels',getLineWidth:d=>T<d.done?6*(1-(T-d.t)/RESOLVE_MIN):0,
+      updateTriggers:{getRadius:T,getFillColor:T,getLineColor:T,getLineWidth:T}}));
+    const br=BRK.filter(b=>b.city===k&&T>=b.m);
+    if(br.length)L.push(new deck.ScatterplotLayer({id:k+'-brk',data:br,getPosition:b=>[b.lon,b.lat],radiusUnits:'pixels',getRadius:10,
+      filled:false,stroked:true,getLineColor:[...C.person,230],lineWidthMinPixels:2}));
+    const lab=[...LABELS[k].map(l=>({...l,c:[...C.muted,230]}))];
+    br.forEach(b=>lab.push({p:[b.lon,b.lat],t:'Van off road',c:[...C.person,255],dy:-16}));
+    if(k==='MEL'&&T>=S.fire.at*60)lab.push({p:[145.40,-37.90],t:'Roads closed: grass fire',c:[...C.fire,255]});
+    if(k==='SYD'&&stormAlpha()>0)lab.push({p:[S.storm.centre[1],S.storm.centre[0]],t:T<=S.storm.end*60?'Hail and flash flooding':'Roads reopening',c:[...C.storm,255]});
+    L.push(new deck.TextLayer({id:k+'-lab',data:lab,getPosition:l=>l.p,getText:l=>l.t,getSize:12,getColor:l=>l.c,getPixelOffset:l=>[0,l.dy||0],
+      fontFamily:'IBM Plex Sans, sans-serif',fontWeight:500,outlineWidth:3,outlineColor:[7,11,16,255],fontSettings:{sdf:true},billboard:true,updateTriggers:{getText:T}}));
+    if(selected&&selected.city===k)L.push(new deck.ScatterplotLayer({id:k+'-sel',data:[selected],getPosition:d=>[d.x,d.y],radiusUnits:'pixels',
+      getRadius:14+3*Math.sin(performance.now()/200),filled:false,stroked:true,getLineColor:C.ink,lineWidthMinPixels:2,updateTriggers:{getRadius:performance.now()}}));
+  }
+  return L;
+}
+function stormAlpha(){const s=S.storm.start*60,e=S.storm.end*60,c=S.storm.clear*60;if(T<s-10||T>c)return 0;if(T<s)return (T-s+10)/10;if(T<=e)return 1;return Math.max(0,1-(T-e)/(c-e))*.6+.15}
+
+// ---------------- HUD ----------------
+function hud(){
+  const [hh,ap]=fmtT(T);$('#clk').textContent=hh;$('#ampm').textContent=ap;
+  $('#c-del').textContent=num(upto(delT,T));$('#c-exc').textContent=num(upto(excT,T));
+  $('#c-ok').textContent=num(upto(okT,T));$('#c-esc').textContent=num(upto(escT,T));$('#c-msg').textContent=num(upto(msgT,T));
+  const tm=tMel(T),ts=tSyd(T);$('#t-mel').textContent=tm.toFixed(0)+'°';$('#t-mel').style.color=tm>=30?css('--fire'):'';
+  $('#t-syd').textContent=ts.toFixed(0)+'°';
+  const em=[];if(tm>=30)em.push('Too hot to leave fresh food out');if(T>=S.fire.at*60)em.push('Extreme fire danger: hills roads closed');
+  BRK.filter(b=>b.city==='MEL'&&T>=b.m&&T<b.m+b.delay*60).forEach(()=>em.push('Van broken down, Dandenong South'));
+  $('#e-mel').textContent=em.join(' · ');
+  const es=[];if(stormAlpha()>0&&T<=S.storm.end*60)es.push('Hail and flash flooding, Parramatta to Ryde');else if(stormAlpha()>0)es.push('Storm clearing');
+  BRK.filter(b=>b.city==='SYD'&&T>=b.m&&T<b.m+b.delay*60).forEach(()=>es.push('Van broken down, Botany'));
+  $('#e-syd').textContent=es.join(' · ');
+  $('#scrub').value=Math.round(T);
+  const n=upto(byDone.map(c=>c.done),T),recent=byDone.slice(Math.max(0,n-3),n).reverse();
+  $('#feed').innerHTML=recent.map(c=>`<div class="item ${c.esc?'esc':''}" data-i="${c.i}"><div class="h"><span>${t12(c.t)} · ${esc(c.suburb)}</span><span class="mono">${c.sec}s</span></div>
+    <div class="b">${esc(c.label)} → ${esc(c.resl)}${c.esc?' · team leader':''}</div></div>`).join('');
+}
+$('#feed').addEventListener('click',e=>{const it=e.target.closest('.item');if(it)open(+it.dataset.i,true)});
+
+let drawnT=-1,drawnAt=0,dirty=true;
+function frame(now){
+  const dt=Math.min(100,now-last);last=now;
+  if(playing){T+=dt/1000*speed;if(T>=1290){T=1290;setPlaying(false)}}
+  // redraw when time moved, something changed, or (at ~20 fps) when a pulsing element is on screen
+  const pulsing=!!selected||T>=S.fire.at*60;
+  if(!window.FREEZE&&(T!==drawnT||dirty||(pulsing&&now-drawnAt>50))){deckgl.setProps({layers:layers()});if(T!==drawnT)hud();drawnT=T;drawnAt=now;dirty=false}
+  requestAnimationFrame(frame);
+}
+function setPlaying(p){playing=p;$('#play').textContent=p?'Pause':'Play'}
+$('#play').onclick=()=>{if(tourOn)stopTour();setPlaying(!playing)};
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{speed=+b.dataset.s;document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+$('#scrub').oninput=e=>{if(tourOn)stopTour();T=+e.target.value};
+
+// ---------------- parcel drawer ----------------
+function fly(c,zoom=12){vs={...vs,[c.city]:{longitude:c.x,latitude:c.y,zoom,pitch:50,bearing:-10,transitionDuration:1400,transitionInterpolator:new deck.FlyToInterpolator()}};deckgl.setProps({viewState:vs})}
+function open(i,doFly){
+  const c=CASES[i];selected=c;dirty=true;if(doFly)fly(c);
+  $('#drawer').hidden=false;$('#without').checked=false;
+  const col=c.esc?'var(--person)':'var(--sorted)';
+  $('#dhead').innerHTML=`<span class="pill" style="color:${c.complaint?'var(--cust)':'var(--flare)'}">${esc(c.label)}</span>
+    <span class="t">${esc(c.resl)}${c.pt?': '+esc(c.pt):''}</span>
+    <span class="muted">${esc(c.suburb)} · ${c.city==='MEL'?'Melbourne':'Sydney'} · ${t12(c.t)} · parcel ${esc(c.id)}${c.type==='TRADE'?' · trade account':c.tier!=='STANDARD'?' · '+c.tier.toLowerCase()+' customer':''}</span>
+    <span><span class="pill" style="color:${col}">${c.esc?'Handed to a team leader':'Sorted, no person needed'}</span> <span class="muted mono">decided in ${c.sec} s · US$${c.cost.toFixed(4)}</span></span>
+    ${c.esc&&c.why.length?`<span class="muted">Why: ${c.why.map(esc).join('; ')}</span>`:''}`;
+  $('#tl').innerHTML=c.tl.map(([m,code,note])=>{const k=code==='CUSTOMER'?'cust':['SCANNED','OUT_FOR_DELIVERY','DELIVERED'].includes(code)?'':'exc';
+    const name=code==='CUSTOMER'?'Customer':(D.labels[code]||({SCANNED:'Sorted at depot',OUT_FOR_DELIVERY:'Out for delivery',DELIVERED:'Delivered'}[code]||code));
+    return `<li class="${k}"><span class="w">${fmtT(m)[0]}</span><span><span class="c">${esc(name)}</span><br><span class="muted">${esc(note)}</span></span></li>`}).join('');
+  const r=$('#relay');r.innerHTML=c.steps.map(([k,sec,x])=>{const det=!/agent|critic/.test(k);const rev=/critic/.test(k)&&/^Sent back/.test(x);
+    return `<li class="${det?'det':'llm'} ${rev?'rev':''}"><span class="node"></span><div><div class="nm">${esc(D.node_labels[k]||k)}
+      <span class="badge">${det?'code, no AI':'Claude'}</span>${/communication_agent/.test(k)?'<span class="badge pii">sees customer name</span>':''}
+      <span class="meta">${sec?sec.toFixed(1)+' s':''}</span></div><div class="tx">${esc(x)}</div></div></li>`}).join('');
+  [...r.children].forEach((li,j)=>setTimeout(()=>li.classList.add('on'),matchMedia('(prefers-reduced-motion: reduce)').matches?0:250+j*380));
+  phone(c,false);
+}
+function phone(c,without){
+  const p=$('#phone');
+  if(without){p.innerHTML=`<div class="notch"></div><div class="who">${t12(c.t+45)}</div>
+    <div class="bubble">Stoa & Co.: Your parcel ${esc(c.id)} delivery was unsuccessful.</div>
+    ${c.complaint?'':`<div class="bubble me">Where's my stuff? What happens now?</div>`}
+    <div class="call"><span class="muted">Calling Stoa customer care</span><span class="big mono" id="hold">00:00</span>
+    <span class="muted">You are caller 14 in the queue</span></div>`;
+    let s=0;clearInterval(phone.iv);phone.iv=setInterval(()=>{s+=7;const e=$('#hold');if(!e){clearInterval(phone.iv);return}e.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},100);return}
+  clearInterval(phone.iv);
+  const cm=c.tl.filter(x=>x[1]==='CUSTOMER');
+  const body=c.ch==='EMAIL'?`<div class="email">${c.subj?`<b>${esc(c.subj)}</b>`:''}${esc(c.msg)}</div>`:`<div class="bubble">${esc(c.msg)}</div>`;
+  p.innerHTML=`<div class="notch"></div><div class="who">${c.ch==='EMAIL'?'Email':'Message'} from Stoa & Co. · ${t12(c.t)}</div>
+    ${cm.map(x=>`<div class="bubble me">${esc(x[2])}</div>`).join('')}${body}`;
+}
+$('#without').onchange=e=>selected&&phone(selected,e.target.checked);
+$('#close').onclick=()=>{$('#drawer').hidden=true;selected=null;dirty=true;vs={...vs,MEL:{...home.MEL,transitionDuration:900},SYD:{...home.SYD,transitionDuration:900}};deckgl.setProps({viewState:vs})};
+
+// ---------------- tour ----------------
+let tourTimer=null;
+function stopTour(){tourOn=false;clearTimeout(tourTimer);$('#caption').hidden=true;$('#tour').textContent='Play the 90-second tour'}
+function caption(t){const c=$('#caption');c.textContent=t;c.hidden=!t}
+$('#tour').onclick=()=>{if(tourOn){stopTour();setPlaying(false);return}
+  tourOn=true;$('#tour').textContent='Stop the tour';$('#drawer').hidden=true;selected=null;
+  const stops=[...D.tour].sort((a,b)=>CASES[a.case].t-CASES[b.case].t);let k=0;
+  T=400;speed=14;setPlaying(true);caption('7:00am. 50,000 parcels leave six depots in Melbourne and Sydney.');
+  const step=()=>{if(!tourOn)return;
+    if(k>=stops.length){caption('End of day. Every exception sorted, every customer told.');T=Math.max(T,1200);speed=40;setPlaying(true);
+      tourTimer=setTimeout(()=>{stopTour();document.querySelector('section.below').scrollIntoView({behavior:'smooth'})},4000);return}
+    const s=stops[k],c=CASES[s.case];
+    if(T<c.t+1){caption('');setPlaying(true);tourTimer=setTimeout(step,250);return}
+    setPlaying(false);caption(s.title);open(s.case,true);k++;
+    tourTimer=setTimeout(()=>{$('#drawer').hidden=true;selected=null;
+      vs={...vs,[c.city]:{...home[c.city],transitionDuration:900,transitionInterpolator:new deck.FlyToInterpolator()}};deckgl.setProps({viewState:vs});
+      setPlaying(true);step()},7000)};
+  tourTimer=setTimeout(step,2500)};
+
+// ---------------- end of day ----------------
+function endOfDay(){
+  const s=D.summary,m=s.metrics||{};
+  const pctNoPerson=s.cases?Math.round(100*(s.cases-s.escalated)/s.cases):0;
+  const k=[[num(s.cases),'exceptions sorted by the agents'],[pctNoPerson+'%','needed no person'],[s.sec_avg+' s','average from scan to customer message'],
+    ['US$'+(s.cost/Math.max(1,s.cases)).toFixed(4),'AI cost per exception ('+(s.model||'Claude')+')']];
+  if(m.resolution_accuracy_pct!=null)k.push([m.resolution_accuracy_pct+'%','decisions matching the playbook answer'],[m.escalation_accuracy_pct+'%','escalation calls correct'],
+    [m.tone_accuracy_pct+'%','messages in the right tone'],[String(m.messages_leaking_internal_detail??0),'messages leaking driver notes or GPS']);
+  $('#kpis').innerHTML=k.map(([v,l])=>`<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${esc(l)}</div></div>`).join('');
+  $('#endnote').textContent=`${num(s.parcels)} parcels, ${num(s.cases)} exceptions, ${num(s.complaints)} customer complaints. Total AI cost US$${s.cost.toFixed(2)}.`;
+  Chart.defaults.color=css('--ink-2');Chart.defaults.font.family='"IBM Plex Sans", system-ui, sans-serif';Chart.defaults.borderColor=css('--line');
+  const bar=(id,obj,lab,color)=>{const e=Object.entries(obj).sort((a,b)=>b[1]-a[1]);new Chart($(id),{type:'bar',
+    data:{labels:e.map(x=>lab[x[0]]||x[0]),datasets:[{data:e.map(x=>x[1]),backgroundColor:color,borderRadius:2,barThickness:12}]},
+    options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:css('--line')}},y:{grid:{display:false},ticks:{font:{size:11}}}}}})};
+  bar('#ch-code',s.by_code,D.labels,css('--flare'));bar('#ch-res',s.by_res,D.res_labels,css('--sorted'));bar('#ch-esc',s.esc_reasons,{},css('--person'));
+  const notes=[`Decisions are checked against a labelled answer for every exception. The labels come from the same written playbook the agents read, so the score measures how faithfully the agents follow policy.`,
+    `Flares stay red for a few minutes on the map so you can see them. Real decisions took ${s.sec_avg} seconds on average.`,
+    `Carded parcels go to Australia Post (Parcel Lockers and Post Offices) as a demo assumption, because it is the network everyone recognises.`];
+  $('#notes').innerHTML=notes.map(n=>`<p style="margin:0">${esc(n)}</p>`).join('');
+  $('#foot').textContent='Built by My Lane AI · mylaneai.com.au';
+}
+function ask(){
+  // a spread across the day, favouring parcels that had a problem, one question per hour
+  const seen=new Set(),W=[];
+  for(const pass of [w=>w.case>=0,w=>true])for(const w of D.wismo){const h=Math.floor(w.t/60);
+    if(W.length<8&&w.a&&pass(w)&&!seen.has(h)&&!W.includes(w)){seen.add(h);W.push(w)}}
+  W.sort((a,b)=>a.t-b.t);const qs=$('#qs');
+  qs.innerHTML=W.map((w,i)=>`<button data-i="${i}" aria-pressed="${i===0}"><span class="qt">${t12(w.t)}</span><br>${esc(w.q)}</button>`).join('');
+  const show=i=>{const w=W[i];$('#askphone').innerHTML=`<div class="notch"></div><div class="who">Stoa & Co. chat · ${t12(w.t)}</div>
+    <div class="bubble me">${esc(w.q)}</div><div class="bubble">${esc(w.a)}</div>${w.now?`<div class="who">Status: ${esc(w.now)}</div>`:''}`;
+    qs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===i))};
+  qs.onclick=e=>{const b=e.target.closest('button');if(b)show(+b.dataset.i)};if(W.length)show(0);
+}
+if(D.note){$('#note').textContent=D.note;$('#note').hidden=false}
+endOfDay();ask();hud();requestAnimationFrame(frame);
+</script>
