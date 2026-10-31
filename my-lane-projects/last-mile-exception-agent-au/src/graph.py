@@ -146,7 +146,7 @@ def build(world, llm, agent_model, critic_model):
     def critic_resolution(s):
         v = project_into(s, CriticResolutionView)
         out, use = llm.call(critic_model, A.CRITIC_RESOLUTION_TASK, _payload(v), A.CriticOut)
-        ok = out["decision"] == "ACCEPT"
+        ok = out["decision"] == "ACCEPT" or not (out["issues"] or out["feedback"].strip())  # no reason given = accept
         return merge_back(CriticResolutionView, {
             "res_accepted": ok, "res_feedback": "" if ok else out["feedback"],
             "res_revisions": v.res_revisions + (0 if ok else 1), "trace": [_t("critic_resolution", None, use, out)]})
@@ -161,7 +161,7 @@ def build(world, llm, agent_model, critic_model):
     def critic_communication(s):
         v = project_into(s, CriticCommunicationView)
         out, use = llm.call(critic_model, A.CRITIC_COMMUNICATION_TASK, _payload(v), A.CriticOut)
-        ok = out["decision"] == "ACCEPT"
+        ok = out["decision"] == "ACCEPT" or not (out["issues"] or out["feedback"].strip())
         return merge_back(CriticCommunicationView, {
             "msg_accepted": ok, "msg_feedback": "" if ok else out["feedback"],
             "msg_revisions": v.msg_revisions + (0 if ok else 1), "trace": [_t("critic_communication", None, use, out)]})
