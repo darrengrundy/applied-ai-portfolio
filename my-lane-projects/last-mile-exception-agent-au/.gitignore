@@ -1,0 +1,7 @@
+.env
+.venv/
+__pycache__/
+data/
+ref/pc.csv
+runs/
+build/
