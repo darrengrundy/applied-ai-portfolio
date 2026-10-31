@@ -272,10 +272,11 @@ def main():
                                                 note=next((b["note"] for b in BREAKDOWNS if b["van_id"] == p.van_id), ""))
         if i in fraud: note = str(rng.choice(FRAUD_NOTES)).format(k=rng.integers(3, 6))
         if i in inject: note = inject[i]
-        if c in ("WEATHER_DELAY", "VEHICLE_DELAY"): note += f", est {p.delay_hours:.1f}hr" if rng.random() < .5 else ""
+        upd = c in UPDATES and rng.random() < .6
+        if c in UPDATES and (not upd or rng.random() < .3): note += f", est {p.delay_hours:.1f}hr"
         rows.append([p.parcel_id, fmt(p.stop_time), c, note, p.customer_id, p.address, p.package_type,
                      p.package_size, p.attempt_number, False])
-        if c in UPDATES and rng.random() < .6:
+        if upd:
             rows.append([p.parcel_id, fmt(p.stop_time + .25), c, UPDATES[c].format(h=f"{p.delay_hours:.1f}"),
                          p.customer_id, p.address, p.package_type, p.package_size, p.attempt_number, False])
         if rng.random() < (.05 if exc[i] else .01):   # duplicate scan of the last event
