@@ -1,12 +1,26 @@
 """The LLM agents: structured output schemas and their instructions."""
 from typing import Literal
 
-from pydantic import BaseModel, Field
+import json
+
+from pydantic import BaseModel, Field, field_validator
 
 Resolution = Literal["REDELIVER_TODAY", "RESCHEDULE", "TO_PARCEL_LOCKER", "TO_POST_OFFICE", "REPLACE",
                      "RETURN_TO_SENDER"]
 ExceptionType = Literal["ATTEMPTED", "ACCESS_ISSUE", "ADDRESS_ISSUE", "DAMAGED", "REFUSED", "WEATHER_DELAY",
                         "HEAT_HOLD", "VEHICLE_DELAY", "ROAD_CLOSURE", "DELIVERED_NOT_RECEIVED"]
+
+
+def _as_list(v):
+    """Models occasionally return a list as a JSON string or a single string; accept both."""
+    if isinstance(v, str):
+        v = v.strip()
+        try:
+            parsed = json.loads(v)
+            return parsed if isinstance(parsed, list) else [parsed]
+        except ValueError:
+            return [v] if v else []
+    return v
 
 
 class ResolutionOut(BaseModel):
@@ -18,11 +32,15 @@ class ResolutionOut(BaseModel):
     playbook_sections: list[int] = Field(default_factory=list, description="Playbook section numbers you applied")
     reasoning: str = Field(description="At most 60 words: which rule decided it and why")
 
+    _lists = field_validator("escalation_reasons", "playbook_sections", mode="before")(_as_list)
+
 
 class CriticOut(BaseModel):
     decision: Literal["ACCEPT", "REVISE"]
     issues: list[str] = Field(default_factory=list)
     feedback: str = Field("", description="If REVISE: exactly what to change, citing the playbook section")
+
+    _lists = field_validator("issues", mode="before")(_as_list)
 
 
 class MessageOut(BaseModel):
