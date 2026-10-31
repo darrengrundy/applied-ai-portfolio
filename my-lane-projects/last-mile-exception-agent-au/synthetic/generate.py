@@ -335,7 +335,7 @@ def main():
     customers.loc[customers.customer_id.isin(P.customer_id.values[rep]), "dnr_claims_90d"] = 2
     C = customers.set_index("customer_id")
     flag[(flag == "CONCIERGE") & (code != "DELIVERED")] = ""
-    P["status_code"] = code; P["sub_type"] = flag; P["delay_hours"] = np.round(delay, 2); P["temp_c"] = temp
+    P["status_code"] = code; P["sub_type"] = flag; P["delay_hours"] = np.round(delay, 1); P["temp_c"] = temp
     P["attempt_number"] = P.prior_attempts + 1; P["gps_offset_m"] = gps; P["dwell_s"] = dwell
 
     # ---------- fraud + injections ----------
