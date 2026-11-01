@@ -24,6 +24,7 @@ Independent applied-AI concepts and prototypes focused on operational decision s
 - [Multi-Agent Last-Mile Delivery Exception Handler](my-lane-projects/delivery-exception-agent/) - complete evaluated POC, published
 - [Multi-Agent AI for Transport Chain of Responsibility Compliance](my-lane-projects/transport-cor-multi-agent/) - working prototype, published
 - [DIFOT Lens - freight service and cost visualisation](my-lane-projects/difot-lens/) - working demo on synthetic data, published
+- [Where's My Stuff? - last-mile exception agents for Australia](my-lane-projects/last-mile-exception-agent-au/) - working demo on a synthetic day, published
 - Distribution LEAN Waste Multi-Agent System - in development
 - Additional projects will be added as their source code is recovered and prepared
 
