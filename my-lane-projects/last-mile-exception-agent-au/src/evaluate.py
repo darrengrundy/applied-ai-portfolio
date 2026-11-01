@@ -14,7 +14,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config import PROJECT
 
-LEAK = re.compile(r"\bgps\b|\d+\s?m from|metres? away|fraud|different names|driver('s)? note|stopped for", re.I)
+LEAK = re.compile(r"\bgps\b|\d+\s?m from|metres? away|fraud|different names|driver('s)? note|\b\d{2,4}\s?m\b", re.I)
 
 
 def main():

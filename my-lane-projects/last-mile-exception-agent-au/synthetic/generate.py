@@ -66,9 +66,10 @@ NOTES = {
     "HANDED": ["Handed to resident", "Signed by customer", "handed to neighbour at no {n} w/ consent"],
     "CONCIERGE": ["Left with building manager, signed", "Delivered to concierge desk", "Left in building parcel room"],
     "TRADE_OK": ["Received at dock, signed", "Signed by store manager", "Delivered to back of house, POD signed"],
-    "ATTEMPTED": ["Nobody home, no ATL, card left", "knocked x2 no answer, sig req'd, carded",
-                  "No one home rang bell twice left card in letterbox", "No answer. Phone went to voicemail. Card left",
-                  "nobody home. cant leave without signature", "attempted - no response, card left at door"],
+    "ATTEMPTED": ["Nobody home, no ATL, card left", "No one home rang bell twice left card in letterbox",
+                  "No answer. Phone went to voicemail. Card left", "attempted - no response, no ATL, card left at door"],
+    "ATTEMPTED_SIG": ["knocked x2 no answer, sig req'd, carded", "nobody home. cant leave without signature",
+                      "Signature required, no one home, card left"],
     "ACCESS_ISSUE": ["No buzzer for unit {u}, lobby locked, called cust no answer", "Gate code didnt work, cant get in",
                      "Apartment foyer locked no concierge on site", "Dog loose in front yard, not safe to enter",
                      "security gate shut, intercom not answered", "Loading dock closed, no access to residential lifts"],
@@ -360,6 +361,8 @@ def main():
         rows.append([p.parcel_id, fmt(vans_by_id[p.van_id]["depart"]), "OUT_FOR_DELIVERY", f"On van {p.van_id}",
                      *base, False, "", ""])
         key = f if f in ("CONCIERGE", "NO_UNIT", "NO_BOOKING") else c
+        if c == "ATTEMPTED" and sig[i]:
+            key = "ATTEMPTED_SIG"   # the note must agree with the parcel record
         if c == "DELIVERED" and not f:
             key = "TRADE_OK" if trade[i] else ("DELIVERED" if i in dnr_set or (away[i] and atl[i]) or
                                                (atl[i] and not sig[i] and rng.random() < .3) else "HANDED")

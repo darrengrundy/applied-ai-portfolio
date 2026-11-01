@@ -117,7 +117,7 @@ def main():
             continue
         p = PI.loc[pid]; cu = C.loc[r["event"]["customer_id"]]
         msg = r.get("message") or {}
-        steps = [[t["node"], round(t.get("latency_s") or 0, 1), trim(step_summary(t))]
+        steps = [[t["node"], round(min(t.get("latency_s") or 0, 60), 1), trim(step_summary(t))]
                  for t in r["trace"] if t["node"] != "finalize"]
         model = model or next((t.get("model") for t in r["trace"] if t.get("model")), "")
         tl = [[hm(x.timestamp), x.status_code, x.status_description] for x in scans[pid].itertuples()] if pid in scans else []
@@ -136,7 +136,7 @@ def main():
             "who": cu.business_name if cu.customer_type == "TRADE" and cu.business_name else cu["name"].split()[0],
             "tier": cu.tier, "type": cu.customer_type, "suburb": cu.suburb,
             "ch": msg.get("channel", ""), "tone": msg.get("tone", ""), "subj": msg.get("subject", ""),
-            "msg": msg.get("message", ""), "sec": round(sum(t.get("latency_s") or 0 for t in r["trace"]), 1),
+            "msg": msg.get("message", ""), "sec": round(sum(min(t.get("latency_s") or 0, 60) for t in r["trace"]), 1),
             "cost": round(r.get("cost_usd", 0), 5), "steps": steps, "tl": tl,
             "sub": (g.sub_type if g is not None else ""), "ok": None,
             "complaint": bool(r["event"].get("customer_messages")), "inj": bool(r["event"].get("guardrail_injection")),
@@ -172,7 +172,7 @@ def main():
         "parcels": int(len(P)), "cases": len(cases), "escalated": sum(c["esc"] for c in cases),
         "forced": sum(c["forced"] for c in cases), "complaints": sum(c["complaint"] for c in cases),
         "cost": round(sum(r.get("cost_usd", 0) for r in res.values()) + sum(w.get("cost_usd", 0) for w in wismo), 2),
-        "sec_avg": round(sum(c["sec"] for c in cases) / max(1, len(cases)), 1),
+        "sec_avg": round(float(pd.Series([c["sec"] for c in cases]).median()), 1) if cases else 0,
         "by_code": pd.Series([c["code"] for c in cases]).value_counts().to_dict(),
         "by_res": pd.Series([c["res"] for c in cases]).value_counts().to_dict(),
         "esc_reasons": pd.Series([w for c in cases for w in c["why"]]).value_counts().head(8).to_dict(),

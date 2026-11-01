@@ -61,13 +61,18 @@ class World:
         """Nearest Australia Post Parcel Lockers (within 3 km) and the nearest Post Office."""
         p = self.parcels.loc[parcel_id]
         L = self.points[self.points.city == p.city].copy()
-        L["distance_km"] = km(p.lat, p.lon, L.lat.values, L.lon.values).round(2)
-        L = L.sort_values("distance_km")
+        d = km(p.lat, p.lon, L.lat.values, L.lon.values)
+        L["distance_km"] = d.round(2)
+        L = L.iloc[d.argsort(kind="stable")]   # order on the exact distance; ties at 10 m otherwise flip
         cols = ["point_id", "type", "name", "suburb", "distance_km", "capacity_status", "max_package_size",
                 "operating_hours", "hold_business_days"]
-        lockers = L[(L.type == "PARCEL_LOCKER") & (L.distance_km <= LOCKER_RADIUS_KM)].head(4)[cols]
+        lockers = L[(L.type == "PARCEL_LOCKER") & (L.distance_km <= LOCKER_RADIUS_KM)][cols]
         po = L[L.type == "POST_OFFICE"].head(1)[cols]
-        return {"parcel_lockers_within_3km": [_rec(r) for r in lockers.to_dict("records")],
+        out = []
+        for r in lockers.to_dict("records"):
+            r = _rec(r); r["fits_this_parcel"], r["why_not"] = locker_fit(r, p)
+            out.append(r)
+        return {"parcel_lockers_within_3km_nearest_first": out,
                 "nearest_post_office": _rec(po.to_dict("records")[0])}
 
     def point(self, point_id):
@@ -85,6 +90,24 @@ class World:
 
     def contacts_for(self, parcel_id):
         return self.contacts[self.contacts.parcel_id == parcel_id].to_dict("records")
+
+
+SIZE = {"SMALL": 1, "MEDIUM": 2, "LARGE": 3}
+
+
+def locker_fit(locker, parcel):
+    """Section 9 physical and policy checks for one locker, in plain code."""
+    if parcel.package_type == "PERISHABLE":
+        return False, "perishable: lockers are not refrigerated"
+    if bool(parcel.signature_required):
+        return False, "parcel needs a signature"
+    if locker["capacity_status"] == "FULL":
+        return False, "locker is full"
+    if locker["capacity_status"] == "LIMITED" and parcel.package_size != "SMALL":
+        return False, "locker has limited space: small parcels only"
+    if SIZE[parcel.package_size] > SIZE[locker["max_package_size"]]:
+        return False, f"{parcel.package_size.lower()} parcel too big for this locker"
+    return True, ""
 
 
 def _py(v):

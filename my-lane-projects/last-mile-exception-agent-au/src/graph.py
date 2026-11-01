@@ -36,6 +36,7 @@ class State(TypedDict, total=False):
     escalated: bool
     escalation_reasons: list
     forced_by_rules: bool
+    required_tone: str
     message: dict
     msg_feedback: str
     msg_revisions: int
@@ -72,6 +73,7 @@ class CriticResolutionView:
 
 @dataclass
 class CommunicationAgentView:
+    required_tone: str
     event_public: dict
     customer_full: dict
     parcel: dict
@@ -85,6 +87,7 @@ class CommunicationAgentView:
 
 @dataclass
 class CriticCommunicationView:
+    required_tone: str
     event_public: dict
     customer_redacted: dict
     parcel: dict
@@ -171,12 +174,14 @@ def build(world, llm, agent_model, critic_model):
         upd = {"trace": []}
         res_final = s.get("resolution") and (s.get("res_accepted") or s.get("res_revisions", 0) >= MAX_REVISIONS)
         if res_final and "escalated" not in s:
-            r = s["resolution"]; auto = s["rule_engine"]["automatic_triggers"]
+            r = s["resolution"]
+            auto = s["rule_engine"]["automatic_triggers"] + s["rule_engine"]["discretionary_signals"]
             reasons = list(dict.fromkeys(auto + (r["escalation_reasons"] if r["escalate"] else [])))
             capped = not s.get("res_accepted")
             if capped:
                 reasons.append("Agent and critic did not agree after 2 revisions")
-            upd.update(escalated=bool(reasons), escalation_reasons=reasons,
+            formal = s["rule_engine"]["tone_by_rule"] == "FORMAL" or bool(reasons)
+            upd.update(escalated=bool(reasons), escalation_reasons=reasons, required_tone="FORMAL" if formal else "CASUAL",
                        forced_by_rules=bool(auto) and not r["escalate"],
                        collection_point=world.point(r["collection_point_id"]) if r["collection_point_id"] else {})
             upd["trace"].append(_t("orchestrator", None, detail={

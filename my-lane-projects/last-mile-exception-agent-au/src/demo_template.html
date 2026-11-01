@@ -432,7 +432,7 @@ $('#tour').onclick=()=>{if(tourOn){stopTour();setPlaying(false);return}
 function endOfDay(){
   const s=D.summary,m=s.metrics||{};
   const pctNoPerson=s.cases?Math.round(100*(s.cases-s.escalated)/s.cases):0;
-  const k=[[num(s.cases),'exceptions sorted by the agents'],[pctNoPerson+'%','needed no person'],[s.sec_avg+' s','average from scan to customer message'],
+  const k=[[num(s.cases),'exceptions sorted by the agents'],[pctNoPerson+'%','needed no person'],[s.sec_avg+' s','typical time from scan to customer message'],
     [aud(s.cost/Math.max(1,s.cases),4),'AI cost per exception ('+(s.model||'Claude')+')']];
   if(m.resolution_accuracy_pct!=null)k.push([m.resolution_accuracy_pct+'%','decisions matching the playbook answer'],[m.escalation_accuracy_pct+'%','escalation calls correct'],
     [m.tone_accuracy_pct+'%','messages in the right tone'],[String(m.messages_leaking_internal_detail??0),'messages leaking driver notes or GPS']);
@@ -444,7 +444,7 @@ function endOfDay(){
     options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:css('--line')}},y:{grid:{display:false},ticks:{font:{size:11}}}}}})};
   bar('#ch-code',s.by_code,D.labels,css('--flare'));bar('#ch-res',s.by_res,D.res_labels,css('--sorted'));bar('#ch-esc',s.esc_reasons,{},css('--person'));
   const notes=[`Decisions are checked against a labelled answer for every exception. The labels come from the same written playbook the agents read, so the score measures how faithfully the agents follow policy.`,
-    `Flares stay red for a few minutes on the map so you can see them. Real decisions took ${s.sec_avg} seconds on average.`,
+    `Flares stay red for a few minutes on the map so you can see them. A typical decision took ${s.sec_avg} seconds.`,
     `Costs are Anthropic API charges, billed in US dollars and shown in Australian dollars at ${D.fx} AUD per USD.`,
     `Carded parcels go to Australia Post (Parcel Lockers and Post Offices) as a demo assumption, because it is the network everyone recognises.`];
   $('#notes').innerHTML=notes.map(n=>`<p style="margin:0">${esc(n)}</p>`).join('');

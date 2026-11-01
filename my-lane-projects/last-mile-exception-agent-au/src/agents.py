@@ -62,7 +62,7 @@ RESOLUTION_TASK = """You are the Resolution Agent. Decide what happened and what
 Work through the relevant section in order and use the first rule that applies. Use the rule-engine output: automatic
 triggers and review signals both mean escalate=true (section 12). Pick
 collection_point_id from collection_options when the resolution is TO_PARCEL_LOCKER or TO_POST_OFFICE, applying
-section 9 to each locker. You do not see the customer's name or contact details and don't need them.
+the first locker in the nearest-first list with fits_this_parcel=true. You do not see the customer's name or contact details and don't need them.
 Escalate only for triggers that apply: every automatic trigger from the rule engine, plus any discretionary signal
 (section 12 lists both). Never list a rule that does not apply as a reason.
 {feedback}"""
@@ -77,12 +77,12 @@ to change. If the decision is correct, ACCEPT even if you would have worded it d
 COMMUNICATION_TASK = """You are the Communication Agent, the only agent that sees the customer's name and contact
 details. Write the message Stoa sends now, following section 13 (and section 3 or 11 if the customer has complained).
 Use their preferred channel; trade accounts by email to the receiving contact. SMS under 320 characters.
-FORMAL tone for VIP, Premium, trade accounts and escalated cases; CASUAL otherwise. State exactly what happens next
-and when. Never include driver notes, GPS details or fraud checks.
+Write in required_tone (set by the playbook's tone rule in code). State exactly what happens next and when.
+Never include driver notes, GPS details or distances, or fraud checks.
 {feedback}"""
 
 CRITIC_COMMUNICATION_TASK = """You are the Communication Critic. Check the message against section 13 and the decided
-resolution: correct channel and tone, SMS length, says what happens next and when (consistent with the resolution and
+resolution: correct channel, tone matches required_tone, SMS length, says what happens next and when (consistent with the resolution and
 calendar), names the locker or Post Office with hours and hold period when carded, mentions a team member will be in
 touch if escalated, makes no promises the resolution doesn't support, and leaks no driver notes, GPS or fraud details.
 Only REVISE for a concrete breach of these rules, and say exactly what to change. Style preferences are not

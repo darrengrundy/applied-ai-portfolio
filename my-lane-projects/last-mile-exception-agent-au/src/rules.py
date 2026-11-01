@@ -44,5 +44,7 @@ def evaluate(ev, customer, parcel, calendar):
     if customer["tier"] == "PREMIUM" and parcel["package_type"] == "PERISHABLE" and \
             code in ("WEATHER_DELAY", "HEAT_HOLD", "ROAD_CLOSURE"):
         disc.append("Premium perishable affected by weather or fire")
+    must = bool(auto or disc)   # playbook section 12: both lists always go to a team leader
+    formal = customer["tier"] in ("VIP", "PREMIUM") or customer["customer_type"] == "TRADE" or must
     return {"automatic_triggers": auto, "discretionary_signals": disc, "possible_false_card": false_card,
-            "must_escalate": bool(auto)}
+            "must_escalate": must, "tone_by_rule": "FORMAL" if formal else "CASUAL"}

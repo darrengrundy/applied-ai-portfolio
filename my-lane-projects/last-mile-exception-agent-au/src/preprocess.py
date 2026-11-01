@@ -53,6 +53,10 @@ def consolidate(world, parcel_id):
     if dnr:   # the case is the customer's report that a delivered parcel isn't there
         ev.update(status_code="DELIVERED_NOT_RECEIVED", event_time=dnr[0]["contact_time"],
                   hour=_hour(dnr[0]["contact_time"]))
+    if delay is not None:   # section 10 arithmetic, done once in code
+        h = ev["hour"] + delay
+        ev["estimated_back_on_road"] = "not today" if delay >= 24 else f"{int(h):02d}:{int(round(h % 1 * 60)):02d}"
+        ev["can_arrive_by_7pm"] = delay < 24 and h <= 19.0
     ev["is_noise"] = ev["status_code"] in NOISE and not complaints
     return ev
 
