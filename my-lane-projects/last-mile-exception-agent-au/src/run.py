@@ -24,6 +24,14 @@ from graph import build
 from llm import Claude
 from world import World
 
+FATAL = ("credit balance", "invalid x-api-key", "authentication_error", "permission_error")
+
+
+def is_fatal(e):
+    """Errors that retrying won't fix: stop the run instead of failing every remaining parcel."""
+    return any(k in str(e).lower() for k in FATAL)
+
+
 OUTCOMES = {"ATTEMPTED", "ACCESS_ISSUE", "ADDRESS_ISSUE", "DAMAGED", "REFUSED", "WEATHER_DELAY", "HEAT_HOLD",
             "VEHICLE_DELAY", "ROAD_CLOSURE"}
 
@@ -114,15 +122,32 @@ def main():
                "latency_s": round(time.time() - t0, 2), "trace": s["trace"]}
         return rec, cost
 
+    stop = threading.Event()
+
+    def guarded(pid):
+        if stop.is_set():
+            return None
+        return one(pid)
+
     with ThreadPoolExecutor(args.workers) as ex, res_path.open("a", encoding="utf-8") as f:
-        futs = {ex.submit(one, pid): pid for pid in ids}
+        futs = {ex.submit(guarded, pid): pid for pid in ids}
         for i, fu in enumerate(as_completed(futs), 1):
             pid = futs[fu]
             try:
-                rec, cost = fu.result()
+                out_ = fu.result()
             except Exception as e:   # keep going; failed parcels can be re-run with the same --out
-                print(f"  ! {pid}: {type(e).__name__}: {e}")
+                if is_fatal(e) and not stop.is_set():
+                    stop.set()
+                    for other in futs:
+                        other.cancel()
+                    print(f"\nStopped: {e}\nTop up credit or fix the key, then run the same command again. "
+                          f"Finished parcels are saved and won't be re-run.")
+                elif not stop.is_set():
+                    print(f"  ! {pid}: {type(e).__name__}: {e}")
                 continue
+            if out_ is None:
+                continue
+            rec, cost = out_
             with lock:
                 f.write(json.dumps(rec, default=str) + "\n"); f.flush()
                 spent[0] += cost; n_llm[0] += rec["outcome"] != "NOISE"
@@ -132,6 +157,8 @@ def main():
                       f"projected full day (~{total_cases:,} exceptions) ${per * total_cases:,.2f} | "
                       f"{time.time() - t_start:.0f}s")
 
+    if stop.is_set():
+        sys.exit(1)
     if args.wismo:
         run_wismo(world, llm, args, out)
 
@@ -146,8 +173,13 @@ def run_wismo(world, llm, args, out):
                 decisions[r["parcel_id"]] = r
     q = world.contacts[world.contacts.contact_type == "WISMO"]
     q = q if args.wismo < 0 else q.head(args.wismo)
-    with (out / "wismo.jsonl").open("w", encoding="utf-8") as f:
+    wp = out / "wismo.jsonl"
+    done = {json.loads(l)["contact_id"] for l in wp.open(encoding="utf-8")} if wp.exists() else set()
+    n = 0
+    with wp.open("a", encoding="utf-8") as f:
         for r in q.itertuples():
+            if r.contact_id in done:
+                continue
             scans = [s for s in world.read_scans(r.parcel_id)
                      if s["timestamp"] <= r.contact_time and s["is_duplicate_scan"] != "True"]
             for s in scans:
@@ -159,10 +191,18 @@ def run_wismo(world, llm, args, out):
                        "decision_already_made": {"resolution": d["resolution"]["resolution"],
                                                  "collection_point": d.get("collection_point"),
                                                  "escalated": d["escalated"]} if decided else None}
-            ans, use = llm.call(args.agent_model, A.WISMO_TASK, payload, A.WismoOut, max_tokens=300)
+            try:
+                ans, use = llm.call(args.agent_model, A.WISMO_TASK, payload, A.WismoOut, max_tokens=300)
+            except Exception as e:
+                if is_fatal(e):
+                    print(f"\nStopped answering enquiries: {e}\nTop up credit, then run the same command again.")
+                    sys.exit(1)
+                print(f"  ! {r.contact_id}: {type(e).__name__}: {e}")
+                continue
             f.write(json.dumps({"contact_id": r.contact_id, "parcel_id": r.parcel_id, "time": r.contact_time,
                                 "question": r.message, **ans, "cost_usd": use["cost_usd"]}) + "\n")
-    print(f"WISMO: answered {len(q)} enquiries -> {out / 'wismo.jsonl'}")
+            n += 1
+    print(f"WISMO: answered {n} new enquiries ({len(done) + n} in total) -> {wp}")
 
 
 if __name__ == "__main__":
