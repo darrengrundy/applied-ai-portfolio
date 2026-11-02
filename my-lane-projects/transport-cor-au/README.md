@@ -117,11 +117,13 @@ No API key is needed for the rule engine, the tests or the screen.
 
 ## Demonstration
 
+**Live demo:** [mylaneai-before-start-cor.lomadg.chatgpt.site](https://mylaneai-before-start-cor.lomadg.chatgpt.site/), also linked from [mylaneai.com.au](https://mylaneai.com.au/). It runs in the browser with synthetic data and needs no sign-in.
+
 Open `demo/index.html` (the hosted build, with link-preview tags) or `demo/tower.html` in a browser. The replay plays each stop in turn. Use ◀ ▶, the arrow keys or the time chips to step through, or open a driver and choose *Show in replay*.
 
 ![Before Start Safety/CoR Check](docs/preview.png)
 
-Build the hosted page with `python src/build_tower.py --hosted --base-url https://<host>/ --out demo/index.html`. The snapshot is Monday 2 November 2026, 05:30 AEDT, with 159 planned trips: 13 drivers to stop, 13 to watch and 10 clear to go. Examples:
+Build the hosted page with `python src/build_tower.py --hosted --base-url https://mylaneai-before-start-cor.lomadg.chatgpt.site/ --out demo/index.html`. The snapshot is Monday 2 November 2026, 05:30 AEDT, with 159 planned trips: 13 drivers to stop, 13 to watch and 10 clear to go. Examples:
 
 - **Fatigue:** a driver finished a Sunday call-out at 23:30 and is rostered for 06:00. The 24 h period that began at 07:00 Sunday already holds 12 h of work, so the earliest compliant start is **07:00**. The capstone demo had cleared 06:30, which still breaches the 12 h work limit.
 - **Two-up:** a Sydney return was brought forward from 18:45 to 08:45 at a customer's request, leaving the pair without their 5 h rest. The agents stop the trip and name the scheduler (and in 2 of 3 runs the consignor). They class the cause as roster planning rather than the customer window that the label expects.
