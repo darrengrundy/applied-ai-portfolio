@@ -1,0 +1,141 @@
+{
+ "summary": {
+  "stop_recall": {
+   "mean": 100.0,
+   "min": 100.0,
+   "max": 100.0
+  },
+  "accountable_party": {
+   "mean": 100.0,
+   "min": 100.0,
+   "max": 100.0
+  },
+  "root_cause": {
+   "mean": 79.2,
+   "min": 75.0,
+   "max": 83.3
+  },
+  "decision_exact": {
+   "mean": 76.4,
+   "min": 75.0,
+   "max": 79.2
+  },
+  "decision_family": {
+   "mean": 94.4,
+   "min": 91.7,
+   "max": 95.8
+  },
+  "ungrounded_numbers": {
+   "mean": 0,
+   "min": 0,
+   "max": 0
+  },
+  "rule_mismatches": {
+   "mean": 0,
+   "min": 0,
+   "max": 0
+  },
+  "floor_overrides": {
+   "mean": 0,
+   "min": 0,
+   "max": 0
+  },
+  "critic_unresolved": {
+   "mean": 0,
+   "min": 0,
+   "max": 0
+  },
+  "briefing_missing": {
+   "mean": 0,
+   "min": 0,
+   "max": 0
+  },
+  "seconds": {
+   "mean": 125.0,
+   "min": 107.7,
+   "max": 159.3
+  },
+  "runs": 3,
+  "calls": 204
+ },
+ "runs": [
+  {
+   "labels": 24,
+   "assessed": 24,
+   "decision_exact": 75.0,
+   "decision_family": 91.7,
+   "root_cause": 79.2,
+   "accountable_party": 100.0,
+   "stop_recall": 100.0,
+   "red_labels": 12,
+   "assessments": 26,
+   "ungrounded_numbers": 0,
+   "critic_first_pass": 23,
+   "critic_unresolved": 0,
+   "floor_overrides": 0,
+   "rule_mismatches": 0,
+   "rule_fixed_by_revision": 2,
+   "briefing_missing": 0,
+   "drivers": 26,
+   "model": "claude-haiku-5-5",
+   "usage": {
+    "calls": 65,
+    "input_tokens": 278545,
+    "output_tokens": 48619
+   },
+   "seconds": 107.7
+  },
+  {
+   "labels": 24,
+   "assessed": 24,
+   "decision_exact": 79.2,
+   "decision_family": 95.8,
+   "root_cause": 75.0,
+   "accountable_party": 100.0,
+   "stop_recall": 100.0,
+   "red_labels": 12,
+   "assessments": 26,
+   "ungrounded_numbers": 0,
+   "critic_first_pass": 22,
+   "critic_unresolved": 0,
+   "floor_overrides": 0,
+   "rule_mismatches": 0,
+   "rule_fixed_by_revision": 4,
+   "briefing_missing": 0,
+   "drivers": 26,
+   "model": "claude-haiku-5-5",
+   "usage": {
+    "calls": 72,
+    "input_tokens": 340726,
+    "output_tokens": 65159
+   },
+   "seconds": 159.3
+  },
+  {
+   "labels": 24,
+   "assessed": 24,
+   "decision_exact": 75.0,
+   "decision_family": 95.8,
+   "root_cause": 83.3,
+   "accountable_party": 100.0,
+   "stop_recall": 100.0,
+   "red_labels": 12,
+   "assessments": 26,
+   "ungrounded_numbers": 0,
+   "critic_first_pass": 21,
+   "critic_unresolved": 0,
+   "floor_overrides": 0,
+   "rule_mismatches": 0,
+   "rule_fixed_by_revision": 3,
+   "briefing_missing": 0,
+   "drivers": 26,
+   "model": "claude-haiku-5-5",
+   "usage": {
+    "calls": 67,
+    "input_tokens": 280065,
+    "output_tokens": 50192
+   },
+   "seconds": 108.1
+  }
+ ]
+}

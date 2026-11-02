@@ -1,0 +1,1649 @@
+{
+ "model": "claude-haiku-5-5",
+ "seconds": 108.1,
+ "usage": {
+  "calls": 67,
+  "input_tokens": 280065,
+  "output_tokens": 50192
+ },
+ "drivers": [
+  {
+   "driver": "D01",
+   "name": "Aaron Achterberg",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Fatigue",
+      "finding_ids": [
+       "F0001"
+      ],
+      "decision": "RESCHEDULE",
+      "root_cause": "ROSTER_PLANNING",
+      "accountable_parties": [
+       "scheduler"
+      ],
+      "action": "Check Aaron's work-time headroom before the 05:00 start on 3 Nov and move the Greyfield trip if needed.",
+      "explanation": "Only 35 minutes of headroom remain at the planned 05:00 start on 3 Nov. The roster leaves too little margin for the trip, so the scheduler should fix the plan.",
+      "cited_facts": [
+       {
+        "finding_id": "F0001",
+        "key": "headroom_min"
+       },
+       {
+        "finding_id": "F0001",
+        "key": "planned_start"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Aaron has 35 minutes of fatigue headroom before the 3 Nov 05:00 start. Scheduler should check the Greyfield trip."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "revise",
+     "errors": [
+      {
+       "area": "Fatigue",
+       "quote": "24 h work limit",
+       "problem": "'24 h work limit': not a solo standard-hours work limit",
+       "is_error": true,
+       "source": "rule check"
+      }
+     ],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    },
+    {
+     "round": 1,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Fatigue": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Fatigue": []
+   }
+  },
+  {
+   "driver": "D02",
+   "name": "Bree Bellwood",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Mass & dimension",
+      "finding_ids": [
+       "F0009",
+       "F0010"
+      ],
+      "decision": "HOLD",
+      "root_cause": "CONSIGNOR_DECLARATION",
+      "accountable_parties": [
+       "consignor",
+       "loader"
+      ],
+      "action": "Hold MV1102-1236 until the coil load is reduced under the 44.0 t limit and re-weighed.",
+      "explanation": "Measured gross is 45.25 t, over the 44.0 t limit. Declared payload was 25200 kg against 28750 kg measured. Fleet pattern shows Brackenridge declares light on every load, so the cause sits with the consignor, with the loader checking weights.",
+      "cited_facts": [
+       {
+        "finding_id": "F0009",
+        "key": "gross_t"
+       },
+       {
+        "finding_id": "F0009",
+        "key": "limit_t"
+       },
+       {
+        "finding_id": "F0010",
+        "key": "declared_kg"
+       },
+       {
+        "finding_id": "F0010",
+        "key": "measured_payload_kg"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Bree Bellwood: 1 RED mass issue on Brackenridge coil load, 45.25 t over 44.0 t limit. Hold MV1102-1236 until reduced and re-weighed."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Mass & dimension": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Mass & dimension": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Mass & dimension": []
+   }
+  },
+  {
+   "driver": "D03",
+   "name": "Callum Castellan",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Mass & dimension",
+      "finding_ids": [
+       "F0011"
+      ],
+      "decision": "RELEASE_WITH_CONDITIONS",
+      "root_cause": "CONSIGNOR_DECLARATION",
+      "accountable_parties": [
+       "consignor",
+       "loader"
+      ],
+      "action": "Get the weighbridge ticket for MV1102-1237 before the 06:45 departure, and confirm the true weight with Brackenridge Steel.",
+      "explanation": "Trip MV1102-1237 is AMBER: a weighbridge ticket is due before departure. Brackenridge Steel's declared weight has run light on every load over four weeks, so the declaration is the upstream cause and the consignor must fix it.",
+      "cited_facts": [
+       {
+        "finding_id": "F0011",
+        "key": "declared_kg"
+       },
+       {
+        "finding_id": "F0011",
+        "key": "depart"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Callum Castellan: steel trip MV1102-1237 needs a weighbridge ticket before the 06:45 departure. Declared weights are the upstream issue."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Mass & dimension": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Mass & dimension": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Mass & dimension": []
+   }
+  },
+  {
+   "driver": "D04",
+   "name": "Dimitri Dunleavy",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Mass & dimension",
+      "finding_ids": [
+       "F0012"
+      ],
+      "decision": "HOLD",
+      "root_cause": "RECORD_KEEPING",
+      "accountable_parties": [
+       "loader",
+       "consignor"
+      ],
+      "action": "Hold MV1102-1238 until a weighbridge ticket and JSEA for the machinery load are on file.",
+      "explanation": "Declared 14205 kg machinery load has no weighbridge ticket or JSEA. Missing evidence is a stop. Fleet pattern shows Brackenridge Steel under-declares, but this trip is Kestrel Machinery, so that pattern does not apply here.",
+      "cited_facts": [
+       {
+        "finding_id": "F0012",
+        "key": "declared_kg"
+       },
+       {
+        "finding_id": "F0012",
+        "key": "load_type"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Dimitri's 08:45 Kestrel machinery trip is on hold: 14205 kg declared with no weighbridge ticket or JSEA."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Mass & dimension": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Mass & dimension": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Mass & dimension": []
+   }
+  },
+  {
+   "driver": "D05",
+   "name": "Ella Ekström",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Load restraint",
+      "finding_ids": [
+       "F0013",
+       "F0014",
+       "F0015",
+       "F0019",
+       "F0020",
+       "F0021",
+       "F0025",
+       "F0026",
+       "F0027"
+      ],
+      "decision": "HOLD",
+      "root_cause": "TRAINING_LAPSE",
+      "accountable_parties": [
+       "operator",
+       "driver"
+      ],
+      "action": "Hold Ella Ekström off all restraint-dependent trips until restraint competency is renewed and recorded.",
+      "explanation": "Ella Ekström's restraint competency expired 28 Oct, and nine findings show it across her planned trips. The operator's training records must be updated before she loads or restrains any load. Fix the record before she drives.",
+      "cited_facts": [
+       {
+        "finding_id": "F0013",
+        "key": "expiry"
+       },
+       {
+        "finding_id": "F0013",
+        "key": "person"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Ella Ekström's restraint competency expired 28 Oct; hold restraint-dependent trips until renewed. Brackenridge Steel weights need correcting."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Load restraint": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Load restraint": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Load restraint": []
+   }
+  },
+  {
+   "driver": "D06",
+   "name": "Faisal Fairweather",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Load restraint",
+      "finding_ids": [
+       "F0016",
+       "F0017",
+       "F0022",
+       "F0023",
+       "F0028",
+       "F0029"
+      ],
+      "decision": "RELEASE_WITH_CONDITIONS",
+      "root_cause": "TRAINING_LAPSE",
+      "accountable_parties": [
+       "operator",
+       "driver"
+      ],
+      "action": "Book Faisal's load restraint refresher before 12 Nov; confirm the booking is made before the 02 Nov depart.",
+      "explanation": "Six AMBER findings show the same restraint competency expiring 12 Nov, 8 to 10 days away. Trips can run today. Training management must schedule the refresher before the lapse.",
+      "cited_facts": [
+       {
+        "finding_id": "F0016",
+        "key": "expiry"
+       },
+       {
+        "finding_id": "F0016",
+        "key": "days"
+       },
+       {
+        "finding_id": "F0022",
+        "key": "days"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Faisal's restraint competency expires 12 Nov. Trips can run; book refresher now. Brackenridge steel trips MV1102-1243 and -1244 carry a declared-weight issue (consignor)."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "revise",
+     "errors": [
+      {
+       "area": "Scope of the Brackenridge note",
+       "quote": "Brackenridge declared-weight issue is separate and not on his trips.",
+       "problem": "Trips MV1102-1243 and MV1102-1244 are for Brackenridge Steel, both on PM06/TR06 on 02 Nov. The statement that the issue is not on his trips is false. Brackenridge is a consignor issue (owner: Consignor + loader), but the claim is concretely wrong against the trip list.",
+       "is_error": true
+      }
+     ],
+     "ungrounded": {
+      "Load restraint": []
+     }
+    },
+    {
+     "round": 1,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Load restraint": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Load restraint": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Load restraint": []
+   }
+  },
+  {
+   "driver": "D10",
+   "name": "Jarrah Jankowski",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Load restraint",
+      "finding_ids": [
+       "F0018"
+      ],
+      "decision": "HOLD",
+      "root_cause": "EQUIPMENT_CONTROL",
+      "accountable_parties": [
+       "operator",
+       "loader"
+      ],
+      "action": "Remove failed webbing EQ002 from service and replace it before MV1102-1253 departs.",
+      "explanation": "EQ002 failed inspection on 2026-10-30 (cut webbing near hook) but is still on the load. The failed gear was not tagged out. Operator and loader control the gear and the load restraint.",
+      "cited_facts": [
+       {
+        "finding_id": "F0018",
+        "key": "equipment"
+       },
+       {
+        "finding_id": "F0018",
+        "key": "result"
+       },
+       {
+        "finding_id": "F0018",
+        "key": "inspected"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Hold MV1102-1253: failed webbing EQ002 is on the load. Replace it before departure; RED cannot be released."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Load restraint": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Load restraint": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Load restraint": []
+   }
+  },
+  {
+   "driver": "D12",
+   "name": "Leila Lombardo",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Maintenance",
+      "finding_ids": [
+       "F0037",
+       "F0038",
+       "F0039",
+       "F0044",
+       "F0045",
+       "F0046",
+       "F0052",
+       "F0053",
+       "F0054"
+      ],
+      "decision": "RELEASE_WITH_CONDITIONS",
+      "root_cause": "MAINTENANCE_PLANNING",
+      "accountable_parties": [
+       "operator"
+      ],
+      "action": "Confirm PM12 service booking for Wed 04 Nov before its trip on that day.",
+      "explanation": "PM12 service is due Wed 04 Nov at 265,076 km against a due point of 285,906 km. Nine AMBER service-soon findings cover the trips. Service timing is an operator workshop planning issue, not a driver fault.",
+      "cited_facts": [
+       {
+        "finding_id": "F0037",
+        "key": "due_date"
+       },
+       {
+        "finding_id": "F0037",
+        "key": "due_km"
+       },
+       {
+        "finding_id": "F0037",
+        "key": "odometer_km"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Leila Lombardo: PM12 service due 04 Nov needs confirming; Brackenridge Steel coil load must be re-weighed before MV1102-1258."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Maintenance": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Maintenance": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Maintenance": []
+   }
+  },
+  {
+   "driver": "D14",
+   "name": "Nadia Nguyen-Hale",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Speed",
+      "finding_ids": [
+       "F0032"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "ROSTER_PLANNING",
+      "accountable_parties": [
+       "scheduler",
+       "consignor"
+      ],
+      "action": "Check the Greyfield Building delivery slot timing before departure, and follow up the speed event with the driver.",
+      "explanation": "One minor event (7 km/h over, 25 seconds) at Princes Hwy, Corio. Fleet pattern shows 20 of 20 events were on Greyfield trips 12-17 minutes before the booked slot, across five drivers. The cause sits with the scheduling and delivery window, not this driver alone.",
+      "cited_facts": [
+       {
+        "finding_id": "F0032",
+        "key": "events"
+       },
+       {
+        "finding_id": "F0032",
+        "key": "max_over"
+       },
+       {
+        "finding_id": "F0032",
+        "key": "locations"
+       },
+       {
+        "finding_id": "F0032",
+        "key": "followed_up"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Nadia Nguyen-Hale: one minor Corio speed event, linked to Greyfield delivery timing. Can go; follow up."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Speed": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Speed": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Speed": []
+   }
+  },
+  {
+   "driver": "D15",
+   "name": "Owen O'Rourke",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Maintenance",
+      "finding_ids": [
+       "F0040",
+       "F0041",
+       "F0042",
+       "F0048",
+       "F0049",
+       "F0050",
+       "F0055",
+       "F0056",
+       "F0057"
+      ],
+      "decision": "HOLD",
+      "root_cause": "DEFECT_CONTROL",
+      "accountable_parties": [
+       "operator",
+       "driver"
+      ],
+      "action": "Hold TR15 until DEF-12409 brake air leak is repaired and cleared. Do not run any trip on TR15 today.",
+      "explanation": "Open major defect DEF-12409 (air leak at trailer brake chamber, axle 2 nearside), reported 2026-10-31 16:20, is still open on TR15. Every trip on TR15 is affected. The defect was not cleared before use.",
+      "cited_facts": [
+       {
+        "finding_id": "F0040",
+        "key": "defect"
+       },
+       {
+        "finding_id": "F0040",
+        "key": "severity"
+       },
+       {
+        "finding_id": "F0040",
+        "key": "reported"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Trailer TR15 has an open major brake air leak (DEF-12409). Hold all TR15 trips until repaired and cleared."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Maintenance": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Maintenance": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Maintenance": []
+   }
+  },
+  {
+   "driver": "D19",
+   "name": "Sione Sefo",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Speed",
+      "finding_ids": [
+       "F0036"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "DATA_QUALITY",
+      "accountable_parties": [
+       "data_owner"
+      ],
+      "action": "Verify the posted limit at Western Fwy, Bacchus Marsh, and correct the map layer before treating the event as speeding.",
+      "explanation": "The 60 km/h limit comes from a low-confidence map layer for a roadworks zone that ended 12 Oct. The event is not confirmed as speeding until the posted limit is checked. Not tied to any planned trip.",
+      "cited_facts": [
+       {
+        "finding_id": "F0036",
+        "key": "limit_source"
+       },
+       {
+        "finding_id": "F0036",
+        "key": "event"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Sione Sefo: one AMBER speed event at Bacchus Marsh, caused by an outdated map limit. Trips can run; verify limit."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Speed": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Speed": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Speed": []
+   }
+  },
+  {
+   "driver": "D20",
+   "name": "Tara Thistlewood",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Integrity",
+      "finding_ids": [
+       "F0059"
+      ],
+      "decision": "INVESTIGATE",
+      "root_cause": "RECORD_KEEPING",
+      "accountable_parties": [
+       "driver",
+       "operator"
+      ],
+      "action": "Confirm who drove PM20 on Sat 31 Oct 14:10-16:40 and correct the work diary before relying on it.",
+      "explanation": "PM20 moved for 96 km with no matching work diary entry. The engine cannot infer the driver from the vehicle, so the driver must confirm who drove. Operator must fix the record.",
+      "cited_facts": [
+       {
+        "finding_id": "F0059",
+        "key": "trip"
+       },
+       {
+        "finding_id": "F0059",
+        "key": "km"
+       },
+       {
+        "finding_id": "F0059",
+        "key": "assigned_driver"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Tara Thistlewood: one integrity item to explain. PM20 moved 96 km on 31 Oct with no matching work diary entry. Confirm who drove."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Integrity": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Integrity": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Integrity": []
+   }
+  },
+  {
+   "driver": "D21",
+   "name": "Usha Uren",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Maintenance",
+      "finding_ids": [
+       "F0043",
+       "F0051",
+       "F0058"
+      ],
+      "decision": "HOLD",
+      "root_cause": "MAINTENANCE_PLANNING",
+      "accountable_parties": [
+       "operator"
+      ],
+      "action": "Book PM21 for service before any trip. Do not dispatch it on these runs.",
+      "explanation": "PM21 is at 584261 km against a service point of 584461 km. Each planned trip takes it past that point, reaching 585221 km by the third trip. Service planning must clear this before use.",
+      "cited_facts": [
+       {
+        "finding_id": "F0043",
+        "key": "due_km"
+       },
+       {
+        "finding_id": "F0043",
+        "key": "km_after_trip"
+       },
+       {
+        "finding_id": "F0051",
+        "key": "km_after_trip"
+       },
+       {
+        "finding_id": "F0058",
+        "key": "km_after_trip"
+       },
+       {
+        "finding_id": "F0058",
+        "key": "due_date"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Usha Uren: PM21 is past its service point on all three trips. Hold until serviced; the operator must book the service."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Maintenance": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Maintenance": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Maintenance": []
+   }
+  },
+  {
+   "driver": "D25",
+   "name": "Yasmin Yallop",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Integrity",
+      "finding_ids": [
+       "F0060"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "DATA_QUALITY",
+      "accountable_parties": [
+       "data_owner"
+      ],
+      "action": "Restore telematics feed from unit TU25 on PM25 and confirm speed and trip data is flowing.",
+      "explanation": "PM25 has sent no telematics for 42 h, so speed and trip checks are incomplete. This is a feed fault, not a driver act. The data owner can restore the feed.",
+      "cited_facts": [
+       {
+        "finding_id": "F0060",
+        "key": "unit"
+       },
+       {
+        "finding_id": "F0060",
+        "key": "last_received"
+       },
+       {
+        "finding_id": "F0060",
+        "key": "hours"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Yasmin Yallop: one AMBER telematics feed gap on PM25. No RED findings; trips can run with feed follow-up."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Integrity": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Integrity": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Integrity": []
+   }
+  },
+  {
+   "driver": "D30",
+   "name": "Ebony Eastaugh",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Speed",
+      "finding_ids": [
+       "F0035"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "DELIVERY_WINDOW",
+      "accountable_parties": [
+       "scheduler",
+       "consignor"
+      ],
+      "action": "Check the Greyfield Building delivery slots before briefing drivers; the speed issue is a schedule pressure problem.",
+      "explanation": "One minor speed event (6 km/h over, 18 seconds) at Princes Hwy, Corio. Fleet pattern shows 20 of 20 events on Greyfield trips, 12-17 minutes before the booked slot, across five drivers. The pressure comes from the timing, so the scheduler and consignor can remove it.",
+      "cited_facts": [
+       {
+        "finding_id": "F0035",
+        "key": "events"
+       },
+       {
+        "finding_id": "F0035",
+        "key": "max_over"
+       },
+       {
+        "finding_id": "F0035",
+        "key": "locations"
+       },
+       {
+        "finding_id": "F0035",
+        "key": "followed_up"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Ebony has one minor 6 km/h speed event at Corio, part of a Greyfield delivery-slot pattern. Monitor; the scheduler and consignor own the fix."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Speed": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Speed": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Speed": []
+   }
+  },
+  {
+   "driver": "D31",
+   "name": "Finn Foulsham",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Integrity",
+      "finding_ids": [
+       "F0060"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "DATA_QUALITY",
+      "accountable_parties": [
+       "data_owner"
+      ],
+      "action": "Restore telematics feed from unit TU25 on PM25 and confirm speed and trip checks are running.",
+      "explanation": "No telematics from PM25 for 42 h, so speed and trip checks are incomplete. The feed fault sits with the systems owner, not the driver. No pattern links to this finding.",
+      "cited_facts": [
+       {
+        "finding_id": "F0060",
+        "key": "unit"
+       },
+       {
+        "finding_id": "F0060",
+        "key": "last_received"
+       },
+       {
+        "finding_id": "F0060",
+        "key": "hours"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Finn Foulsham: one AMBER telematics gap on PM25 (42 h, TU25). Can run; data owner to restore feed."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Integrity": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Integrity": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Integrity": []
+   }
+  },
+  {
+   "driver": "D07",
+   "name": "Grace Galbraith",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Load restraint",
+      "finding_ids": [
+       "F0024"
+      ],
+      "decision": "HOLD",
+      "root_cause": "LOADING_PRACTICE",
+      "accountable_parties": [
+       "loader"
+      ],
+      "action": "Hold trip MV1103-1302 until the steel row has 3 chain lashings per row, as the table requires.",
+      "explanation": "Load restraint finding F0024 is RED: 2 lashings planned, 3 required for a 6800 kg row. The loader packs and restrains, so the loader can remove the cause before departure.",
+      "cited_facts": [
+       {
+        "finding_id": "F0024",
+        "key": "planned"
+       },
+       {
+        "finding_id": "F0024",
+        "key": "required"
+       },
+       {
+        "finding_id": "F0024",
+        "key": "row_kg"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Grace: hold the 05:45 steel trip for lashings and a consignor weight check; other trips can go."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Load restraint": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Load restraint": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Load restraint": []
+   }
+  },
+  {
+   "driver": "D08",
+   "name": "Hamish Holloway",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Speed",
+      "finding_ids": [
+       "F0030"
+      ],
+      "decision": "INVESTIGATE",
+      "root_cause": "DRIVER_BEHAVIOUR",
+      "accountable_parties": [
+       "driver",
+       "operator"
+      ],
+      "action": "Review the four speeding events with Hamish Holloway before he drives; record the follow-up.",
+      "explanation": "Four events 10+ km/h over, max 16 over, none followed up. Engine rule is RED. The fleet Corio pattern is for D09, D14, D16, D26, D30 only, so it does not apply to this driver and is not used here.",
+      "cited_facts": [
+       {
+        "finding_id": "F0030",
+        "key": "events"
+       },
+       {
+        "finding_id": "F0030",
+        "key": "max_over"
+       },
+       {
+        "finding_id": "F0030",
+        "key": "followed_up"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Hamish has four unfollowed speeding events, max 16 km/h over. Review before he drives; the other trips are clear of findings."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Speed": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Speed": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Speed": []
+   }
+  },
+  {
+   "driver": "D09",
+   "name": "Indira Iredale",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Speed",
+      "finding_ids": [
+       "F0031"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "CUSTOMER_WINDOW",
+      "accountable_parties": [
+       "scheduler",
+       "consignor"
+      ],
+      "action": "Check the Greyfield Building delivery slot at Corio before briefing drivers on the Princes Hwy speed zone.",
+      "explanation": "One minor 6 km/h over event at Princes Hwy, Corio. Fleet pattern shows 20 of 20 events on Greyfield trips, 12-17 minutes before the booked slot. The pressure comes from the delivery window, so the scheduler and consignor can remove it. Trip can run.",
+      "cited_facts": [
+       {
+        "finding_id": "F0031",
+        "key": "events"
+       },
+       {
+        "finding_id": "F0031",
+        "key": "max_over"
+       },
+       {
+        "finding_id": "F0031",
+        "key": "followed_up"
+       },
+       {
+        "finding_id": "F0031",
+        "key": "locations"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Minor 6 km/h speeding at Corio, not followed up. Pattern points to Greyfield delivery slot timing. Trips can run."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Speed": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Speed": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Speed": []
+   }
+  },
+  {
+   "driver": "D13",
+   "name": "Marco McAlister",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Maintenance",
+      "finding_ids": [
+       "F0047"
+      ],
+      "decision": "RESCHEDULE",
+      "root_cause": "MAINTENANCE_PLANNING",
+      "accountable_parties": [
+       "operator",
+       "scheduler"
+      ],
+      "action": "Move workshop booking WS-12410 or move PM13 dispatch so the truck is not out while booked in.",
+      "explanation": "PM13 is booked into the workshop Tue 09:00 to 13:00 while its 06:00 departure is planned. The clash is between the workshop booking and dispatch, so the booking needs changing. The trip can still run after a change.",
+      "cited_facts": [
+       {
+        "finding_id": "F0047",
+        "key": "booking"
+       },
+       {
+        "finding_id": "F0047",
+        "key": "start"
+       },
+       {
+        "finding_id": "F0047",
+        "key": "depart"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Marco's Tuesday truck PM13 clashes with a workshop booking at 09:00; the booking needs moving before departure."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Maintenance": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Maintenance": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Maintenance": []
+   }
+  },
+  {
+   "driver": "D24",
+   "name": "Xavier Xuereb",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Fatigue",
+      "finding_ids": [
+       "F0004",
+       "F0005"
+      ],
+      "decision": "RESCHEDULE",
+      "root_cause": "ROSTER_PLANNING",
+      "accountable_parties": [
+       "scheduler"
+      ],
+      "action": "Move the 06:45 Kestrel run to start no earlier than Mon 07:00, or assign another driver.",
+      "explanation": "Planned start of 06:00 breaches the 7 h major rest and the 12 h work limit in the 24 h window. The earliest compliant start is 07:00. The roster creates the breach, so the scheduler must change it.",
+      "cited_facts": [
+       {
+        "finding_id": "F0004",
+        "key": "planned_start"
+       },
+       {
+        "finding_id": "F0004",
+        "key": "earliest_compliant_start"
+       },
+       {
+        "finding_id": "F0005",
+        "key": "detail"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Xavier's 06:45 Kestrel run breaks fatigue rules; move start to 07:00 or reassign. No finding was raised for the 11-03 or 11-04 trips, but their fatigue compliance was not assessed."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "revise",
+     "errors": [
+      {
+       "area": "Driver summary scope",
+       "quote": "the other two trips are clear.",
+       "problem": "The other two trips (MV1103-1333 on 2026-11-03 and MV1104-1392 on 2026-11-04) are outside the 24 h window 2026-11-01T07:00 to 2026-11-02T07:00 that the findings assess. No finding covers them, so saying they are 'clear' overstates what was checked. The facts only support that no finding was raised for them; the assessment did not evaluate their fatigue compliance.",
+       "is_error": true
+      }
+     ],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    },
+    {
+     "round": 1,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Fatigue": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Fatigue": []
+   }
+  },
+  {
+   "driver": "D26",
+   "name": "Zac Zielinski",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Speed",
+      "finding_ids": [
+       "F0034"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "CUSTOMER_WINDOW",
+      "accountable_parties": [
+       "scheduler",
+       "consignor"
+      ],
+      "action": "Check the Greyfield Building delivery slot with the consignor before the 06:15 trip; do not coach Zac alone.",
+      "explanation": "One minor event (8 km/h over, 19 seconds) at Princes Hwy, Corio. The fleet pattern shows 20 of 20 events by five drivers were on Greyfield trips, 12-17 minutes before slot, so the window drives the pressure. Trip can run.",
+      "cited_facts": [
+       {
+        "finding_id": "F0034",
+        "key": "events"
+       },
+       {
+        "finding_id": "F0034",
+        "key": "max_over"
+       },
+       {
+        "finding_id": "F0034",
+        "key": "seconds"
+       },
+       {
+        "finding_id": "F0034",
+        "key": "followed_up"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Zac has one minor speed event at Corio on the Greyfield run. Pattern points to the delivery slot; monitor and check the slot upstream."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Speed": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Speed": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Speed": []
+   }
+  },
+  {
+   "driver": "D16",
+   "name": "Priya Pettigrew",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Speed",
+      "finding_ids": [
+       "F0033"
+      ],
+      "decision": "MONITOR",
+      "root_cause": "CUSTOMER_WINDOW",
+      "accountable_parties": [
+       "scheduler",
+       "consignor"
+      ],
+      "action": "Check the Greyfield Building delivery slot at Corio with the scheduler before the next trip.",
+      "explanation": "One minor event: 5 km/h over on Princes Hwy, Corio, 36 seconds. Fleet pattern shows 20 of 20 events on Greyfield trips, 12-17 minutes before slot. Pressure comes from the delivery window, so scheduler and consignor can fix it.",
+      "cited_facts": [
+       {
+        "finding_id": "F0033",
+        "key": "events"
+       },
+       {
+        "finding_id": "F0033",
+        "key": "max_over"
+       },
+       {
+        "finding_id": "F0033",
+        "key": "seconds"
+       },
+       {
+        "finding_id": "F0033",
+        "key": "followed_up"
+       }
+      ],
+      "colour": "AMBER"
+     }
+    ],
+    "driver_summary": "Priya has one minor 5 km/h speed event at Corio. Trip can run; the Greyfield delivery slot is the pressure point."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Speed": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Speed": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Speed": []
+   }
+  },
+  {
+   "driver": "D18",
+   "name": "Rhys Rowntree",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Fatigue",
+      "finding_ids": [
+       "F0002",
+       "F0003"
+      ],
+      "decision": "HOLD",
+      "root_cause": "ROSTER_PLANNING",
+      "accountable_parties": [
+       "scheduler"
+      ],
+      "action": "Do not dispatch Rhys on the 2 Nov run; reassign the trip or roster a 24 h rest first.",
+      "explanation": "Planned 2 Nov start breaches the 24 h rest in 7 days and the 72 h work limit (77.0 h in 7d). No compliant start time exists. The roster creates the breach, so the scheduler must fix it.",
+      "cited_facts": [
+       {
+        "finding_id": "F0002",
+        "key": "detail"
+       },
+       {
+        "finding_id": "F0002",
+        "key": "earliest_compliant_start"
+       },
+       {
+        "finding_id": "F0003",
+        "key": "detail"
+       },
+       {
+        "finding_id": "F0003",
+        "key": "planned_start"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Rhys is RED for fatigue on the 2 Nov run: no 24 h rest and 77.0 h work in 7 days. Hold and reassign or rest first."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Fatigue": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Fatigue": []
+   }
+  },
+  {
+   "driver": "D33",
+   "name": "Hugo Hartigan",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Fatigue",
+      "finding_ids": [
+       "F0006",
+       "F0007"
+      ],
+      "decision": "HOLD",
+      "root_cause": "ROSTER_PLANNING",
+      "accountable_parties": [
+       "scheduler"
+      ],
+      "action": "Reassign Hugo Hartigan's 2026-11-02 17:15 shift; do not run MV1102-1453 or MV1103-1454 as planned.",
+      "explanation": "The planned shift starts 17:15 on 2 Nov. It has no continuous stationary rest of 5 h in 24 h and 12.2 h work in 24 h (max 12 h). No compliant start is given. The customer-requested plan change moved MV1103-1454 forward, and the roster did not absorb it.",
+      "cited_facts": [
+       {
+        "finding_id": "F0006",
+        "key": "detail"
+       },
+       {
+        "finding_id": "F0006",
+        "key": "earliest_compliant_start"
+       },
+       {
+        "finding_id": "F0007",
+        "key": "detail"
+       },
+       {
+        "finding_id": "F0007",
+        "key": "fix"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Hugo Hartigan: RED fatigue breaches on the 2 Nov 17:15 shift (no 5 h rest, 12.2 h work). Reassign before any trip."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "revise",
+     "errors": [
+      {
+       "area": "Fatigue",
+       "quote": "7 h major rest",
+       "problem": "'7 h major rest': the two-up rule here is 5 h rest",
+       "is_error": true,
+       "source": "rule check"
+      }
+     ],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    },
+    {
+     "round": 1,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Fatigue": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Fatigue": []
+   }
+  },
+  {
+   "driver": "D34",
+   "name": "Isla Ingleby",
+   "assessment": {
+    "assessments": [
+     {
+      "area": "Fatigue",
+      "finding_ids": [
+       "F0008"
+      ],
+      "decision": "RESCHEDULE",
+      "root_cause": "ROSTER_PLANNING",
+      "accountable_parties": [
+       "scheduler"
+      ],
+      "action": "Move Isla's 18:45 Corella trip or reassign the shift so the 5 h continuous rest is met.",
+      "explanation": "Isla's planned shift has no 5 h continuous stationary rest in the 24 h window. No earliest compliant start is given. The Corella brought-forward change at 16:10 pulled the shift forward. The scheduler owns the roster fix.",
+      "cited_facts": [
+       {
+        "finding_id": "F0008",
+        "key": "detail"
+       },
+       {
+        "finding_id": "F0008",
+        "key": "planned_start"
+       },
+       {
+        "finding_id": "F0008",
+        "key": "earliest_compliant_start"
+       }
+      ],
+      "colour": "RED"
+     }
+    ],
+    "driver_summary": "Isla's shift has no 5 h continuous rest in 24 h; reschedule the roster. Hugo's RED fatigue findings need separate handling."
+   },
+   "review": [
+    {
+     "round": 0,
+     "verdict": "revise",
+     "errors": [
+      {
+       "area": "Fatigue",
+       "quote": "24 h rest",
+       "problem": "'24 h rest': the two-up rule here is 5 h rest",
+       "is_error": true,
+       "source": "rule check"
+      }
+     ],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    },
+    {
+     "round": 1,
+     "verdict": "pass",
+     "errors": [],
+     "ungrounded": {
+      "Fatigue": []
+     }
+    }
+   ],
+   "floor_overrides": [],
+   "ungrounded_final": {
+    "Fatigue": []
+   },
+   "passed": true,
+   "rule_mismatch_final": {
+    "Fatigue": []
+   }
+  }
+ ],
+ "systemic": [
+  {
+   "title": "Ella Ekström's restraint competency lapsed and is still rostered onto loads",
+   "evidence": "LR-COMPETENCY-EXPIRED flags 9 loads (MV1102-1240, 1241, 1242, MV1103-1297, 1298, 1299, MV1104-1357, 1358, 1359) all tied to her competency that expired 28 Oct. A further 6 loads (MV1102-1243, 1244, MV1103-1300, 1301, MV1104-1360, 1361) are flagged for Faisal Fairweather, whose restraint competency expires 12 Nov.",
+   "root_cause": "TRAINING_LAPSE",
+   "accountable_parties": [
+    "operator",
+    "scheduler"
+   ],
+   "recommendation": "Take Ella Ekström off restraint-dependent loading until recertified, and book Faisal Fairweather's refresher before 12 Nov. Operator training management should run a competency-expiry check before roster release so lapses are caught before rostering."
+  },
+  {
+   "title": "Mass problems concentrated on Brackenridge Steel loads, with declared weights consistently light",
+   "evidence": "Engine pattern: Brackenridge Steel Supply declares light on 217 of 217 loads; weighbridge payload averages 7.5% above declared over 4 weeks. Today MV1102-1236 is measured 45.2 t against a 44.0 t limit, with declared weight 14% under weighbridge. MV1102-1237 has its weighbridge ticket pending and MV1102-1238 has no weighbridge ticket or JSEA.",
+   "root_cause": "CONSIGNOR_DECLARATION",
+   "accountable_parties": [
+    "consignor",
+    "loader"
+   ],
+   "recommendation": "Require Brackenridge Steel to correct its declared weights and supply weighbridge-verified figures before dispatch. Loaders should weigh and hold loads without a ticket until the declaration is corrected and the combination limit is confirmed."
+  },
+  {
+   "title": "Speeding at Princes Hwy, Corio is tied to the Greyfield Building delivery slot, not to individual drivers",
+   "evidence": "Engine pattern: 5 drivers (D09, D14, D16, D26, D30) with 20 events at Princes Hwy, Corio (80 to 60), all 5-9 km/h over, all on trips to Greyfield Building, 12-17 minutes before the booked slot. Each driver has only one minor SPD-WATCH event today.",
+   "root_cause": "CUSTOMER_WINDOW",
+   "accountable_parties": [
+    "consignor",
+    "scheduler"
+   ],
+   "recommendation": "Review the Greyfield Building delivery slot with the consignor so arrival does not require running ahead of the 60 km/h zone, and have the scheduler build the dispatch around that window before coaching individual drivers."
+  },
+  {
+   "title": "Planned rosters breach fatigue rules for several drivers",
+   "evidence": "Today's findings: FAT-24H-REST for D24, D33, D34; FAT-24H-WORK for D24 and D33 (12 h work in 24 h); FAT-7D-REST and FAT-7D-WORK for D18; FAT-HEADROOM for D01 with only 35 min left on the 24 h work limit. Several of these are planned shifts, so the breach is in the roster itself.",
+   "root_cause": "ROSTER_PLANNING",
+   "accountable_parties": [
+    "scheduler",
+    "operator"
+   ],
+   "recommendation": "Rebuild the planned shifts for D24, D33, D34 and D18 to clear the 7 h major rest and the 12 h and 72 h work limits, and add a pre-publication fatigue check to roster build so planned breaches are blocked before drivers are rostered."
+  },
+  {
+   "title": "Trailer TR15 has an open major brake defect and PM12 is due on a rolling schedule",
+   "evidence": "MNT-OPEN-DEFECT shows 9 entries on TR15 for an open major air leak at the trailer brake chamber (axle 2, nearside). MNT-SERVICE-SOON shows 9 PM12 service-due entries (Wed 04 Nov, at 20,750 down to 20,110 km). PM21 passes its service point on 3 trips.",
+   "root_cause": "DEFECT_CONTROL",
+   "accountable_parties": [
+    "operator",
+    "executive"
+   ],
+   "recommendation": "Take TR15 out of service until the brake chamber air leak is repaired and the defect is cleared. Book PM12 and PM21 into the workshop ahead of their service points so the fleet is not running into due or overdue services."
+  }
+ ],
+ "briefing": "**Stop before release**\n- 2 Nov 06:15 Bree Bellwood, MV1102-1236: hold to reweigh. Consignor/loader.\n- 2 Nov 06:15 Tara Thistlewood: confirm PM20 driver, correct diary. Driver/operator.\n- 2 Nov 06:30 Owen O'Rourke, TR15: no trips until brake leak cleared. Operator.\n- 2 Nov 06:45 Xavier Xuereb: move Kestrel run or reassign. Scheduler.\n- 2 Nov 07:30 Jarrah Jankowski: replace webbing EQ002 before MV1102-1253. Operator/loader.\n- 2 Nov 07:30 Usha Uren, PM21: book service, no dispatch. Operator.\n- 2 Nov 07:45 Rhys Rowntree: no dispatch, reassign. Scheduler.\n- 2 Nov 08:00 Ella Ekström: off restraint trips until recertified. Operator.\n- 2 Nov 08:45 Dimitri Dunleavy, MV1102-1238: hold for ticket and JSEA. Loader/consignor.\n- 3 Nov 05:45 Grace Galbraith, MV1103-1302: hold until lashings fixed. Loader.\n- 3 Nov 05:45 Hamish Holloway: review speeding events before driving. Driver/operator.\n- 3 Nov 08:45 Hugo Hartigan and Isla Ingleby: reassign Hugo; move Isla's 2 Nov 18:45 trip. Scheduler.\n\n**Watch today**\n- Aaron Achterberg: check fatigue headroom before 3 Nov 05:45. Scheduler.\n- Greyfield slot speeding (Nguyen-Hale, Eastaugh, Iredale, Zielinski, Pettigrew): check slot before departure. Scheduler/consignor.\n- Telematics TU25 feed (Yallop, Foulsham): restore. Data owner.\n- Sione Sefo: verify Western Fwy limit before calling it speeding. Data owner.\n- Pre-departure bookings: Castellan weighbridge ticket before 2 Nov 06:45; Fairweather refresher; Lombardo PM12; McAlister WS-12410. Operator/scheduler.\n\n**Fix upstream**\n- Restraint competency lapsed (Ekström, Fairweather): run expiry check before roster release. Operator/scheduler.\n- Brackenridge Steel declares light: require verified weights. Consignor/loader.\n- Greyfield slot drives Princes Hwy speeding: review delivery window. Consignor/scheduler.\n- Roster fatigue breaches (D24, D33, D34, D18, D01): add pre-publication fatigue check. Scheduler/operator.\n- TR15 brake defect and PM12/PM21 due: pull TR15, book services early. Operator/executive.",
+ "briefing_review": [
+  {
+   "verdict": "pass",
+   "errors": []
+  }
+ ],
+ "briefing_missing": []
+}

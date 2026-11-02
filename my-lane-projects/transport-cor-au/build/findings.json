@@ -1,0 +1,4984 @@
+{
+ "meta": {
+  "operator": "Wattlebark Haulage (fictional)",
+  "snapshot": "2026-11-02T05:30+11:00",
+  "history_start": "2026-10-05T00:00+11:00",
+  "plan_end": "2026-11-05T00:00+11:00",
+  "seed": 20261102,
+  "note": "All people, companies and records are fictional."
+ },
+ "movements": [
+  {
+   "movement_id": "MV1102-1235",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D01",
+   "co_driver_id": null,
+   "vehicle_id": "PM01",
+   "trailer_id": "TR01",
+   "customer_id": "C1",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-02T06:15+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1236",
+   "rag": "RED",
+   "findings": [
+    "F0009",
+    "F0010"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D02",
+   "co_driver_id": null,
+   "vehicle_id": "PM02",
+   "trailer_id": "TR02",
+   "customer_id": "C1",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-02T06:15+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1237",
+   "rag": "AMBER",
+   "findings": [
+    "F0011"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D03",
+   "co_driver_id": null,
+   "vehicle_id": "PM03",
+   "trailer_id": "TR03",
+   "customer_id": "C1",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-02T06:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1238",
+   "rag": "RED",
+   "findings": [
+    "F0012"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D04",
+   "co_driver_id": null,
+   "vehicle_id": "PM04",
+   "trailer_id": "TR04",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T08:45+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1239",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D04",
+   "co_driver_id": null,
+   "vehicle_id": "PM04",
+   "trailer_id": "TR04",
+   "customer_id": "C3",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T12:55+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1102-1240",
+   "rag": "RED",
+   "findings": [
+    "F0013"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T08:00+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1241",
+   "rag": "RED",
+   "findings": [
+    "F0014"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T10:40+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1102-1242",
+   "rag": "RED",
+   "findings": [
+    "F0015"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T13:20+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1243",
+   "rag": "AMBER",
+   "findings": [
+    "F0016"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D06",
+   "co_driver_id": null,
+   "vehicle_id": "PM06",
+   "trailer_id": "TR06",
+   "customer_id": "C1",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T07:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1244",
+   "rag": "AMBER",
+   "findings": [
+    "F0017"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D06",
+   "co_driver_id": null,
+   "vehicle_id": "PM06",
+   "trailer_id": "TR06",
+   "customer_id": "C1",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T11:55+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1253",
+   "rag": "RED",
+   "findings": [
+    "F0018"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T07:30+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1102-1254",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T10:10+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1102-1255",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T12:50+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1102-1257",
+   "rag": "AMBER",
+   "findings": [
+    "F0037"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T07:00+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1258",
+   "rag": "AMBER",
+   "findings": [
+    "F0038"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T09:40+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1259",
+   "rag": "AMBER",
+   "findings": [
+    "F0039"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T12:20+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1261",
+   "rag": "AMBER",
+   "findings": [
+    "F0032"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D14",
+   "co_driver_id": null,
+   "vehicle_id": "PM14",
+   "trailer_id": "TR14",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-02T07:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1262",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D14",
+   "co_driver_id": null,
+   "vehicle_id": "PM14",
+   "trailer_id": "TR14",
+   "customer_id": "C6",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-02T10:55+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1263",
+   "rag": "RED",
+   "findings": [
+    "F0040"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T06:30+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1264",
+   "rag": "RED",
+   "findings": [
+    "F0041"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T09:10+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1265",
+   "rag": "RED",
+   "findings": [
+    "F0042"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T11:50+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1268",
+   "rag": "AMBER",
+   "findings": [
+    "F0036"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D19",
+   "co_driver_id": null,
+   "vehicle_id": "PM19",
+   "trailer_id": "TR19",
+   "customer_id": "C1",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T07:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1269",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D19",
+   "co_driver_id": null,
+   "vehicle_id": "PM19",
+   "trailer_id": "TR19",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T11:55+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1270",
+   "rag": "RED",
+   "findings": [
+    "F0059"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D20",
+   "co_driver_id": null,
+   "vehicle_id": "PM20",
+   "trailer_id": "TR20",
+   "customer_id": "C5",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T06:15+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1271",
+   "rag": "RED",
+   "findings": [
+    "F0059"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D20",
+   "co_driver_id": null,
+   "vehicle_id": "PM20",
+   "trailer_id": "TR20",
+   "customer_id": "C5",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T10:25+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1272",
+   "rag": "RED",
+   "findings": [
+    "F0043"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D21",
+   "co_driver_id": null,
+   "vehicle_id": "PM21",
+   "trailer_id": "TR21",
+   "customer_id": "C3",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-02T07:30+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1102-1277",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T09:00+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1278",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T11:40+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1102-1279",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C5",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T14:20+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1282",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D27",
+   "co_driver_id": null,
+   "vehicle_id": "PM27",
+   "trailer_id": "TR27",
+   "customer_id": "C4",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T07:00+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1283",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D27",
+   "co_driver_id": null,
+   "vehicle_id": "PM27",
+   "trailer_id": "TR27",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-02T11:10+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1284",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D28",
+   "co_driver_id": null,
+   "vehicle_id": "PM28",
+   "trailer_id": "TR28",
+   "customer_id": "C6",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-02T06:30+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1285",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T06:30+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1102-1286",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T09:10+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1102-1287",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T11:50+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1288",
+   "rag": "AMBER",
+   "findings": [
+    "F0035"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D30",
+   "co_driver_id": null,
+   "vehicle_id": "PM30",
+   "trailer_id": "TR30",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-02T07:30+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1289",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D30",
+   "co_driver_id": null,
+   "vehicle_id": "PM30",
+   "trailer_id": "TR30",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-02T10:40+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1102-1290",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T07:30+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1102-1291",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T10:10+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1102-1292",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-02T12:50+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1294",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D02",
+   "co_driver_id": null,
+   "vehicle_id": "PM02",
+   "trailer_id": "TR02",
+   "customer_id": "C2",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-03T05:45+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1295",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D04",
+   "co_driver_id": null,
+   "vehicle_id": "PM04",
+   "trailer_id": "TR04",
+   "customer_id": "C5",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T08:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1296",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D04",
+   "co_driver_id": null,
+   "vehicle_id": "PM04",
+   "trailer_id": "TR04",
+   "customer_id": "C2",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T12:55+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1297",
+   "rag": "RED",
+   "findings": [
+    "F0019"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T07:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1298",
+   "rag": "RED",
+   "findings": [
+    "F0020"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T10:25+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1299",
+   "rag": "RED",
+   "findings": [
+    "F0021"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T13:05+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1300",
+   "rag": "AMBER",
+   "findings": [
+    "F0022"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D06",
+   "co_driver_id": null,
+   "vehicle_id": "PM06",
+   "trailer_id": "TR06",
+   "customer_id": "C4",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T07:30+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1301",
+   "rag": "AMBER",
+   "findings": [
+    "F0023"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D06",
+   "co_driver_id": null,
+   "vehicle_id": "PM06",
+   "trailer_id": "TR06",
+   "customer_id": "C4",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T11:40+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1302",
+   "rag": "RED",
+   "findings": [
+    "F0024"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D07",
+   "co_driver_id": null,
+   "vehicle_id": "PM07",
+   "trailer_id": "TR07",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T05:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1303",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D07",
+   "co_driver_id": null,
+   "vehicle_id": "PM07",
+   "trailer_id": "TR07",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T08:25+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1304",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D07",
+   "co_driver_id": null,
+   "vehicle_id": "PM07",
+   "trailer_id": "TR07",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T11:05+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1305",
+   "rag": "RED",
+   "findings": [
+    "F0030"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D08",
+   "co_driver_id": null,
+   "vehicle_id": "PM08",
+   "trailer_id": "TR08",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T05:45+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1306",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D08",
+   "co_driver_id": null,
+   "vehicle_id": "PM08",
+   "trailer_id": "TR08",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T08:25+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1307",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D08",
+   "co_driver_id": null,
+   "vehicle_id": "PM08",
+   "trailer_id": "TR08",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T11:05+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1308",
+   "rag": "AMBER",
+   "findings": [
+    "F0031"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D09",
+   "co_driver_id": null,
+   "vehicle_id": "PM09",
+   "trailer_id": "TR09",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T06:00+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1309",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D09",
+   "co_driver_id": null,
+   "vehicle_id": "PM09",
+   "trailer_id": "TR09",
+   "customer_id": "C6",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T09:10+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1310",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T08:00+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1311",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T10:40+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1312",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C5",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T13:20+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1313",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D11",
+   "co_driver_id": null,
+   "vehicle_id": "PM11",
+   "trailer_id": "TR11",
+   "customer_id": "C4",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-03T05:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1314",
+   "rag": "AMBER",
+   "findings": [
+    "F0044"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T07:00+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1315",
+   "rag": "AMBER",
+   "findings": [
+    "F0045"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T09:40+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1316",
+   "rag": "AMBER",
+   "findings": [
+    "F0046"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C5",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T12:20+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1317",
+   "rag": "AMBER",
+   "findings": [
+    "F0047"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D13",
+   "co_driver_id": null,
+   "vehicle_id": "PM13",
+   "trailer_id": "TR13",
+   "customer_id": "C6",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-03T06:00+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1318",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D14",
+   "co_driver_id": null,
+   "vehicle_id": "PM14",
+   "trailer_id": "TR14",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T07:45+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1319",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D14",
+   "co_driver_id": null,
+   "vehicle_id": "PM14",
+   "trailer_id": "TR14",
+   "customer_id": "C6",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T10:55+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1320",
+   "rag": "RED",
+   "findings": [
+    "F0048"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T07:00+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1321",
+   "rag": "RED",
+   "findings": [
+    "F0049"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C5",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T09:40+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1322",
+   "rag": "RED",
+   "findings": [
+    "F0050"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T12:20+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1323",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D17",
+   "co_driver_id": null,
+   "vehicle_id": "PM17",
+   "trailer_id": "TR17",
+   "customer_id": "C1",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-03T05:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1325",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D19",
+   "co_driver_id": null,
+   "vehicle_id": "PM19",
+   "trailer_id": "TR19",
+   "customer_id": "C1",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T08:00+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1326",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D19",
+   "co_driver_id": null,
+   "vehicle_id": "PM19",
+   "trailer_id": "TR19",
+   "customer_id": "C5",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T12:10+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1327",
+   "rag": "RED",
+   "findings": [
+    "F0059"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D20",
+   "co_driver_id": null,
+   "vehicle_id": "PM20",
+   "trailer_id": "TR20",
+   "customer_id": "C2",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T06:15+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1328",
+   "rag": "RED",
+   "findings": [
+    "F0059"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D20",
+   "co_driver_id": null,
+   "vehicle_id": "PM20",
+   "trailer_id": "TR20",
+   "customer_id": "C5",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T10:25+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1329",
+   "rag": "RED",
+   "findings": [
+    "F0051"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D21",
+   "co_driver_id": null,
+   "vehicle_id": "PM21",
+   "trailer_id": "TR21",
+   "customer_id": "C2",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-03T07:45+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1330",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D22",
+   "co_driver_id": null,
+   "vehicle_id": "PM22",
+   "trailer_id": "TR22",
+   "customer_id": "C3",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-03T05:45+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1331",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D23",
+   "co_driver_id": null,
+   "vehicle_id": "PM23",
+   "trailer_id": "TR23",
+   "customer_id": "C3",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T06:15+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1332",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D23",
+   "co_driver_id": null,
+   "vehicle_id": "PM23",
+   "trailer_id": "TR23",
+   "customer_id": "C2",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T10:25+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1333",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D24",
+   "co_driver_id": null,
+   "vehicle_id": "PM24",
+   "trailer_id": "TR24",
+   "customer_id": "C5",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-03T07:15+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1334",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T08:45+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1335",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T11:25+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1336",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T14:05+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1337",
+   "rag": "AMBER",
+   "findings": [
+    "F0034"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D26",
+   "co_driver_id": null,
+   "vehicle_id": "PM26",
+   "trailer_id": "TR26",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T06:15+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1338",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D26",
+   "co_driver_id": null,
+   "vehicle_id": "PM26",
+   "trailer_id": "TR26",
+   "customer_id": "C6",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T09:25+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1339",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D27",
+   "co_driver_id": null,
+   "vehicle_id": "PM27",
+   "trailer_id": "TR27",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T06:30+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1340",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D27",
+   "co_driver_id": null,
+   "vehicle_id": "PM27",
+   "trailer_id": "TR27",
+   "customer_id": "C3",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-03T10:40+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1341",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D28",
+   "co_driver_id": null,
+   "vehicle_id": "PM28",
+   "trailer_id": "TR28",
+   "customer_id": "C1",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-03T06:30+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1342",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T07:00+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1343",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T09:40+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1344",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T12:20+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1345",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D30",
+   "co_driver_id": null,
+   "vehicle_id": "PM30",
+   "trailer_id": "TR30",
+   "customer_id": "C6",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T07:30+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1346",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D30",
+   "co_driver_id": null,
+   "vehicle_id": "PM30",
+   "trailer_id": "TR30",
+   "customer_id": "C2",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-03T10:40+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1103-1347",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T08:15+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1103-1348",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T10:55+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1349",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T13:35+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1350",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D32",
+   "co_driver_id": null,
+   "vehicle_id": "PM26",
+   "trailer_id": "TR26",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T06:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1103-1351",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D32",
+   "co_driver_id": null,
+   "vehicle_id": "PM26",
+   "trailer_id": "TR26",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T09:25+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1352",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D32",
+   "co_driver_id": null,
+   "vehicle_id": "PM26",
+   "trailer_id": "TR26",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-03T12:05+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1353",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D02",
+   "co_driver_id": null,
+   "vehicle_id": "PM02",
+   "trailer_id": "TR02",
+   "customer_id": "C1",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-04T06:15+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1354",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D03",
+   "co_driver_id": null,
+   "vehicle_id": "PM03",
+   "trailer_id": "TR03",
+   "customer_id": "C3",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-04T06:45+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1104-1355",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D04",
+   "co_driver_id": null,
+   "vehicle_id": "PM04",
+   "trailer_id": "TR04",
+   "customer_id": "C2",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T08:30+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1104-1356",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D04",
+   "co_driver_id": null,
+   "vehicle_id": "PM04",
+   "trailer_id": "TR04",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T12:40+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1357",
+   "rag": "RED",
+   "findings": [
+    "F0025"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T08:15+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1358",
+   "rag": "RED",
+   "findings": [
+    "F0026"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C5",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T10:55+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1359",
+   "rag": "RED",
+   "findings": [
+    "F0027"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D05",
+   "co_driver_id": null,
+   "vehicle_id": "PM05",
+   "trailer_id": "TR05",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T13:35+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1360",
+   "rag": "AMBER",
+   "findings": [
+    "F0028"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D06",
+   "co_driver_id": null,
+   "vehicle_id": "PM06",
+   "trailer_id": "TR06",
+   "customer_id": "C3",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T08:00+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1104-1361",
+   "rag": "AMBER",
+   "findings": [
+    "F0029"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D06",
+   "co_driver_id": null,
+   "vehicle_id": "PM06",
+   "trailer_id": "TR06",
+   "customer_id": "C3",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T12:10+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1104-1362",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D08",
+   "co_driver_id": null,
+   "vehicle_id": "PM08",
+   "trailer_id": "TR08",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T05:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1363",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D08",
+   "co_driver_id": null,
+   "vehicle_id": "PM08",
+   "trailer_id": "TR08",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T08:25+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1364",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D08",
+   "co_driver_id": null,
+   "vehicle_id": "PM08",
+   "trailer_id": "TR08",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T11:05+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1365",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D09",
+   "co_driver_id": null,
+   "vehicle_id": "PM09",
+   "trailer_id": "TR09",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T06:00+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1104-1366",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D09",
+   "co_driver_id": null,
+   "vehicle_id": "PM09",
+   "trailer_id": "TR09",
+   "customer_id": "C4",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T09:10+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1367",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T07:45+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1368",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T10:25+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1369",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D10",
+   "co_driver_id": null,
+   "vehicle_id": "PM10",
+   "trailer_id": "TR10",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T13:05+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1104-1371",
+   "rag": "AMBER",
+   "findings": [
+    "F0052"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T06:45+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1372",
+   "rag": "AMBER",
+   "findings": [
+    "F0053"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T09:25+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1373",
+   "rag": "AMBER",
+   "findings": [
+    "F0054"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D12",
+   "co_driver_id": null,
+   "vehicle_id": "PM12",
+   "trailer_id": "TR12",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T12:05+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1374",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D13",
+   "co_driver_id": null,
+   "vehicle_id": "PM13",
+   "trailer_id": "TR13",
+   "customer_id": "C4",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-04T06:00+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1375",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D14",
+   "co_driver_id": null,
+   "vehicle_id": "PM14",
+   "trailer_id": "TR14",
+   "customer_id": "C5",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T07:30+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1376",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D14",
+   "co_driver_id": null,
+   "vehicle_id": "PM14",
+   "trailer_id": "TR14",
+   "customer_id": "C2",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T10:40+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1104-1377",
+   "rag": "RED",
+   "findings": [
+    "F0055"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T06:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1378",
+   "rag": "RED",
+   "findings": [
+    "F0056"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T09:25+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1379",
+   "rag": "RED",
+   "findings": [
+    "F0057"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D15",
+   "co_driver_id": null,
+   "vehicle_id": "PM15",
+   "trailer_id": "TR15",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T12:05+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1380",
+   "rag": "AMBER",
+   "findings": [
+    "F0033"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D16",
+   "co_driver_id": null,
+   "vehicle_id": "PM16",
+   "trailer_id": "TR16",
+   "customer_id": "C3",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T08:15+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1381",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D16",
+   "co_driver_id": null,
+   "vehicle_id": "PM16",
+   "trailer_id": "TR16",
+   "customer_id": "C5",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T11:25+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1382",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D17",
+   "co_driver_id": null,
+   "vehicle_id": "PM17",
+   "trailer_id": "TR17",
+   "customer_id": "C2",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-04T06:15+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1104-1384",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D19",
+   "co_driver_id": null,
+   "vehicle_id": "PM19",
+   "trailer_id": "TR19",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T07:45+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1385",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D19",
+   "co_driver_id": null,
+   "vehicle_id": "PM19",
+   "trailer_id": "TR19",
+   "customer_id": "C5",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T11:55+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1386",
+   "rag": "RED",
+   "findings": [
+    "F0059"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D20",
+   "co_driver_id": null,
+   "vehicle_id": "PM20",
+   "trailer_id": "TR20",
+   "customer_id": "C4",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T06:00+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1387",
+   "rag": "RED",
+   "findings": [
+    "F0059"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D20",
+   "co_driver_id": null,
+   "vehicle_id": "PM20",
+   "trailer_id": "TR20",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T10:10+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1388",
+   "rag": "RED",
+   "findings": [
+    "F0058"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D21",
+   "co_driver_id": null,
+   "vehicle_id": "PM21",
+   "trailer_id": "TR21",
+   "customer_id": "C4",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-04T07:30+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1389",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D22",
+   "co_driver_id": null,
+   "vehicle_id": "PM22",
+   "trailer_id": "TR22",
+   "customer_id": "C2",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-04T06:00+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1104-1390",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D23",
+   "co_driver_id": null,
+   "vehicle_id": "PM23",
+   "trailer_id": "TR23",
+   "customer_id": "C2",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T06:00+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1104-1391",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D23",
+   "co_driver_id": null,
+   "vehicle_id": "PM23",
+   "trailer_id": "TR23",
+   "customer_id": "C5",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T10:10+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1392",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D24",
+   "co_driver_id": null,
+   "vehicle_id": "PM24",
+   "trailer_id": "TR24",
+   "customer_id": "C3",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-04T07:00+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1104-1393",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T08:30+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1394",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C5",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T11:10+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1395",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D25",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C1",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T13:50+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1396",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D26",
+   "co_driver_id": null,
+   "vehicle_id": "PM26",
+   "trailer_id": "TR26",
+   "customer_id": "C4",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T05:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1397",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D26",
+   "co_driver_id": null,
+   "vehicle_id": "PM26",
+   "trailer_id": "TR26",
+   "customer_id": "C5",
+   "lane": "GEE",
+   "destination": "Geelong (Corio)",
+   "depart": "2026-11-04T08:55+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1398",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D27",
+   "co_driver_id": null,
+   "vehicle_id": "PM27",
+   "trailer_id": "TR27",
+   "customer_id": "C1",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T07:15+11:00",
+   "load_type": "steel"
+  },
+  {
+   "movement_id": "MV1104-1399",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D27",
+   "co_driver_id": null,
+   "vehicle_id": "PM27",
+   "trailer_id": "TR27",
+   "customer_id": "C6",
+   "lane": "BAL",
+   "destination": "Ballarat (Wendouree)",
+   "depart": "2026-11-04T11:25+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1400",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D28",
+   "co_driver_id": null,
+   "vehicle_id": "PM28",
+   "trailer_id": "TR28",
+   "customer_id": "C4",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-04T07:15+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1401",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T06:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1402",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C5",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T09:25+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1403",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D29",
+   "co_driver_id": null,
+   "vehicle_id": "PM29",
+   "trailer_id": "TR29",
+   "customer_id": "C4",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T12:05+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1104-1404",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C2",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T08:15+11:00",
+   "load_type": "timber"
+  },
+  {
+   "movement_id": "MV1104-1405",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C6",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T10:55+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1104-1406",
+   "rag": "AMBER",
+   "findings": [
+    "F0060"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D31",
+   "co_driver_id": null,
+   "vehicle_id": "PM25",
+   "trailer_id": "TR25",
+   "customer_id": "C3",
+   "lane": "MET",
+   "destination": "Melbourne metro drops",
+   "depart": "2026-11-04T13:35+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1102-1441",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D35",
+   "co_driver_id": "D36",
+   "vehicle_id": "PM24",
+   "trailer_id": "TR24",
+   "customer_id": "C4",
+   "lane": "SYD",
+   "destination": "Sydney (Moorebank)",
+   "depart": "2026-11-02T18:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1442",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D36",
+   "co_driver_id": "D35",
+   "vehicle_id": "PM24",
+   "trailer_id": "TR24",
+   "customer_id": "C5",
+   "lane": "SYD",
+   "destination": "Sydney (Moorebank)",
+   "depart": "2026-11-03T18:30+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1444",
+   "rag": "RED",
+   "findings": [
+    "F0004",
+    "F0005"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D24",
+   "co_driver_id": null,
+   "vehicle_id": "PM24",
+   "trailer_id": "TR24",
+   "customer_id": "C6",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-02T06:45+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1102-1451",
+   "rag": "RED",
+   "findings": [
+    "F0002",
+    "F0003"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D18",
+   "co_driver_id": null,
+   "vehicle_id": "PM18",
+   "trailer_id": "TR18",
+   "customer_id": "C6",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-02T07:45+11:00",
+   "load_type": "machinery"
+  },
+  {
+   "movement_id": "MV1103-1452",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D18",
+   "co_driver_id": null,
+   "vehicle_id": "PM18",
+   "trailer_id": "TR18",
+   "customer_id": "C5",
+   "lane": "BEN",
+   "destination": "Bendigo (Epsom)",
+   "depart": "2026-11-03T07:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1102-1453",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D33",
+   "co_driver_id": "D34",
+   "vehicle_id": "PM23",
+   "trailer_id": "TR23",
+   "customer_id": "C4",
+   "lane": "SYD",
+   "destination": "Sydney (Moorebank)",
+   "depart": "2026-11-02T18:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1454",
+   "rag": "RED",
+   "findings": [
+    "F0006",
+    "F0007",
+    "F0008"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D34",
+   "co_driver_id": "D33",
+   "vehicle_id": "PM23",
+   "trailer_id": "TR23",
+   "customer_id": "C4",
+   "lane": "SYD",
+   "destination": "Sydney (Moorebank)",
+   "depart": "2026-11-03T08:45+11:00",
+   "load_type": "pallets"
+  },
+  {
+   "movement_id": "MV1103-1455",
+   "rag": "AMBER",
+   "findings": [
+    "F0001"
+   ],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D01",
+   "co_driver_id": null,
+   "vehicle_id": "PM01",
+   "trailer_id": "TR01",
+   "customer_id": "C3",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-03T05:45+11:00",
+   "load_type": "building"
+  },
+  {
+   "movement_id": "MV1104-1456",
+   "rag": "GREEN",
+   "findings": [],
+   "checks_run": [
+    "fatigue",
+    "mass",
+    "restraint",
+    "speed",
+    "maintenance",
+    "integrity"
+   ],
+   "driver_id": "D11",
+   "co_driver_id": null,
+   "vehicle_id": "PM11",
+   "trailer_id": "TR11",
+   "customer_id": "C5",
+   "lane": "ALB",
+   "destination": "Wodonga (Logic)",
+   "depart": "2026-11-04T05:45+11:00",
+   "load_type": "pallets"
+  }
+ ],
+ "findings": [
+  {
+   "id": "F0001",
+   "area": "Fatigue",
+   "rule_id": "FAT-HEADROOM",
+   "rag": "AMBER",
+   "entity": "D01",
+   "movement_id": "MV1103-1455",
+   "title": "Aaron Achterberg: only 35 min left on the 24 h work limit",
+   "facts": {
+    "driver": "Aaron Achterberg",
+    "headroom_min": 35,
+    "planned_start": "2026-11-03T05:00+11:00"
+   },
+   "evidence": [],
+   "source": "F1/F4",
+   "limits": ""
+  },
+  {
+   "id": "F0002",
+   "area": "Fatigue",
+   "rule_id": "FAT-7D-REST",
+   "rag": "RED",
+   "entity": "D18",
+   "movement_id": "MV1102-1451",
+   "title": "Rhys Rowntree: planned shift breaches the 24 h rest in 7 days",
+   "facts": {
+    "driver": "Rhys Rowntree",
+    "scheme": "solo",
+    "rule": "FAT-7D-REST",
+    "detail": "no 24 h continuous stationary rest in 7d",
+    "window_start": "2026-10-27T07:00+11:00",
+    "window_end": "2026-11-03T07:00+11:00",
+    "planned_start": "2026-11-02T07:00+11:00",
+    "earliest_compliant_start": null,
+    "fix": "Give a 24 h continuous rest before the next shift, or reassign"
+   },
+   "evidence": [
+    "EWD-12259",
+    "EWD-12260",
+    "EWD-12261",
+    "EWD-12262",
+    "EWD-12264",
+    "EWD-12265",
+    "EWD-12267",
+    "EWD-12268",
+    "EWD-12270",
+    "EWD-12272",
+    "EWD-12273",
+    "EWD-12274",
+    "EWD-12275",
+    "EWD-12277",
+    "EWD-12278",
+    "EWD-12280",
+    "EWD-12281",
+    "EWD-12283",
+    "EWD-12285",
+    "EWD-12286",
+    "EWD-12287",
+    "EWD-12288",
+    "EWD-12290",
+    "EWD-12291",
+    "EWD-12293",
+    "EWD-12294",
+    "EWD-12296",
+    "EWD-12298",
+    "EWD-12299",
+    "EWD-12300",
+    "EWD-12301",
+    "EWD-12303",
+    "EWD-12304",
+    "EWD-12306",
+    "EWD-12307",
+    "EWD-12309",
+    "EWD-12311",
+    "EWD-12312",
+    "EWD-12313",
+    "EWD-12314"
+   ],
+   "source": "F1/F2/F4",
+   "limits": "Standard hours only; exemptions, ACH/BFM/AFM and fitness for duty not assessed."
+  },
+  {
+   "id": "F0003",
+   "area": "Fatigue",
+   "rule_id": "FAT-7D-WORK",
+   "rag": "RED",
+   "entity": "D18",
+   "movement_id": "MV1102-1451",
+   "title": "Rhys Rowntree: planned shift breaches 72 h work in 7 days",
+   "facts": {
+    "driver": "Rhys Rowntree",
+    "scheme": "solo",
+    "rule": "FAT-7D-WORK",
+    "detail": "77.0 h work in 7d (max 72 h)",
+    "window_start": "2026-10-27T07:00+11:00",
+    "window_end": "2026-11-03T07:00+11:00",
+    "planned_start": "2026-11-02T07:00+11:00",
+    "earliest_compliant_start": null,
+    "fix": "Give a 24 h continuous rest before the next shift, or reassign"
+   },
+   "evidence": [
+    "EWD-12259",
+    "EWD-12260",
+    "EWD-12261",
+    "EWD-12262",
+    "EWD-12264",
+    "EWD-12265",
+    "EWD-12267",
+    "EWD-12268",
+    "EWD-12270",
+    "EWD-12272",
+    "EWD-12273",
+    "EWD-12274",
+    "EWD-12275",
+    "EWD-12277",
+    "EWD-12278",
+    "EWD-12280",
+    "EWD-12281",
+    "EWD-12283",
+    "EWD-12285",
+    "EWD-12286",
+    "EWD-12287",
+    "EWD-12288",
+    "EWD-12290",
+    "EWD-12291",
+    "EWD-12293",
+    "EWD-12294",
+    "EWD-12296",
+    "EWD-12298",
+    "EWD-12299",
+    "EWD-12300",
+    "EWD-12301",
+    "EWD-12303",
+    "EWD-12304",
+    "EWD-12306",
+    "EWD-12307",
+    "EWD-12309",
+    "EWD-12311",
+    "EWD-12312",
+    "EWD-12313",
+    "EWD-12314"
+   ],
+   "source": "F1/F2/F4",
+   "limits": "Standard hours only; exemptions, ACH/BFM/AFM and fitness for duty not assessed."
+  },
+  {
+   "id": "F0004",
+   "area": "Fatigue",
+   "rule_id": "FAT-24H-REST",
+   "rag": "RED",
+   "entity": "D24",
+   "movement_id": "MV1102-1444",
+   "title": "Xavier Xuereb: planned shift breaches the 7 h major rest in its 24 h period",
+   "facts": {
+    "driver": "Xavier Xuereb",
+    "scheme": "solo",
+    "rule": "FAT-24H-REST",
+    "detail": "no 7 h continuous stationary rest in 24h",
+    "window_start": "2026-11-01T07:00+11:00",
+    "window_end": "2026-11-02T07:00+11:00",
+    "planned_start": "2026-11-02T06:00+11:00",
+    "earliest_compliant_start": "2026-11-02T07:00+11:00",
+    "fix": "Earliest compliant start Mon 07:00"
+   },
+   "evidence": [
+    "EWD-12242",
+    "EWD-12243",
+    "EWD-12244",
+    "EWD-12245",
+    "EWD-12246",
+    "EWD-12247",
+    "EWD-12248"
+   ],
+   "source": "F1/F2/F4",
+   "limits": "Standard hours only; exemptions, ACH/BFM/AFM and fitness for duty not assessed."
+  },
+  {
+   "id": "F0005",
+   "area": "Fatigue",
+   "rule_id": "FAT-24H-WORK",
+   "rag": "RED",
+   "entity": "D24",
+   "movement_id": "MV1102-1444",
+   "title": "Xavier Xuereb: planned shift breaches 12 h work in 24 h",
+   "facts": {
+    "driver": "Xavier Xuereb",
+    "scheme": "solo",
+    "rule": "FAT-24H-WORK",
+    "detail": "13.0 h work in 24h (max 12 h)",
+    "window_start": "2026-11-01T07:00+11:00",
+    "window_end": "2026-11-02T07:00+11:00",
+    "planned_start": "2026-11-02T06:00+11:00",
+    "earliest_compliant_start": "2026-11-02T07:00+11:00",
+    "fix": "Earliest compliant start Mon 07:00"
+   },
+   "evidence": [
+    "EWD-12242",
+    "EWD-12243",
+    "EWD-12244",
+    "EWD-12245",
+    "EWD-12246",
+    "EWD-12247",
+    "EWD-12248"
+   ],
+   "source": "F1/F2/F4",
+   "limits": "Standard hours only; exemptions, ACH/BFM/AFM and fitness for duty not assessed."
+  },
+  {
+   "id": "F0006",
+   "area": "Fatigue",
+   "rule_id": "FAT-24H-REST",
+   "rag": "RED",
+   "entity": "D33",
+   "movement_id": "MV1103-1454",
+   "title": "Hugo Hartigan: planned shift breaches the 7 h major rest in its 24 h period",
+   "facts": {
+    "driver": "Hugo Hartigan",
+    "scheme": "two_up",
+    "rule": "FAT-24H-REST",
+    "detail": "no 5 h continuous stationary rest in 24h",
+    "window_start": "2026-11-02T17:15+11:00",
+    "window_end": "2026-11-03T17:15+11:00",
+    "planned_start": "2026-11-02T17:15+11:00",
+    "earliest_compliant_start": null,
+    "fix": "Reassign the shift"
+   },
+   "evidence": [],
+   "source": "F1/F2/F4",
+   "limits": "Standard hours only; exemptions, ACH/BFM/AFM and fitness for duty not assessed."
+  },
+  {
+   "id": "F0007",
+   "area": "Fatigue",
+   "rule_id": "FAT-24H-WORK",
+   "rag": "RED",
+   "entity": "D33",
+   "movement_id": "MV1103-1454",
+   "title": "Hugo Hartigan: planned shift breaches 12 h work in 24 h",
+   "facts": {
+    "driver": "Hugo Hartigan",
+    "scheme": "two_up",
+    "rule": "FAT-24H-WORK",
+    "detail": "12.2 h work in 24h (max 12 h)",
+    "window_start": "2026-11-02T17:15+11:00",
+    "window_end": "2026-11-03T17:15+11:00",
+    "planned_start": "2026-11-02T17:15+11:00",
+    "earliest_compliant_start": null,
+    "fix": "Reassign the shift"
+   },
+   "evidence": [],
+   "source": "F1/F2/F4",
+   "limits": "Standard hours only; exemptions, ACH/BFM/AFM and fitness for duty not assessed."
+  },
+  {
+   "id": "F0008",
+   "area": "Fatigue",
+   "rule_id": "FAT-24H-REST",
+   "rag": "RED",
+   "entity": "D34",
+   "movement_id": "MV1103-1454",
+   "title": "Isla Ingleby: planned shift breaches the 7 h major rest in its 24 h period",
+   "facts": {
+    "driver": "Isla Ingleby",
+    "scheme": "two_up",
+    "rule": "FAT-24H-REST",
+    "detail": "no 5 h continuous stationary rest in 24h",
+    "window_start": "2026-11-02T17:15+11:00",
+    "window_end": "2026-11-03T17:15+11:00",
+    "planned_start": "2026-11-02T17:15+11:00",
+    "earliest_compliant_start": null,
+    "fix": "Reassign the shift"
+   },
+   "evidence": [],
+   "source": "F1/F2/F4",
+   "limits": "Standard hours only; exemptions, ACH/BFM/AFM and fitness for duty not assessed."
+  },
+  {
+   "id": "F0009",
+   "area": "Mass & dimension",
+   "rule_id": "MASS-OVER-GML",
+   "rag": "RED",
+   "entity": "MV1102-1236",
+   "movement_id": "MV1102-1236",
+   "title": "Measured 45.2 t over the 44.0 t limit",
+   "facts": {
+    "gross_t": 45.25,
+    "limit_t": 44.0,
+    "declared_kg": 25200,
+    "measured_payload_kg": 28750,
+    "customer": "C1"
+   },
+   "evidence": [
+    "WB-12383"
+   ],
+   "source": "M1",
+   "limits": ""
+  },
+  {
+   "id": "F0010",
+   "area": "Mass & dimension",
+   "rule_id": "MASS-DECLARED-LOW",
+   "rag": "AMBER",
+   "entity": "MV1102-1236",
+   "movement_id": "MV1102-1236",
+   "title": "Declared weight 14% under weighbridge",
+   "facts": {
+    "gross_t": 45.25,
+    "limit_t": 44.0,
+    "declared_kg": 25200,
+    "measured_payload_kg": 28750,
+    "customer": "C1"
+   },
+   "evidence": [
+    "WB-12383"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0011",
+   "area": "Mass & dimension",
+   "rule_id": "MASS-PENDING",
+   "rag": "AMBER",
+   "entity": "MV1102-1237",
+   "movement_id": "MV1102-1237",
+   "title": "Weighbridge ticket due before departure",
+   "facts": {
+    "declared_kg": 15704,
+    "depart": "2026-11-02T06:45+11:00"
+   },
+   "evidence": [],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0012",
+   "area": "Mass & dimension",
+   "rule_id": "MASS-NO-EVIDENCE",
+   "rag": "RED",
+   "entity": "MV1102-1238",
+   "movement_id": "MV1102-1238",
+   "title": "No weighbridge ticket or JSEA for this load",
+   "facts": {
+    "declared_kg": 14205,
+    "load_type": "machinery"
+   },
+   "evidence": [],
+   "source": "M1 + DEMO",
+   "limits": "Missing evidence is treated as a stop, not a pass."
+  },
+  {
+   "id": "F0013",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1102-1240",
+   "movement_id": "MV1102-1240",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0014",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1102-1241",
+   "movement_id": "MV1102-1241",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0015",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1102-1242",
+   "movement_id": "MV1102-1242",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0016",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-SOON",
+   "rag": "AMBER",
+   "entity": "MV1102-1243",
+   "movement_id": "MV1102-1243",
+   "title": "Faisal Fairweather's restraint competency expires 12 Nov",
+   "facts": {
+    "person": "Faisal Fairweather",
+    "expiry": "2026-11-12",
+    "days": 10
+   },
+   "evidence": [
+    "D06"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0017",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-SOON",
+   "rag": "AMBER",
+   "entity": "MV1102-1244",
+   "movement_id": "MV1102-1244",
+   "title": "Faisal Fairweather's restraint competency expires 12 Nov",
+   "facts": {
+    "person": "Faisal Fairweather",
+    "expiry": "2026-11-12",
+    "days": 10
+   },
+   "evidence": [
+    "D06"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0018",
+   "area": "Load restraint",
+   "rule_id": "LR-EQUIPMENT-FAILED",
+   "rag": "RED",
+   "entity": "MV1102-1253",
+   "movement_id": "MV1102-1253",
+   "title": "EQ002 failed inspection on 2026-10-30 but is on this load",
+   "facts": {
+    "equipment": "EQ002",
+    "kind": "webbing",
+    "result": "fail: cut webbing near hook",
+    "inspected": "2026-10-30"
+   },
+   "evidence": [
+    "EQ002"
+   ],
+   "source": "L1 p.205",
+   "limits": ""
+  },
+  {
+   "id": "F0019",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1103-1297",
+   "movement_id": "MV1103-1297",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0020",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1103-1298",
+   "movement_id": "MV1103-1298",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0021",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1103-1299",
+   "movement_id": "MV1103-1299",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0022",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-SOON",
+   "rag": "AMBER",
+   "entity": "MV1103-1300",
+   "movement_id": "MV1103-1300",
+   "title": "Faisal Fairweather's restraint competency expires 12 Nov",
+   "facts": {
+    "person": "Faisal Fairweather",
+    "expiry": "2026-11-12",
+    "days": 9
+   },
+   "evidence": [
+    "D06"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0023",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-SOON",
+   "rag": "AMBER",
+   "entity": "MV1103-1301",
+   "movement_id": "MV1103-1301",
+   "title": "Faisal Fairweather's restraint competency expires 12 Nov",
+   "facts": {
+    "person": "Faisal Fairweather",
+    "expiry": "2026-11-12",
+    "days": 9
+   },
+   "evidence": [
+    "D06"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0024",
+   "area": "Load restraint",
+   "rule_id": "LR-UNDER-TABLE",
+   "rag": "RED",
+   "entity": "MV1103-1302",
+   "movement_id": "MV1103-1302",
+   "title": "2 lashings per row; table needs 3",
+   "facts": {
+    "row_kg": 6800,
+    "lashing": "chain",
+    "friction": 0.2,
+    "per_lashing_kg": 3300,
+    "planned": 2,
+    "required": 3
+   },
+   "evidence": [],
+   "source": "L1 p.207",
+   "limits": ""
+  },
+  {
+   "id": "F0025",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1104-1357",
+   "movement_id": "MV1104-1357",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0026",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1104-1358",
+   "movement_id": "MV1104-1358",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0027",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-EXPIRED",
+   "rag": "RED",
+   "entity": "MV1104-1359",
+   "movement_id": "MV1104-1359",
+   "title": "Ella Ekstr\u00f6m's restraint competency expired 28 Oct",
+   "facts": {
+    "person": "Ella Ekstr\u00f6m",
+    "expiry": "2026-10-28"
+   },
+   "evidence": [
+    "D05"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0028",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-SOON",
+   "rag": "AMBER",
+   "entity": "MV1104-1360",
+   "movement_id": "MV1104-1360",
+   "title": "Faisal Fairweather's restraint competency expires 12 Nov",
+   "facts": {
+    "person": "Faisal Fairweather",
+    "expiry": "2026-11-12",
+    "days": 8
+   },
+   "evidence": [
+    "D06"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0029",
+   "area": "Load restraint",
+   "rule_id": "LR-COMPETENCY-SOON",
+   "rag": "AMBER",
+   "entity": "MV1104-1361",
+   "movement_id": "MV1104-1361",
+   "title": "Faisal Fairweather's restraint competency expires 12 Nov",
+   "facts": {
+    "person": "Faisal Fairweather",
+    "expiry": "2026-11-12",
+    "days": 8
+   },
+   "evidence": [
+    "D06"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0030",
+   "area": "Speed",
+   "rule_id": "SPD-OVER-10",
+   "rag": "RED",
+   "entity": "D08",
+   "movement_id": "MV1103-1305",
+   "title": "Hamish Holloway: 4 event(s) 10+ km/h over, no follow-up",
+   "facts": {
+    "driver": "Hamish Holloway",
+    "events": 4,
+    "max_over": 16,
+    "seconds": 216,
+    "locations": [
+     "Ballarat Rd, Sunshine (60)",
+     "Western Ring Rd, Sunshine West (60 roadworks)"
+    ],
+    "followed_up": 0
+   },
+   "evidence": [
+    "SPD-12384",
+    "SPD-12385",
+    "SPD-12386",
+    "SPD-12387"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0031",
+   "area": "Speed",
+   "rule_id": "SPD-WATCH",
+   "rag": "AMBER",
+   "entity": "D09",
+   "movement_id": "MV1103-1308",
+   "title": "Indira Iredale: 1 minor event(s) under 10 km/h over",
+   "facts": {
+    "driver": "Indira Iredale",
+    "events": 1,
+    "max_over": 6,
+    "seconds": 21,
+    "locations": [
+     "Princes Hwy, Corio (80 to 60)"
+    ],
+    "followed_up": 0
+   },
+   "evidence": [
+    "SPD-12391"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0032",
+   "area": "Speed",
+   "rule_id": "SPD-WATCH",
+   "rag": "AMBER",
+   "entity": "D14",
+   "movement_id": "MV1102-1261",
+   "title": "Nadia Nguyen-Hale: 1 minor event(s) under 10 km/h over",
+   "facts": {
+    "driver": "Nadia Nguyen-Hale",
+    "events": 1,
+    "max_over": 7,
+    "seconds": 25,
+    "locations": [
+     "Princes Hwy, Corio (80 to 60)"
+    ],
+    "followed_up": 0
+   },
+   "evidence": [
+    "SPD-12395"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0033",
+   "area": "Speed",
+   "rule_id": "SPD-WATCH",
+   "rag": "AMBER",
+   "entity": "D16",
+   "movement_id": "MV1104-1380",
+   "title": "Priya Pettigrew: 1 minor event(s) under 10 km/h over",
+   "facts": {
+    "driver": "Priya Pettigrew",
+    "events": 1,
+    "max_over": 5,
+    "seconds": 36,
+    "locations": [
+     "Princes Hwy, Corio (80 to 60)"
+    ],
+    "followed_up": 0
+   },
+   "evidence": [
+    "SPD-12399"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0034",
+   "area": "Speed",
+   "rule_id": "SPD-WATCH",
+   "rag": "AMBER",
+   "entity": "D26",
+   "movement_id": "MV1103-1337",
+   "title": "Zac Zielinski: 1 minor event(s) under 10 km/h over",
+   "facts": {
+    "driver": "Zac Zielinski",
+    "events": 1,
+    "max_over": 8,
+    "seconds": 19,
+    "locations": [
+     "Princes Hwy, Corio (80 to 60)"
+    ],
+    "followed_up": 0
+   },
+   "evidence": [
+    "SPD-12403"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0035",
+   "area": "Speed",
+   "rule_id": "SPD-WATCH",
+   "rag": "AMBER",
+   "entity": "D30",
+   "movement_id": "MV1102-1288",
+   "title": "Ebony Eastaugh: 1 minor event(s) under 10 km/h over",
+   "facts": {
+    "driver": "Ebony Eastaugh",
+    "events": 1,
+    "max_over": 6,
+    "seconds": 18,
+    "locations": [
+     "Princes Hwy, Corio (80 to 60)"
+    ],
+    "followed_up": 0
+   },
+   "evidence": [
+    "SPD-12407"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0036",
+   "area": "Speed",
+   "rule_id": "SPD-LIMIT-UNVERIFIED",
+   "rag": "AMBER",
+   "entity": "D19",
+   "movement_id": "MV1102-1268",
+   "title": "Event 94 km/h against a low-confidence mapped 60 km/h",
+   "facts": {
+    "event": "SPD-12408",
+    "location": "Western Fwy, Bacchus Marsh",
+    "limit_source": "map layer (roadworks zone ended 12 Oct)"
+   },
+   "evidence": [
+    "SPD-12408"
+   ],
+   "source": "DEMO",
+   "limits": "Verify the posted limit before treating this as speeding."
+  },
+  {
+   "id": "F0037",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1102-1257",
+   "title": "PM12 service due Wed 04 Nov / 20,750 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265156,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0038",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1102-1258",
+   "title": "PM12 service due Wed 04 Nov / 20,670 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265236,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0039",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1102-1259",
+   "title": "PM12 service due Wed 04 Nov / 20,590 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265316,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0040",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1102-1263",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0041",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1102-1264",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0042",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1102-1265",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0043",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-OVERDUE",
+   "rag": "RED",
+   "entity": "PM21",
+   "movement_id": "MV1102-1272",
+   "title": "PM21 passes its service point on this trip",
+   "facts": {
+    "vehicle": "PM21",
+    "odometer_km": 584261,
+    "due_km": 584461,
+    "km_after_trip": 584581,
+    "due_date": "2026-12-28"
+   },
+   "evidence": [
+    "PM21"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0044",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1103-1314",
+   "title": "PM12 service due Wed 04 Nov / 20,510 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265396,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0045",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1103-1315",
+   "title": "PM12 service due Wed 04 Nov / 20,430 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265476,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0046",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1103-1316",
+   "title": "PM12 service due Wed 04 Nov / 20,350 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265556,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0047",
+   "area": "Maintenance",
+   "rule_id": "MNT-BOOKING-CLASH",
+   "rag": "AMBER",
+   "entity": "PM13",
+   "movement_id": "MV1103-1317",
+   "title": "PM13 is booked into the workshop Tue 09:00 while dispatched",
+   "facts": {
+    "booking": "WS-12410",
+    "start": "2026-11-03T09:00+11:00",
+    "end": "2026-11-03T13:00+11:00",
+    "depart": "2026-11-03T06:00+11:00"
+   },
+   "evidence": [
+    "WS-12410"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0048",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1103-1320",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0049",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1103-1321",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0050",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1103-1322",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0051",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-OVERDUE",
+   "rag": "RED",
+   "entity": "PM21",
+   "movement_id": "MV1103-1329",
+   "title": "PM21 passes its service point on this trip",
+   "facts": {
+    "vehicle": "PM21",
+    "odometer_km": 584261,
+    "due_km": 584461,
+    "km_after_trip": 584901,
+    "due_date": "2026-12-28"
+   },
+   "evidence": [
+    "PM21"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0052",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1104-1371",
+   "title": "PM12 service due Wed 04 Nov / 20,270 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265636,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0053",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1104-1372",
+   "title": "PM12 service due Wed 04 Nov / 20,190 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265716,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0054",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-SOON",
+   "rag": "AMBER",
+   "entity": "PM12",
+   "movement_id": "MV1104-1373",
+   "title": "PM12 service due Wed 04 Nov / 20,110 km",
+   "facts": {
+    "vehicle": "PM12",
+    "odometer_km": 265076,
+    "due_km": 285906,
+    "km_after_trip": 265796,
+    "due_date": "2026-11-04"
+   },
+   "evidence": [
+    "PM12"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0055",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1104-1377",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0056",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1104-1378",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0057",
+   "area": "Maintenance",
+   "rule_id": "MNT-OPEN-DEFECT",
+   "rag": "RED",
+   "entity": "TR15",
+   "movement_id": "MV1104-1379",
+   "title": "Open major defect on TR15: air leak at trailer brake chamber (axle 2, nearside)",
+   "facts": {
+    "defect": "DEF-12409",
+    "severity": "major",
+    "reported": "2026-10-31T16:20+11:00"
+   },
+   "evidence": [
+    "DEF-12409"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0058",
+   "area": "Maintenance",
+   "rule_id": "MNT-SERVICE-OVERDUE",
+   "rag": "RED",
+   "entity": "PM21",
+   "movement_id": "MV1104-1388",
+   "title": "PM21 passes its service point on this trip",
+   "facts": {
+    "vehicle": "PM21",
+    "odometer_km": 584261,
+    "due_km": 584461,
+    "km_after_trip": 585221,
+    "due_date": "2026-12-28"
+   },
+   "evidence": [
+    "PM21"
+   ],
+   "source": "DEMO",
+   "limits": ""
+  },
+  {
+   "id": "F0059",
+   "area": "Integrity",
+   "rule_id": "INT-UNRECORDED-DRIVER",
+   "rag": "RED",
+   "entity": "PM20",
+   "movement_id": null,
+   "title": "PM20 moved Sat 31 Oct 14:10-16:40 with no matching work diary entry",
+   "facts": {
+    "trip": "TRP-12411",
+    "km": 96,
+    "login": "D20",
+    "assigned_driver": "Tara Thistlewood"
+   },
+   "evidence": [
+    "TRP-12411"
+   ],
+   "source": "DEMO",
+   "limits": "Driver identity is not inferred from the vehicle; someone must confirm who drove."
+  },
+  {
+   "id": "F0060",
+   "area": "Integrity",
+   "rule_id": "INT-FEED-STALE",
+   "rag": "AMBER",
+   "entity": "PM25",
+   "movement_id": null,
+   "title": "No telematics from PM25 for 42 h",
+   "facts": {
+    "unit": "TU25",
+    "last_received": "2026-10-31T11:04+11:00",
+    "hours": 42
+   },
+   "evidence": [],
+   "source": "DEMO",
+   "limits": "Speed and trip checks for this vehicle are incomplete."
+  }
+ ]
+}

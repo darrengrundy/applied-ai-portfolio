@@ -1,0 +1,371 @@
+<title>Before Start CoR Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: control-room screen. Left: drivers in three banded segments (STOP / WATCH / GO), one row per driver,
+   six check lights per row. Right: checkpoint replay (truck animation) above "easy to miss" patterns.
+   Deliberately single dark theme. */
+:root{
+  --ground:#0c1317; --panel:#131d22; --panel-2:#192730; --rule:#24343c; --road:#2e434d; --water:#10242e;
+  --ink:#e6eef0; --ink-2:#9fb1b7; --ink-3:#6c8087;
+  --red:#ff4d4d; --red-bg:#3a1517; --amber:#ffb627; --amber-bg:#352712; --green:#3ddc84; --green-bg:#10301f;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"Barlow",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:15px/1.4 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 28px}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.brand h1{font-size:30px;letter-spacing:.02em;line-height:1}
+.brand p{margin:3px 0 0;color:var(--ink-2);font-size:13px}
+.counts{display:flex;gap:10px;flex-wrap:wrap}
+.count{display:grid;grid-template-columns:auto auto;align-items:center;gap:0 10px;padding:6px 14px 6px 10px;border-radius:6px;background:var(--panel)}
+.count i{grid-row:span 2;width:14px;height:14px;border-radius:50%}
+.count b{font-family:var(--display);font-size:34px;line-height:1;font-weight:700}
+.count span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.count.RED i{background:var(--red);box-shadow:0 0 12px var(--red)} .count.RED b{color:var(--red)}
+.count.AMBER i{background:var(--amber)} .count.AMBER b{color:var(--amber)}
+.count.GREEN i{background:var(--green)} .count.GREEN b{color:var(--green)}
+.clock{margin-left:auto;text-align:right}
+.clock b{display:block;font-family:var(--display);font-size:26px;font-weight:600;line-height:1}
+.clock span{color:var(--ink-3);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:18px;margin-top:16px;align-items:start}
+@media (max-width:1150px){.grid{grid-template-columns:minmax(0,1fr)}}
+.col{min-width:0;display:flex;flex-direction:column;gap:16px}
+
+/* segments */
+.seg{border-radius:8px;background:var(--panel);overflow:hidden}
+.seg-head{display:flex;align-items:center;gap:14px;padding:10px 16px;border-top:4px solid var(--rule)}
+.seg-head h2{font-size:24px;letter-spacing:.04em;text-transform:uppercase;line-height:1}
+.seg-head p{margin:0;color:var(--ink-2);font-size:13px}
+.seg-head .n{margin-left:auto;font:600 28px/1 var(--display)}
+.seg.RED .seg-head{border-color:var(--red);background:var(--red-bg)} .seg.RED h2,.seg.RED .n{color:var(--red)}
+.seg.AMBER .seg-head{border-color:var(--amber);background:var(--amber-bg)} .seg.AMBER h2,.seg.AMBER .n{color:var(--amber)}
+.seg.GREEN .seg-head{border-color:var(--green);background:var(--green-bg)} .seg.GREEN h2,.seg.GREEN .n{color:var(--green)}
+.seg-head button.toggle{background:none;border:1px solid var(--rule);border-radius:4px;padding:3px 10px;font-size:12px;color:var(--ink-2);cursor:pointer}
+
+.tbl{overflow-x:auto}
+.cols,.drow{display:grid;grid-template-columns:minmax(150px,1.2fr) 96px repeat(6,42px) minmax(190px,1.7fr);align-items:center;gap:0 6px;min-width:760px}
+.cols{padding:6px 16px;border-bottom:1px solid var(--rule)}
+.cols span{font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.cols span.c{text-align:center;font-size:9px;letter-spacing:.02em}
+.drow{padding:9px 16px;border:0;border-top:1px solid var(--rule);background:none;width:100%;text-align:left;cursor:pointer}
+.drow:first-of-type{border-top:0}
+.drow:hover{background:var(--panel-2)}
+.who b{display:block;font-weight:600;font-size:15px}
+.who small{color:var(--ink-3);font:500 11px var(--mono)}
+.dep b{display:block;font:600 22px/1 var(--display)}
+.dep small{font:500 11px var(--mono);color:var(--ink-3)}
+.seg.RED .dep small.soon{color:var(--red)}
+.light{justify-self:center;width:16px;height:16px;border-radius:50%;background:var(--green);opacity:.45}
+.light.AMBER{background:var(--amber);opacity:1}
+.light.RED{background:var(--red);opacity:1;box-shadow:0 0 8px rgba(255,77,77,.7)}
+.light.DUE{background:none;border:2px solid var(--ink-3);opacity:1}
+.do{font-size:13px;color:var(--ink-2);min-width:0}
+.do b{display:block;color:var(--ink);font-weight:500;font-size:14px}
+.seg.RED .do b{color:var(--ink)}
+.dec{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:3px;font:600 12px/1.3 var(--display);letter-spacing:.06em;background:var(--panel-2);color:var(--ink-2);vertical-align:1px}
+.dec.HOLD,.dec.RESCHEDULE,.dec.INVESTIGATE{background:var(--red-bg);color:var(--red)}
+.dec.MONITOR,.dec.RELEASE_WITH_CONDITIONS{background:var(--amber-bg);color:var(--amber)}
+.who-fix{display:block;margin-top:2px;font:500 10px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.hbtn{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:8px 12px;cursor:pointer;font:600 15px var(--display);letter-spacing:.05em;text-transform:uppercase}
+.hbtn:hover{background:var(--panel-2)}
+.ag{padding:12px 14px;border-radius:6px;background:var(--panel-2)}
+.ag h3{font-size:17px}
+.ag p{margin:6px 0 0;font-size:14px}
+.ag .meta{margin-top:6px;font:500 11px var(--mono);color:var(--ink-3);letter-spacing:.04em}
+.brief{white-space:pre-wrap;font-size:14px;line-height:1.5}
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.score div{padding:10px 12px;border-radius:6px;background:var(--panel-2)}
+.score b{display:block;font:700 30px/1 var(--display)}
+.score span{font-size:12px;color:var(--ink-2)}
+.score em{display:block;margin-top:4px;font:500 10px var(--mono);font-style:normal;color:var(--ink-3)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:8px 16px;border-top:1px solid var(--rule);color:var(--ink-3);font-size:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+
+/* replay */
+.replay{position:relative;border-radius:8px;background:var(--panel);overflow:hidden}
+.replay-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--rule)}
+.replay-head h2{font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.replay-head .ctl{margin-left:auto;display:flex;gap:6px;align-items:center}
+.replay-head .ctl button{background:var(--panel-2);border:0;border-radius:4px;width:30px;height:28px;cursor:pointer}
+.replay-head .ctl span{font:500 12px var(--mono);color:var(--ink-3);min-width:44px;text-align:center}
+.stage{position:relative;aspect-ratio:16/9;max-width:100%}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.road{fill:none;stroke:var(--road);stroke-linecap:round}
+.water{fill:var(--water)}
+.town circle{fill:var(--panel-2);stroke:var(--ink-3)}
+.town text,.cp text{fill:var(--ink-2);font-family:var(--body)}
+.cp rect{fill:var(--panel-2);stroke:var(--ink-3)}
+.cp.GREEN rect{stroke:var(--green);fill:var(--green-bg)}
+.cp.AMBER rect{stroke:var(--amber);fill:var(--amber-bg)}
+.cp.RED rect{stroke:var(--red);fill:var(--red-bg)}
+.cp.DUE rect{stroke:var(--ink-3);stroke-dasharray:1 1}
+.hit{fill:none;stroke:var(--red);opacity:0}
+.hit.on{opacity:1}
+.truck .cab{fill:var(--ink)} .truck .box{fill:var(--ink-2)}
+.overlay{position:absolute;right:12px;top:12px;width:min(320px,calc(100% - 24px));padding:12px 14px;border-radius:8px;
+  background:rgba(12,19,23,.94);border:1px solid var(--red);box-shadow:0 0 28px rgba(255,77,77,.25);
+  transform:translateX(20px);opacity:0;transition:opacity .35s,transform .35s;pointer-events:none}
+.overlay.on{opacity:1;transform:none;pointer-events:auto}
+.overlay .pill{display:inline-block;padding:2px 8px;border-radius:3px;background:var(--red);color:#1a0607;font:700 13px var(--display);letter-spacing:.08em}
+.overlay .cpn{margin-left:6px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.overlay h3{font-size:19px;margin-top:6px}
+.overlay .sub{font-size:12px;color:var(--ink-2)}
+.overlay .big{font:700 38px/1 var(--display);color:var(--red);margin-top:8px}
+.overlay ul{margin:4px 0 0;padding-left:16px;font-size:13px;color:var(--ink-2)}
+.overlay .fix,.fix{margin-top:8px;font-size:13px}
+.fix::before{content:"Do now  ";font:600 11px var(--mono);letter-spacing:.06em;color:var(--amber)}
+.caption{position:absolute;left:12px;bottom:10px;font:500 12px var(--mono);color:var(--ink-2);background:rgba(12,19,23,.8);padding:3px 8px;border-radius:4px}
+
+/* fatigue timeline */
+.tl{margin-top:8px}
+.tl svg{width:100%;height:auto;display:block}
+.tl .w{fill:var(--ink-2)} .tl .p{fill:var(--amber)} .tl .ax{fill:var(--ink-3);font:500 9px var(--mono)}
+.tl .win{stroke:var(--red);stroke-width:2;fill:none}
+.tl .wl{fill:var(--red);font:500 9px var(--mono)}
+.tl .key{fill:var(--ink-3);font:500 9px var(--body)}
+
+/* easy to miss */
+.miss{display:flex;flex-direction:column;gap:10px}
+.miss-head{display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:2px solid var(--rule)}
+.miss-head h2{font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.miss-head span{color:var(--ink-2);font-size:13px}
+.pattern{padding:12px 14px;border-radius:6px;background:var(--panel);border-left:4px solid var(--ink-3);text-align:left;width:100%;border-top:0;border-right:0;border-bottom:0}
+button.pattern{cursor:pointer}
+.pattern.RED{border-left-color:var(--red)} .pattern.AMBER{border-left-color:var(--amber)}
+.pattern h3{font-size:18px;line-height:1.15}
+.pattern p{margin:6px 0 0;font-size:13px;color:var(--ink-2)}
+.pattern .own{margin-top:6px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.foot{margin-top:18px;color:var(--ink-3);font-size:12px;max-width:110ch}
+
+/* drawer */
+dialog{max-width:min(760px,calc(100vw - 32px));width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:8px;padding:0}
+dialog::backdrop{background:rgba(5,10,12,.7)}
+.dh{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--rule)}
+.dh h2{font-size:24px}
+.dh button{background:none;border:0;font-size:22px;cursor:pointer;color:var(--ink-2)}
+.db{padding:14px 18px 20px;display:flex;flex-direction:column;gap:14px}
+.mv{font-size:13px;color:var(--ink-2)}
+.mv b{color:var(--ink)}
+.f{border-left:4px solid var(--rule);padding-left:12px}
+.f.RED{border-color:var(--red)} .f.AMBER{border-color:var(--amber)}
+.f h3{font-size:19px}
+.f dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 14px;margin:8px 0 0;font-size:13px}
+.f dt{color:var(--ink-3);font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.f dd{margin:0;overflow-wrap:anywhere}
+.f .src{margin-top:6px;font-size:12px;color:var(--ink-3)}
+@media (prefers-reduced-motion:no-preference){.count.RED i{animation:pulse 1.6s ease-in-out infinite}}
+@keyframes pulse{50%{box-shadow:0 0 2px var(--red)}}
+</style>
+
+<header class="bar">
+  <div class="brand"><h1>Before Start Safety/CoR Check</h1><p>Wattlebark Haulage, Laverton North · drivers rostered Mon 2 – Wed 4 Nov · fictional data</p></div>
+  <div class="counts" id="counts"></div>
+  <div style="display:flex;gap:8px"><button class="hbtn" id="brief-b">05:30 briefing</button><button class="hbtn" id="score-b">Scorecard</button></div>
+  <div class="clock"><b>Mon 2 Nov · 05:30</b><span>AEDT · base time Melbourne</span></div>
+</header>
+
+<div class="grid">
+  <div class="col" id="segments"></div>
+  <div class="col">
+    <section class="replay" aria-label="Checkpoint replay">
+      <div class="replay-head"><h2>Checkpoint replay</h2>
+        <div class="ctl"><button id="prev" aria-label="Previous stop">◀</button><button id="play" aria-label="Pause">❚❚</button><button id="next" aria-label="Next stop">▶</button><span id="sc"></span></div></div>
+      <div class="stage"><svg id="map" viewBox="0 0 1000 562" role="img" aria-label="Map of lanes from Laverton North with depot checkpoints"></svg>
+        <div class="overlay" id="ov" aria-live="polite"></div><div class="caption" id="cap"></div></div>
+    </section>
+    <section class="miss"><div class="miss-head"><h2>Easy to miss</h2><span>patterns over 4 weeks</span></div><div id="notice" class="miss"></div></section>
+  </div>
+</div>
+<p class="foot">Lights are set by deterministic checks against NHVR standard hours, General Mass Limits and the Load Restraint Guide, plus the operator's own procedures (service, training, speed follow-up). A hollow light means the weighbridge ticket is taken at loading, closer to departure. Decision support only: it does not certify compliance or release a vehicle. All people, companies and records are fictional.</p>
+
+<dialog id="dlg"><div class="dh"><div><span class="mono" id="dlg-k" style="color:var(--ink-3);font-size:12px"></span><h2 id="dlg-t"></h2></div><button id="dlg-x" aria-label="Close">×</button></div><div class="db" id="dlg-b"></div></dialog>
+
+<script>
+const D=/*__DATA__*/null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+const SNAP=new Date(D.meta.snapshot);
+const TZ="Australia/Melbourne";
+const dayFmt=new Intl.DateTimeFormat("en-AU",{weekday:"short",timeZone:TZ});
+const hm=s=>s.slice(11,16), dname=s=>dayFmt.format(new Date(s));
+const until=s=>{const m=Math.round((new Date(s)-SNAP)/60000);if(m<0)return"now";if(m<60)return`in ${m} min`;if(m<1440)return`in ${Math.floor(m/60)} h${m%60?" "+String(m%60).padStart(2,"0")+" m":""}`;return dname(s)};
+const SHORT={"Fatigue":"Fatig.","Mass & dimension":"Mass","Load restraint":"Restr.","Speed":"Speed","Maintenance":"Maint.","Integrity":"Diary"};
+const RANK={GREEN:0,AMBER:1,RED:2};
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// ---- header counts (drivers) ----
+const groups={RED:[],AMBER:[],GREEN:[]};D.drivers.forEach(d=>groups[d.rag].push(d));
+const mvCount=r=>Object.values(D.moves).filter(m=>m.rag===r).length;
+$("#counts").innerHTML=[["RED","stop"],["AMBER","watch"],["GREEN","go"]].map(([k,l])=>
+  `<div class="count ${k}"><i></i><b>${groups[k].length}</b><span>${l} · drivers<br>${mvCount(k)} trips</span></div>`).join("");
+
+// ---- segments ----
+const SEG={RED:["Stop","Do not release until fixed"],AMBER:["Watch","Can go; follow up today"],GREEN:["Go","All checks clear"]};
+function row(d){const m=D.moves[d.next];
+  const tf=d.top?D.findings[d.top]:null;
+  return `<button class="drow" data-d="${d.id}">
+   <span class="who"><b>${esc(d.name)}</b><small>${m.vehicle} + ${m.trailer}${d.partner?" · two-up w/ "+esc(d.partner.split(" ")[0]):""}</small></span>
+   <span class="dep"><b>${dname(m.depart)} ${hm(m.depart)}</b><small class="${d.rag==="RED"&&new Date(m.depart)-SNAP<4*3600e3?"soon":""}">${until(m.depart)}${d.more>0?` · +${d.more} more`:""}</small></span>
+   ${D.areas.map(a=>`<span class="light ${d.areas[a]}" title="${a}: ${d.areas[a]==="DUE"?"ticket at loading":d.areas[a].toLowerCase()}" aria-label="${a} ${d.areas[a]}"></span>`).join("")}
+   <span class="do">${tf?`<b>${esc(tf.title.replace(d.name+": ",""))}</b>${d.decision?`<span class="dec ${d.decision}">${d.decision.replace(/_/g," ")}</span>`:""}${esc(d.do)}${d.parties?`<span class="who-fix">Owner: ${d.parties.map(esc).join(" · ")}</span>`:""}`:`<b>${esc(m.dest)}</b>${esc(m.customer)} · ${esc(m.load)}`}</span></button>`}
+const cols=`<div class="cols"><span>Driver · vehicle</span><span>Next trip</span>${D.areas.map(a=>`<span class="c">${SHORT[a]}</span>`).join("")}<span>Issue · action</span></div>`;
+let goOpen=false;
+function renderSegs(){
+ $("#segments").innerHTML=["RED","AMBER","GREEN"].map(k=>{
+  const list=groups[k], hide=k==="GREEN"&&!goOpen;
+  return `<section class="seg ${k}" aria-label="${SEG[k][0]}"><div class="seg-head"><h2>${SEG[k][0]}</h2><p>${SEG[k][1]}</p>
+   ${k==="GREEN"?`<button class="toggle" id="go-t">${goOpen?"Hide":"Show"} drivers</button>`:""}<span class="n">${list.length}</span></div>
+   ${hide?"":`<div class="tbl">${cols}${list.map(row).join("")}</div>`}</section>`}).join("")
+  +`<div class="legend"><span><i style="background:var(--red)"></i>stop</span><span><i style="background:var(--amber)"></i>watch</span><span><i style="background:var(--green);opacity:.45"></i>clear</span><span><i style="border:2px solid var(--ink-3)"></i>weighed at loading</span></div>`;
+ const t=$("#go-t");if(t)t.onclick=e=>{e.stopPropagation();goOpen=!goOpen;renderSegs()}}
+renderSegs();
+
+// ---- easy to miss ----
+$("#notice").innerHTML=D.patterns.map(p=>`<div class="pattern ${p.rag}"><h3>${esc(p.title)}</h3><p>${esc(p.detail)}</p><div class="own">Fix sits with: ${esc(p.owner)}</div></div>`).join("")
+ +D.entity.map(i=>{const f=D.findings[i];return `<button class="pattern ${f.rag}" data-f="${f.id}"><h3>${esc(f.title)}</h3><p>${esc(f.limits||"")}</p></button>`}).join("");
+
+// ---- fatigue timeline svg ----
+function timeline(did){const T=D.timelines[did];if(!T)return"";
+  const lo=+new Date(T.lo),hi=+new Date(T.hi),W=600,x=t=>((+new Date(t)-lo)/(hi-lo))*W;
+  let s=`<svg viewBox="-4 0 ${W+8} 64" role="img" aria-label="Work and rest timeline">`;
+  s+=`<rect x="0" y="22" width="${W}" height="14" fill="var(--panel-2)"/>`;
+  T.events.forEach(e=>{if(!e.w)return;const a=Math.max(0,x(e.s)),b=Math.min(W,x(e.e));if(b>a)s+=`<rect class="${e.p?"p":"w"}" x="${a}" y="22" width="${b-a}" height="14"/>`});
+  const a=Math.max(0,x(T.ws)),b=Math.min(W,x(T.we));
+  s+=`<path class="win" d="M${a},18 V12 H${b} V18"/><text class="wl" x="${a+2}" y="9">${esc(T.label)}</text>`;
+  const step=(hi-lo)>4*864e5?864e5:6*3600e3;
+  const fmt=new Intl.DateTimeFormat("en-AU",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hour12:false,weekday:step>=864e5?"short":undefined});
+  let t0=Math.ceil(lo/step)*step;for(let t=t0;t<=hi;t+=step){const xx=x(t);s+=`<rect x="${xx}" y="36" width="1" height="4" fill="var(--ink-3)"/><text class="ax" x="${xx}" y="50" text-anchor="middle">${fmt.format(new Date(t))}</text>`}
+  s+=`<rect x="0" y="56" width="8" height="6" class="w"/><text class="key" x="11" y="62">work (diary)</text><rect x="80" y="56" width="8" height="6" class="p"/><text class="key" x="91" y="62">planned shift</text><path class="win" d="M170,62 V57 H184 V62"/><text class="key" x="188" y="62">counting period that breaches</text>`;
+  return `<div class="tl">${s}</svg></div>`}
+
+// ---- drawer ----
+const label=k=>k.replace(/_/g," ");
+function fview(f){const facts=Object.entries(f.facts||{}).filter(([k,v])=>v!==null&&v!==""&&k!=="fix");
+  return `<div class="f ${f.rag}"><span class="mono" style="font-size:11px;color:var(--ink-3)">${f.rag} · ${esc(f.area)} · ${f.rule_id}</span><h3>${esc(f.title)}</h3>
+  <dl>${facts.map(([k,v])=>`<dt>${esc(label(k))}</dt><dd class="mono">${esc(Array.isArray(v)?v.join(", "):v)}</dd>`).join("")}</dl>
+  <div class="src">Basis: ${esc(f.source)}${f.limits?` · ${esc(f.limits)}`:""}${f.evidence&&f.evidence.length?` · evidence: ${f.evidence.slice(0,6).map(esc).join(", ")}${f.evidence.length>6?" …":""}`:""}</div></div>`}
+function openDriver(id){const d=D.drivers.find(x=>x.id===id);pause(true);
+  $("#dlg-k").textContent=`${d.id} · ${d.scheme==="two_up"?"two-up":"solo"} · standard hours · ${d.rag}`;
+  $("#dlg-t").textContent=d.name;
+  const trips=d.moves.map(i=>D.moves[i]).map(m=>`<div class="mv"><span class="light ${m.rag}" style="display:inline-block;vertical-align:-3px;margin-right:8px"></span><b>${dname(m.depart)} ${hm(m.depart)}</b> → ${esc(m.dest)} · ${m.vehicle} + ${m.trailer} · ${esc(m.customer)}, ${esc(m.load)}</div>`).join("");
+  const fs=d.findings.map(i=>D.findings[i]);
+  const A=D.agents&&D.agents[d.id];
+  const agHTML=A?A.items.map(x=>`<div class="ag"><span class="dec ${x.decision}">${x.decision.replace(/_/g," ")}</span><span class="mono" style="font-size:11px;color:var(--ink-3)">${esc(x.area)} · cause: ${esc(x.root_cause.replace(/_/g," ").toLowerCase())} · owner: ${x.accountable_parties.map(esc).join(", ")}</span>
+    <h3 style="margin-top:6px">${esc(x.action)}</h3><p>${esc(x.explanation)}</p></div>`).join("")+`<div class="meta mono" style="font-size:11px;color:var(--ink-3)">Written by ${esc(D.agents_meta.model)} from the engine facts below · reviewer ${A.passed?"passed":"did not pass"} it${A.rounds>1?` after ${A.rounds-1} revision${A.rounds>2?"s":""}`:" first time"}</div>`:"";
+  $("#dlg-b").innerHTML=`<div>${trips}</div>`+(A?agHTML:(d.do?`<div class="fix">${esc(d.do)}</div>`:""))+timeline(d.id)+
+   (fs.length?fs.map(fview).join(""):`<div class="f"><h3>All six checks clear</h3><p style="color:var(--ink-2);margin:6px 0 0">Fatigue, mass, restraint, speed, maintenance and records ran with complete evidence. Weighbridge tickets for later trips are checked at loading.</p></div>`);
+  $("#dlg").showModal()}
+function openF(id){const f=D.findings[id];pause(true);$("#dlg-k").textContent=f.entity;$("#dlg-t").textContent=f.area;$("#dlg-b").innerHTML=fview(f);$("#dlg").showModal()}
+document.addEventListener("click",e=>{const r=e.target.closest("[data-d]"),f=e.target.closest("[data-f]");if(r)openDriver(r.dataset.d);else if(f)openF(f.dataset.f)});
+$("#dlg-x").onclick=()=>$("#dlg").close();
+const PL={HOLD:"hold",RESCHEDULE:"reschedule"};
+$("#brief-b").onclick=()=>{pause(true);const M=D.agents_meta;$("#dlg-k").textContent=M?`Drafted by ${M.model} from today's findings`:"Agents not run";
+  $("#dlg-t").textContent="05:30 dispatch briefing";
+  $("#dlg-b").innerHTML=M?`<div class="brief">${esc(M.briefing.replace(/^#+ ?/gm,"").replace(/\*\*/g,""))}</div>`+
+   `<h3 style="font-size:20px">Fix upstream</h3>`+M.systemic.map(x=>`<div class="ag"><h3>${esc(x.title)}</h3><p>${esc(x.evidence)}</p><p><b>${esc(x.recommendation)}</b></p><div class="meta">cause: ${esc(x.root_cause.replace(/_/g," ").toLowerCase())} · owner: ${x.accountable_parties.map(esc).join(", ")}</div></div>`).join(""):"<p>Run the agents to draft the briefing.</p>";
+  $("#dlg").showModal()};
+$("#score-b").onclick=()=>{pause(true);const E=D.eval;$("#dlg-k").textContent=E?`${E.model} · ${E.drivers} drivers · ${E.series?E.series.runs+" runs · mean shown":E.usage.calls+" calls"}`:"";
+  $("#dlg-t").textContent="How the agents scored";
+  $("#dlg-b").innerHTML=E?`<p style="margin:0;color:var(--ink-2)">Scored against ${E.labels} seeded scenarios with known answers. The rule engine flags all of them and nothing else; these numbers measure what the agents add on top.</p>
+   ${(()=>{const S=E.series;const v=(k,u="")=>S?`${S[k].mean}${u}`:`${E[k]}${u}`;const r=(k,u="")=>S&&S[k].min!==S[k].max?`<em>${S[k].min}–${S[k].max}${u} across ${S.runs} runs</em>`:(S?`<em>same in all ${S.runs} runs</em>`:"");
+     return `<div class="score">${[["stop_recall","%","red items given a stop decision"],["accountable_party","%","accountable party correct"],["root_cause","%","root cause matches"],["decision_exact","%","exact decision matches"],["decision_family","%","stop vs go matches"],["ungrounded_numbers","","numbers not found in the evidence"],["rule_mismatches","","fatigue rules quoted wrongly"],["floor_overrides","","red items the code guard had to correct"]].map(([k,u,t])=>`<div><b>${v(k,u)}</b><span>${t}</span>${r(k,u)}</div>`).join("")}</div>`})()}
+   <p style="margin:0;font-size:13px;color:var(--ink-2)">Misses are mostly between neighbouring answers: hold vs reschedule for a vehicle that needs a swap, and roster vs customer window for the Corio speeding. Colours never come from the agents, and a red item cannot be released by them. Code checks sit around the model: a red item can't be released, every number must appear in the evidence, quoted fatigue limits must match the driver's hours option, and every stopped driver must appear in the briefing.</p>`:"<p>No evaluation yet.</p>";
+  $("#dlg").showModal()};
+
+// ---- checkpoint replay ----
+const NS="http://www.w3.org/2000/svg", svg=$("#map");
+const ROADS={
+ MET:"M348,360 C370,356 395,350 425,346",
+ GEE:"M348,360 C342,392 320,420 306,450 L296,478",
+ BAL:"M348,360 C320,350 282,336 250,326 C215,315 190,300 165,292",
+ BEN:"M348,360 C345,330 335,290 325,255 C318,228 312,200 305,175",
+ ALB:"M348,360 C380,330 430,280 470,245 C540,190 610,150 680,122",
+ SYD:"M348,360 C380,330 430,280 470,245 C540,190 610,150 680,122 C760,95 860,60 935,38"};
+const TOWNS=[["Laverton North depot",330,360,"end",-8,14],["Melbourne",428,344,"start",6,4],["Geelong",296,480,"end",-7,4],["Ballarat",163,292,"end",-7,4],
+ ["Bendigo",305,173,"start",7,4],["Wodonga",682,121,"start",7,12],["to Sydney",935,38,"end",-8,4],["Corio",306,452,"start",6,4],["Bacchus Marsh",250,326,"middle",0,-8],["Kyneton",325,255,"start",6,4],["Seymour",470,245,"start",6,12]];
+const CPS=[["ewd","Sign-on · work diary",310,"Sign-on"],["vehicle","Vehicle pre-start check",320,"Vehicle check"],["loadcheck","Load & restraint check",330,"Load check"],["weighbridge","Weighbridge",340,"Weighbridge"]];
+const AREA_CP={ewd:"Fatigue",vehicle:"Maintenance",weighbridge:"Mass & dimension",loadcheck:"Load restraint"};
+const YARD="M302,360 L348,360";
+const WIDE=[0,0,1000,562], YW=60, YH=33.75;
+const el=(t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+el("path",{class:"water",d:"M356,374 C384,382 412,398 416,424 C420,452 396,472 362,470 C336,468 322,450 330,426 C335,404 342,386 356,374 Z"});
+el("text",{x:372,y:432,"font-size":11,fill:"var(--ink-3)","font-style":"italic"}).textContent="Port Phillip";
+const roadEls={};for(const k in ROADS)roadEls[k]=el("path",{class:"road",d:ROADS[k],"stroke-width":4,"vector-effect":"non-scaling-stroke"});
+const yard=el("path",{class:"road",d:YARD,"stroke-width":10,"vector-effect":"non-scaling-stroke"});
+const townG=el("g",{});
+TOWNS.forEach(([n,x,y,anc,dx,dy])=>{const g=el("g",{class:"town"},townG);el("circle",{cx:x,cy:y,r:n.includes("depot")?6:4},g);
+  const t=el("text",{x:x+dx,y:y+dy,"text-anchor":anc,"font-size":13},g);t.textContent=n});
+const spotT=el("text",{"font-size":3,fill:"var(--ink-2)","text-anchor":"middle",opacity:0});
+const yardG=el("g",{opacity:0});
+const cpEls={};CPS.forEach(([k,n,x,sn])=>{const g=el("g",{class:"cp"},yardG);el("rect",{x:x-2.6,y:354.6,width:5.2,height:2.8,rx:.5,"stroke-width":.3},g);
+  const t=el("text",{x:x,y:352.6,"text-anchor":"middle","font-size":1.45},g);t.textContent=sn;cpEls[k]=g});
+const gate=el("text",{x:347,y:364.8,"text-anchor":"middle","font-size":1.6,fill:"var(--ink-3)"},yardG);gate.textContent="gate";
+const dep=el("text",{x:302,y:364.8,"font-size":1.6,fill:"var(--ink-3)"},yardG);dep.textContent="Laverton North yard";
+const hit=el("circle",{class:"hit",r:3,"stroke-width":.6});
+const truck=el("g",{class:"truck"});el("rect",{class:"box",x:-9,y:-2.2,width:12,height:4.4,rx:.6},truck);el("rect",{class:"cab",x:3.6,y:-2,width:4.2,height:4,rx:.8},truck);
+
+let vb=[...WIDE];const setVB=v=>{vb=v;svg.setAttribute("viewBox",v.join(" "));const z=v[2]<120;yardG.setAttribute("opacity",z?1:0);townG.setAttribute("opacity",v[2]<400?0:1)};
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+let token=0;
+const wait=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
+function anim(ms,fn,my){return new Promise(res=>{if(reduce){fn(1);return res()}const t0=performance.now();
+  const step=now=>{if(my!==token)return res();const t=Math.min(1,(now-t0)/ms);fn(ease(t));t<1?requestAnimationFrame(step):res()};requestAnimationFrame(step)})}
+const zoom=(to,ms,my)=>{const from=[...vb];return anim(ms,t=>setVB(from.map((v,i)=>v+(to[i]-v)*t)),my)};
+function place(path,len){const L=path.getTotalLength(),l=Math.max(0,Math.min(L,len)),p=path.getPointAtLength(l),q=path.getPointAtLength(Math.min(L,l+.5));
+  const ang=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI, s=vb[2]/1000*2.2;
+  truck.setAttribute("transform",`translate(${p.x},${p.y}) rotate(${ang}) scale(${Math.max(s,.22)})`);return p}
+const drive=(path,a,b,ms,my)=>anim(ms,t=>place(path,a+(b-a)*t),my);
+
+let i=0,playing=!reduce,timer=null;
+const S=D.scenes;
+svg.appendChild(truck);
+async function run(n){const my=++token;const sc=S[n];i=n;
+  $("#sc").textContent=`${n+1} / ${S.length}`;$("#ov").classList.remove("on");hit.classList.remove("on");
+  for(const k in cpEls)cpEls[k].setAttribute("class","cp");
+  $("#cap").textContent=`${sc.name} · ${dname(sc.depart)} ${hm(sc.depart)}`;
+  setVB([...WIDE]);place(yard,0);await wait(500);if(my!==token)return;
+  const stopX=sc.checkpoint==="road"?325:CPS.find(c=>c[0]===sc.checkpoint)[2];
+  await zoom([stopX-YW*0.3,358-YH/2,YW,YH],1100,my);if(my!==token)return;
+  const yL=yard.getTotalLength();
+  const stopAt=sc.checkpoint==="road"?null:CPS.find(c=>c[0]===sc.checkpoint)[2];
+  let cur=0;
+  spotT.setAttribute("opacity",0);
+  for(const [k,,x] of CPS){const target=x-302;await drive(yard,cur,target,650,my);cur=target;if(my!==token)return;
+    const st=sc.areas[AREA_CP[k]];cpEls[k].setAttribute("class","cp "+(k===sc.checkpoint?"RED":st));
+    if(k===sc.checkpoint)break; await wait(220)}
+  if(sc.checkpoint==="road"){await drive(yard,cur,yL,500,my);if(my!==token)return;
+    const road=roadEls[sc.lane]||roadEls.MET,L=road.getTotalLength(),p=road.getPointAtLength(L*sc.frac);
+    const zo=zoom([...WIDE],900,my);await drive(road,0,L*sc.frac*0.35,900,my);await zo;if(my!==token)return;
+    await drive(road,L*sc.frac*0.35,L*sc.frac,1300,my);if(my!==token)return;
+    hit.setAttribute("cx",p.x);hit.setAttribute("cy",p.y);
+    await zoom([p.x-140*0.3,p.y-39,140,78.7],900,my);hit.setAttribute("r",4);hit.setAttribute("stroke-width",1);
+    spotT.setAttribute("x",p.x);spotT.setAttribute("y",p.y+9);spotT.textContent=(D.findings[sc.finding].facts.locations||[""])[0]||D.moves[sc.move].dest;spotT.setAttribute("opacity",1);
+  }else{hit.setAttribute("cx",stopAt);hit.setAttribute("cy",357.5);hit.setAttribute("r",4.4);hit.setAttribute("stroke-width",.4)}
+  if(my!==token)return;hit.classList.add("on");showOverlay(sc);
+  if(playing){timer=setTimeout(()=>{if(my===token)run((n+1)%S.length)},6500)}}
+function showOverlay(sc){const f=D.findings[sc.finding];
+  $("#ov").innerHTML=`<span class="pill">STOP</span><span class="cpn">${esc(sc.checkpoint==="road"?"On the road · "+sc.area:CPS.find(c=>c[0]===sc.checkpoint)[1])}</span>
+   <h3>${esc(sc.name)}${sc.partner?" + "+esc(sc.partner):""}</h3><div class="sub">${D.moves[sc.move].vehicle} + ${D.moves[sc.move].trailer} · ${dname(sc.depart)} ${hm(sc.depart)} → ${esc(D.moves[sc.move].dest)}</div>
+   ${sc.big?`<div class="big">${esc(sc.big)}</div>`:""}<ul>${[sc.title,...sc.lines].filter((v,k,a)=>a.indexOf(v)===k).map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
+   ${sc.area==="Fatigue"?timeline(sc.driver):""}<div class="fix">${esc(sc.do)}</div>${sc.parties?`<div class="who-fix">Owner: ${sc.parties.map(esc).join(" · ")}</div>`:""}`;
+  $("#ov").classList.add("on")}
+function pause(p){playing=!p;clearTimeout(timer);$("#play").textContent=playing?"❚❚":"►";$("#play").setAttribute("aria-label",playing?"Pause":"Play")}
+$("#play").onclick=()=>{if(playing)pause(true);else{pause(false);run((i+1)%S.length)}};
+$("#next").onclick=()=>{clearTimeout(timer);run((i+1)%S.length)};
+$("#prev").onclick=()=>{clearTimeout(timer);run((i-1+S.length)%S.length)};
+$("#ov").addEventListener("click",()=>openDriver(S[i].driver));
+if(reduce)pause(true);
+run(0);
+</script>
