@@ -234,9 +234,35 @@ def main(a):
     data = dict(meta=d["meta"], drivers=drivers, moves=moves, findings=fs, entity=entity, patterns=patterns(d),
                 scenes=scenes, timelines=timelines, areas=AREAS, agents=agents, agents_meta=agents_meta, eval=evalm)
     html = (ROOT / "demo/tower_template.html").read_text().replace("/*__DATA__*/null", json.dumps(data, separators=(",", ":")))
+    if a.hosted:
+        html = hosted(html, a.base_url)
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text(html)
     print(a.out, len(html) // 1024, "KB;", len(drivers), "drivers;", len(scenes), "scenes")
+
+
+DESC = ("Before Start Safety/CoR Check: a control-tower view of 159 planned heavy vehicle trips. Rules set the traffic light; "
+        "Claude agents explain each stop and name who in the chain owns the fix. Synthetic data.")
+
+
+def hosted(html, base_url=""):
+    """Wrap the page as a standalone document for static hosting, with link-preview tags."""
+    i = html.index("</style>") + len("</style>")
+    head, body = html[:i], html[i:]
+    img = f"{base_url.rstrip('/')}/preview.png" if base_url else "preview.png"
+    meta = (f'<meta name="description" content="{DESC}">'
+            f'<meta property="og:type" content="website"><meta property="og:title" content="Before Start Safety/CoR Check">'
+            f'<meta property="og:description" content="{DESC}"><meta property="og:image" content="{img}">'
+            f'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+            + (f'<meta property="og:url" content="{base_url}">' if base_url else "")
+            + '<meta name="twitter:card" content="summary_large_image">'
+            '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E'
+            '%3Ccircle cx=%228%22 cy=%228%22 r=%227%22 fill=%22%23ff4d4d%22/%3E%3C/svg%3E">'
+            '<style>html,body{margin:0}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);'
+            'padding-bottom:env(safe-area-inset-bottom,0px)}</style>')
+    return ('<!doctype html><html lang="en-AU"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+            + meta + head + "</head><body>" + body + "</body></html>")
 
 
 if __name__ == "__main__":
@@ -244,4 +270,6 @@ if __name__ == "__main__":
     ap.add_argument("--data", default="data")
     ap.add_argument("--findings", default="build/findings.json")
     ap.add_argument("--out", default="demo/tower.html")
+    ap.add_argument("--hosted", action="store_true", help="standalone document with link-preview tags")
+    ap.add_argument("--base-url", default="", help="public URL of the hosted page, for the preview image")
     main(ap.parse_args())

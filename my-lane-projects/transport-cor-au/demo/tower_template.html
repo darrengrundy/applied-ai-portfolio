@@ -100,7 +100,7 @@ button{font:inherit;color:inherit}
 .replay-head .ctl{margin-left:auto;display:flex;gap:6px;align-items:center}
 .replay-head .ctl button{background:var(--panel-2);border:0;border-radius:4px;width:30px;height:28px;cursor:pointer}
 .replay-head .ctl span{font:500 12px var(--mono);color:var(--ink-3);min-width:44px;text-align:center}
-.stage{position:relative;aspect-ratio:16/9;max-width:100%}
+.stage{position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden}
 .stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .road{fill:none;stroke:var(--road);stroke-linecap:round}
 .water{fill:var(--water)}
@@ -126,6 +126,25 @@ button{font:inherit;color:inherit}
 .overlay ul{margin:4px 0 0;padding-left:16px;font-size:13px;color:var(--ink-2)}
 .overlay .fix,.fix{margin-top:8px;font-size:13px}
 .fix::before{content:"Do now  ";font:600 11px var(--mono);letter-spacing:.06em;color:var(--amber)}
+.jump{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;border-top:1px solid var(--rule)}
+.jump button{background:var(--panel-2);border:1px solid transparent;border-radius:4px;padding:3px 8px;font:500 11px var(--mono);color:var(--ink-2);cursor:pointer}
+.jump button:hover{color:var(--ink)}
+.jump button[aria-current="true"]{border-color:var(--red);color:var(--ink)}
+.jump button b{color:var(--red);font-weight:500;margin-right:5px}
+.replay-btn{margin-top:4px;background:var(--red-bg);color:var(--ink);border:1px solid var(--red);border-radius:4px;padding:6px 12px;cursor:pointer;font:600 14px var(--display);letter-spacing:.05em;text-transform:uppercase;align-self:flex-start}
+.overlay.on~.caption{opacity:0}
+.stage{min-height:300px}
+@media (max-width:700px){
+ .cols{display:none}
+ .tbl{overflow:visible}
+ .drow{min-width:0;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px 4px;padding:12px 14px}
+ .drow .who{grid-column:1/5}.drow .dep{grid-column:5/7;text-align:right}
+ .drow .light{margin-bottom:14px;position:relative}
+ .drow .light::after{content:attr(data-l);position:absolute;top:19px;left:50%;transform:translateX(-50%);font:500 9px var(--mono);color:var(--ink-3);opacity:1;white-space:nowrap}
+ .drow .do{grid-column:1/-1}
+ .overlay{left:10px;right:10px;width:auto;top:auto;bottom:10px;max-height:calc(100% - 20px);overflow:auto}
+ .overlay .big{font-size:30px}
+}
 .caption{position:absolute;left:12px;bottom:10px;font:500 12px var(--mono);color:var(--ink-2);background:rgba(12,19,23,.8);padding:3px 8px;border-radius:4px}
 
 /* fatigue timeline */
@@ -184,11 +203,12 @@ dialog::backdrop{background:rgba(5,10,12,.7)}
         <div class="ctl"><button id="prev" aria-label="Previous stop">◀</button><button id="play" aria-label="Pause">❚❚</button><button id="next" aria-label="Next stop">▶</button><span id="sc"></span></div></div>
       <div class="stage"><svg id="map" viewBox="0 0 1000 562" role="img" aria-label="Map of lanes from Laverton North with depot checkpoints"></svg>
         <div class="overlay" id="ov" aria-live="polite"></div><div class="caption" id="cap"></div></div>
+      <div class="jump" id="jump" aria-label="Jump to a stop"></div>
     </section>
     <section class="miss"><div class="miss-head"><h2>Easy to miss</h2><span>patterns over 4 weeks</span></div><div id="notice" class="miss"></div></section>
   </div>
 </div>
-<p class="foot">Lights are set by deterministic checks against NHVR standard hours, General Mass Limits and the Load Restraint Guide, plus the operator's own procedures (service, training, speed follow-up). A hollow light means the weighbridge ticket is taken at loading, closer to departure. Decision support only: it does not certify compliance or release a vehicle. All people, companies and records are fictional.</p>
+<p class="foot"><a href="https://mylaneai.com.au/" style="color:var(--ink-2)">My Lane</a> · <a href="https://github.com/darrengrundy/applied-ai-portfolio/tree/main/my-lane-projects/transport-cor-au" style="color:var(--ink-2)">Code and evaluation on GitHub</a> · Use ◀ ▶ or the arrow keys to step through the stops; click any driver for the evidence.<br>Lights are set by deterministic checks against NHVR standard hours, General Mass Limits and the Load Restraint Guide, plus the operator's own procedures (service, training, speed follow-up). A hollow light means the weighbridge ticket is taken at loading, closer to departure. Decision support only: it does not certify compliance or release a vehicle. All people, companies and records are fictional.</p>
 
 <dialog id="dlg"><div class="dh"><div><span class="mono" id="dlg-k" style="color:var(--ink-3);font-size:12px"></span><h2 id="dlg-t"></h2></div><button id="dlg-x" aria-label="Close">×</button></div><div class="db" id="dlg-b"></div></dialog>
 
@@ -218,8 +238,8 @@ function row(d){const m=D.moves[d.next];
   return `<button class="drow" data-d="${d.id}">
    <span class="who"><b>${esc(d.name)}</b><small>${m.vehicle} + ${m.trailer}${d.partner?" · two-up w/ "+esc(d.partner.split(" ")[0]):""}</small></span>
    <span class="dep"><b>${dname(m.depart)} ${hm(m.depart)}</b><small class="${d.rag==="RED"&&new Date(m.depart)-SNAP<4*3600e3?"soon":""}">${until(m.depart)}${d.more>0?` · +${d.more} more`:""}</small></span>
-   ${D.areas.map(a=>`<span class="light ${d.areas[a]}" title="${a}: ${d.areas[a]==="DUE"?"ticket at loading":d.areas[a].toLowerCase()}" aria-label="${a} ${d.areas[a]}"></span>`).join("")}
-   <span class="do">${tf?`<b>${esc(tf.title.replace(d.name+": ",""))}</b>${d.decision?`<span class="dec ${d.decision}">${d.decision.replace(/_/g," ")}</span>`:""}${esc(d.do)}${d.parties?`<span class="who-fix">Owner: ${d.parties.map(esc).join(" · ")}</span>`:""}`:`<b>${esc(m.dest)}</b>${esc(m.customer)} · ${esc(m.load)}`}</span></button>`}
+   ${D.areas.map(a=>`<span class="light ${d.areas[a]}" data-l="${SHORT[a]}" title="${a}: ${d.areas[a]==="DUE"?"ticket at loading":d.areas[a].toLowerCase()}" aria-label="${a} ${d.areas[a]}"></span>`).join("")}
+   <span class="do">${tf?`<b>${esc((t=>t.charAt(0).toUpperCase()+t.slice(1))(tf.title.replace(d.name+": ","")))}</b>${d.decision?`<span class="dec ${d.decision}">${d.decision.replace(/_/g," ")}</span>`:""}${esc(d.do)}${d.parties?`<span class="who-fix">Owner: ${d.parties.map(esc).join(" · ")}</span>`:""}`:`<b>${esc(m.dest)}</b>${esc(m.customer)} · ${esc(m.load)}`}</span></button>`}
 const cols=`<div class="cols"><span>Driver · vehicle</span><span>Next trip</span>${D.areas.map(a=>`<span class="c">${SHORT[a]}</span>`).join("")}<span>Issue · action</span></div>`;
 let goOpen=false;
 function renderSegs(){
@@ -264,9 +284,10 @@ function openDriver(id){const d=D.drivers.find(x=>x.id===id);pause(true);
   const A=D.agents&&D.agents[d.id];
   const agHTML=A?A.items.map(x=>`<div class="ag"><span class="dec ${x.decision}">${x.decision.replace(/_/g," ")}</span><span class="mono" style="font-size:11px;color:var(--ink-3)">${esc(x.area)} · cause: ${esc(x.root_cause.replace(/_/g," ").toLowerCase())} · owner: ${x.accountable_parties.map(esc).join(", ")}</span>
     <h3 style="margin-top:6px">${esc(x.action)}</h3><p>${esc(x.explanation)}</p></div>`).join("")+`<div class="meta mono" style="font-size:11px;color:var(--ink-3)">Written by ${esc(D.agents_meta.model)} from the engine facts below · reviewer ${A.passed?"passed":"did not pass"} it${A.rounds>1?` after ${A.rounds-1} revision${A.rounds>2?"s":""}`:" first time"}</div>`:"";
-  $("#dlg-b").innerHTML=`<div>${trips}</div>`+(A?agHTML:(d.do?`<div class="fix">${esc(d.do)}</div>`:""))+timeline(d.id)+
+  const hasScene=S.some(sc=>sc.driver===d.id||sc.name===d.partner);
+  $("#dlg-b").innerHTML=`<div>${trips}</div>`+(hasScene?`<button class="replay-btn" id="dlg-play">Show in replay</button>`:"")+(A?agHTML:(d.do?`<div class="fix">${esc(d.do)}</div>`:""))+timeline(d.id)+
    (fs.length?fs.map(fview).join(""):`<div class="f"><h3>All six checks clear</h3><p style="color:var(--ink-2);margin:6px 0 0">Fatigue, mass, restraint, speed, maintenance and records ran with complete evidence. Weighbridge tickets for later trips are checked at loading.</p></div>`);
-  $("#dlg").showModal()}
+  $("#dlg").showModal();const pb=$("#dlg-play");if(pb)pb.onclick=()=>playScene(d.id)}
 function openF(id){const f=D.findings[id];pause(true);$("#dlg-k").textContent=f.entity;$("#dlg-t").textContent=f.area;$("#dlg-b").innerHTML=fview(f);$("#dlg").showModal()}
 document.addEventListener("click",e=>{const r=e.target.closest("[data-d]"),f=e.target.closest("[data-f]");if(r)openDriver(r.dataset.d);else if(f)openF(f.dataset.f)});
 $("#dlg-x").onclick=()=>$("#dlg").close();
@@ -319,8 +340,9 @@ const truck=el("g",{class:"truck"});el("rect",{class:"box",x:-9,y:-2.2,width:12,
 let vb=[...WIDE];const setVB=v=>{vb=v;svg.setAttribute("viewBox",v.join(" "));const z=v[2]<120;yardG.setAttribute("opacity",z?1:0);townG.setAttribute("opacity",v[2]<400?0:1)};
 const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
 let token=0;
-const wait=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
-function anim(ms,fn,my){return new Promise(res=>{if(reduce){fn(1);return res()}const t0=performance.now();
+const PACE=0.75, HOLD=5200; // replay speed: transitions at 75% of the original time
+const wait=ms=>new Promise(r=>setTimeout(r,reduce?0:ms*PACE));
+function anim(ms,fn,my){ms*=PACE;return new Promise(res=>{if(reduce){fn(1);return res()}const t0=performance.now();
   const step=now=>{if(my!==token)return res();const t=Math.min(1,(now-t0)/ms);fn(ease(t));t<1?requestAnimationFrame(step):res()};requestAnimationFrame(step)})}
 const zoom=(to,ms,my)=>{const from=[...vb];return anim(ms,t=>setVB(from.map((v,i)=>v+(to[i]-v)*t)),my)};
 function place(path,len){const L=path.getTotalLength(),l=Math.max(0,Math.min(L,len)),p=path.getPointAtLength(l),q=path.getPointAtLength(Math.min(L,l+.5));
@@ -332,7 +354,7 @@ let i=0,playing=!reduce,timer=null;
 const S=D.scenes;
 svg.appendChild(truck);
 async function run(n){const my=++token;const sc=S[n];i=n;
-  $("#sc").textContent=`${n+1} / ${S.length}`;$("#ov").classList.remove("on");hit.classList.remove("on");
+  $("#sc").textContent=`${n+1} / ${S.length}`;document.querySelectorAll(".jump button").forEach((b,k)=>b.setAttribute("aria-current",k===n?"true":"false"));$("#ov").classList.remove("on");hit.classList.remove("on");
   for(const k in cpEls)cpEls[k].setAttribute("class","cp");
   $("#cap").textContent=`${sc.name} · ${dname(sc.depart)} ${hm(sc.depart)}`;
   setVB([...WIDE]);place(yard,0);await wait(500);if(my!==token)return;
@@ -354,7 +376,7 @@ async function run(n){const my=++token;const sc=S[n];i=n;
     spotT.setAttribute("x",p.x);spotT.setAttribute("y",p.y+9);spotT.textContent=(D.findings[sc.finding].facts.locations||[""])[0]||D.moves[sc.move].dest;spotT.setAttribute("opacity",1);
   }else{hit.setAttribute("cx",stopAt);hit.setAttribute("cy",357.5);hit.setAttribute("r",4.4);hit.setAttribute("stroke-width",.4)}
   if(my!==token)return;hit.classList.add("on");showOverlay(sc);
-  if(playing){timer=setTimeout(()=>{if(my===token)run((n+1)%S.length)},6500)}}
+  if(playing){timer=setTimeout(()=>{if(my===token)run((n+1)%S.length)},HOLD)}}
 function showOverlay(sc){const f=D.findings[sc.finding];
   $("#ov").innerHTML=`<span class="pill">STOP</span><span class="cpn">${esc(sc.checkpoint==="road"?"On the road · "+sc.area:CPS.find(c=>c[0]===sc.checkpoint)[1])}</span>
    <h3>${esc(sc.name)}${sc.partner?" + "+esc(sc.partner):""}</h3><div class="sub">${D.moves[sc.move].vehicle} + ${D.moves[sc.move].trailer} · ${dname(sc.depart)} ${hm(sc.depart)} → ${esc(D.moves[sc.move].dest)}</div>
@@ -366,6 +388,10 @@ $("#play").onclick=()=>{if(playing)pause(true);else{pause(false);run((i+1)%S.len
 $("#next").onclick=()=>{clearTimeout(timer);run((i+1)%S.length)};
 $("#prev").onclick=()=>{clearTimeout(timer);run((i-1+S.length)%S.length)};
 $("#ov").addEventListener("click",()=>openDriver(S[i].driver));
+$("#jump").innerHTML=S.map((sc,k)=>`<button data-k="${k}" title="${esc(sc.name)} · ${esc(sc.area)}"><b>${hm(sc.depart)}</b>${esc(sc.name.split(" ").slice(-1)[0])}</button>`).join("");
+$("#jump").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;e.stopPropagation();clearTimeout(timer);run(+b.dataset.k)});
+function playScene(did){const k=S.findIndex(sc=>sc.driver===did||D.drivers.find(d=>d.id===did)?.partner===sc.name);if(k<0)return;$("#dlg").close();clearTimeout(timer);run(k);$(".replay").scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"})}
+document.addEventListener("keydown",e=>{if($("#dlg").open||e.target.closest("input,textarea"))return;if(e.key==="ArrowRight")$("#next").click();if(e.key==="ArrowLeft")$("#prev").click();if(e.key===" "&&e.target===document.body){e.preventDefault();$("#play").click()}});
 if(reduce)pause(true);
 run(0);
 </script>

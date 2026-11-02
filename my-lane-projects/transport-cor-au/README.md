@@ -87,10 +87,10 @@ transport-cor-au/
 |   |-- evaluate_agents.py, run_series.py
 |   `-- build_tower.py  # builds the self-contained screen
 |-- tests/              # fatigue boundaries, agent code checks
-|-- demo/               # tower.html (open in a browser), tower_template.html
+|-- demo/               # index.html (hosted build), tower.html, tower_template.html
+|-- docs/               # DESIGN.md, preview.png
 |-- build/              # committed evidence: findings, agent output, evaluation, 3-run series
 |-- ref/sources.md      # NHVR extracts with retrieval date
-|-- docs/DESIGN.md
 |-- .env.example
 `-- requirements.txt
 ```
@@ -117,7 +117,11 @@ No API key is needed for the rule engine, the tests or the screen.
 
 ## Demonstration
 
-Open `demo/tower.html` in a browser. The snapshot is Monday 2 November 2026, 05:30 AEDT, with 159 planned trips: 13 drivers to stop, 13 to watch and 10 clear to go. Examples:
+Open `demo/index.html` (the hosted build, with link-preview tags) or `demo/tower.html` in a browser. The replay plays each stop in turn. Use ◀ ▶, the arrow keys or the time chips to step through, or open a driver and choose *Show in replay*.
+
+![Before Start Safety/CoR Check](docs/preview.png)
+
+Build the hosted page with `python src/build_tower.py --hosted --base-url https://<host>/ --out demo/index.html`. The snapshot is Monday 2 November 2026, 05:30 AEDT, with 159 planned trips: 13 drivers to stop, 13 to watch and 10 clear to go. Examples:
 
 - **Fatigue:** a driver finished a Sunday call-out at 23:30 and is rostered for 06:00. The 24 h period that began at 07:00 Sunday already holds 12 h of work, so the earliest compliant start is **07:00**. The capstone demo had cleared 06:30, which still breaches the 12 h work limit.
 - **Two-up:** a Sydney return was brought forward from 18:45 to 08:45 at a customer's request, leaving the pair without their 5 h rest. The agents stop the trip and name the scheduler (and in 2 of 3 runs the consignor). They class the cause as roster planning rather than the customer window that the label expects.
