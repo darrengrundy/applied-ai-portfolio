@@ -5,6 +5,8 @@
 Reads data/ (the day) and the run folder (results.jsonl, wismo.jsonl, metrics.json from evaluate.py).
 Everything the page needs is embedded, so it makes no server or API calls when viewed."""
 import argparse
+import base64
+import gzip
 import json
 import math
 import sys
@@ -83,6 +85,10 @@ def main():
     ap.add_argument("--data", default=str(PROJECT / "data"))
     ap.add_argument("--out", default=str(PROJECT / "demo" / "index.html"))
     ap.add_argument("--note", default="", help="Optional banner, e.g. for a preview build")
+    ap.add_argument("--artifact", action="store_true", help="Page body only (for hosts that add their own skeleton)")
+    ap.add_argument("--og-url", default="https://mylaneai-wheres-my-stuff.lomadg.chatgpt.site/")
+    ap.add_argument("--og-image", default="https://raw.githubusercontent.com/darrengrundy/applied-ai-portfolio/main/"
+                                          "my-lane-projects/last-mile-exception-agent-au/docs/preview.png")
     ap.add_argument("--aud-rate", type=float, default=1.43,
                     help="AUD per USD for showing costs (Anthropic bills in USD; mid-market rate 31 Oct 2026 was 1.426)")
     a = ap.parse_args()
@@ -192,7 +198,16 @@ def main():
     payload = {"fx": a.aud_rate, "note": a.note, "node_labels": NODE_LABEL, "story": story, "cities": cities, "cases": cases, "wismo": W, "tour": tour, "summary": summary,
                "labels": LABEL, "res_labels": RES_LABEL}
     html = (PROJECT / "src" / "demo_template.html").read_text(encoding="utf-8")
-    html = html.replace("__DATA__", json.dumps(payload, separators=(",", ":"), default=str))
+    blob = gzip.compress(json.dumps(payload, separators=(",", ":"), default=str).encode("utf-8"), 9)
+    desc = (f"AI agents sort {len(cases):,} failed deliveries in one synthetic day across Melbourne and Sydney "
+            f"and tell each customer what happens next before they have to ask.")
+    html = (html.replace("__DESC__", desc).replace("__OGIMAGE__", a.og_image).replace("__OGURL__", a.og_url)
+            .replace("__DATA__", base64.b64encode(blob).decode("ascii")))
+    if not a.artifact:   # a full document for static hosting (standards mode); the artifact host adds its own
+        html = '<!doctype html>\n<html lang="en-AU">\n<head>\n<meta charset="utf-8">\n' \
+               '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' + \
+               html.replace("<style>", "<style>\nbody{margin:0}", 1).replace("</style>", "</style>\n</head>\n<body>", 1) + \
+               "\n</body>\n</html>\n"
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html, encoding="utf-8")
     print(f"{out} written: {out.stat().st_size / 1e6:.1f} MB | {len(cases):,} cases | {len(W)} enquiries | "
