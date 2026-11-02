@@ -1,5 +1,14 @@
 <title>Where's My Stuff?</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="__DESC__">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Where's My Stuff? Last-mile exception agents">
+<meta property="og:description" content="__DESC__">
+<meta property="og:image" content="__OGIMAGE__">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="__OGURL__">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -247,8 +256,16 @@ footer{margin-top:24px;padding-top:12px;border-top:1px solid var(--line);color:v
 
 <script src="https://unpkg.com/deck.gl@8.9.35/dist.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
-<script>
-const D=__DATA__;
+<script id="day-data" type="application/octet-stream">__DATA__</script>
+<script type="module">
+// The day's data ships gzip-compressed (base64) to keep the page small; unpack it in the browser.
+async function loadDay(){
+  const b=atob(document.getElementById('day-data').textContent.trim());
+  const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);
+  const s=new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'));
+  return JSON.parse(await new Response(s).text());
+}
+const D=await loadDay();
 const $=s=>document.querySelector(s);
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const hex=h=>{h=h.replace('#','');return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16))};
@@ -464,4 +481,5 @@ function ask(){
 }
 if(D.note){$('#note').textContent=D.note;$('#note').hidden=false}
 endOfDay();ask();hud();requestAnimationFrame(frame);
+window.__demo={open,setPlaying,setT:t=>{T=t;dirty=true},freeze:f=>{window.FREEZE=f},tour:D.tour};
 </script>
