@@ -8,7 +8,7 @@
 
 **Status:** Working demo — visual and metrics layer complete and reproducible on synthetic data; the agent layer is designed but not built yet.
 
-**Context:** Independent project ([My Lane](https://mylaneai.com.au/)). Phase 1 of a planned DIFOT root-cause multi-agent system. The prototype was built on a real national distribution network's carrier data, then re-created here on synthetic data at double the volume so it can be shared.
+**Context:** Independent project ([My Lane](https://mylaneai.com.au/)). Phase 1 of a planned DIFOT root-cause multi-agent system. Designed for real carrier exports, demonstrated on synthetic data.
 
 ## Problem
 
@@ -53,7 +53,7 @@ The planned agent layer follows the same pattern as the [delivery exception agen
 
 - Computes DIFOT, on time and in full in business days, excluding weekends and national holidays.
 - Estimates cost per shipment, per kg and per km, including a distance model with manual overrides for postcodes that share one coordinate (for example the Torres Strait islands).
-- Animates more than 300k consignments on their real dispatch-to-delivery timeline in the browser.
+- Animates more than 300k consignments on their own dispatch-to-delivery timeline in the browser.
 - Writes root-cause callouts from the data at build time, so the wording follows whatever the numbers show.
 - Runs on any carrier export with the same schema; only the config (title, banner, label positions) changes.
 
@@ -97,9 +97,9 @@ The synthetic year (5 Jan – 23 Oct 2026) has 318k consignments from three east
 2. **North Queensland wet season** (Feb–Mar): late deliveries north of Gladstone.
 3. **Melbourne → Perth linehaul disruption** (7–27 Sep): a sharp WA dip.
 4. **Friday cut-off**: next-day freight dispatched on Friday misses more often, so Monday ETAs are the weakest weekday.
-5. **Cost creep**: the fuel levy rises all year and a 4.5% rate review lands on 1 Jul, so cost per kg rises about 12%.
+5. **Cost creep**: the fuel levy rises all year and a 4.5% rate review lands on 1 Jul, so cost per kg rises about 10%.
 
-The pipeline isn't told about any of these; it recovers them from the CSVs alone. Headline results: DIFOT 83.2%, $15.5M freight spend, 78% of failures exactly one business day late, and Truganina 80% vs Eastern Creek 87%.
+The pipeline isn't told about any of these; it recovers them from the CSVs alone. Headline results: DIFOT 83.6%, $15.5M freight spend, 77% of failures exactly one business day late, and Truganina 80% vs Eastern Creek 88%.
 
 | Postcodes | Root-cause signals |
 |---|---|
@@ -116,7 +116,7 @@ The pipeline isn't told about any of these; it recovers them from the CSVs alone
 ## Testing and evidence
 
 - **Reproducibility:** a clean run of the three setup commands rebuilds `demo/index.html` byte for byte with the default seed.
-- **Real data run:** the pipeline was first run on a real 159k-consignment carrier export (not published). Its patterns shaped the synthetic storylines. DIFOT has not yet been reconciled against the network's official monthly report.
+- **Input format:** built to the standard carrier `ConnoteList` export schema, so a real export runs unchanged. DIFOT has not yet been reconciled against an operator's official monthly report.
 - **Storyline recovery:** all five planted storylines are visible in the built page's trend and root-cause views.
 - **Rendering:** checked in headless Chromium at desktop and phone width, in light and dark themes. Freight-flow animation smoothness was not measured on a GPU in CI.
 - **Not yet tested:** no automated unit tests; no evaluation of the agent layer, which isn't built.
@@ -131,8 +131,8 @@ The pipeline isn't told about any of these; it recovers them from the CSVs alone
 
 ## What I learned
 
-1. A consignment export answers more "why" questions than expected: the size of the miss (78–83% exactly one day late) points to cut-offs and linehaul connections before any reason codes arrive.
-2. Network averages mislead. In the real data, cost per km fell while cost per kg rose, purely because the lane mix changed. Lane-level views are essential.
+1. A consignment export answers more "why" questions than expected: the size of the miss (more than three-quarters of failures exactly one day late) points to cut-offs and linehaul connections before any reason codes arrive.
+2. Network averages mislead. Cost per km can fall while cost per kg rises, purely because the lane mix changes. Lane-level views are essential.
 3. Geography data has traps. Some postcodes share one coordinate across dozens of islands, and one territory had no current remoteness class. Both were found by looking at the map, not the tables.
 4. Generating synthetic data with deliberate storylines is worth the effort: it makes a demo honest to share and creates ground truth for later evaluation.
 
@@ -145,8 +145,7 @@ The pipeline isn't told about any of these; it recovers them from the CSVs alone
 
 ## Security and responsible AI
 
-- The published demo uses only synthetic data. The company, customers, consignments and charges are fictitious, and generated customer postcodes exclude the real network's sites.
-- The real-data version is kept outside this repository.
+- The published demo uses only synthetic data. The company, customers, consignments and charges are fictitious,.
 - No credentials, endpoints or personal data are used or committed.
 - No LLM is involved yet. When agents are added, the metrics engine stays the only source of numbers and a human approves any carrier claim.
 
