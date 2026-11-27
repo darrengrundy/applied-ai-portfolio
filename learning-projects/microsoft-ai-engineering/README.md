@@ -4,7 +4,7 @@ This tracker covers the **30 practical exercises** retained for Microsoft course
 
 The exercise names and numbering follow the local AI-103 course pack retained in August 2026. Microsoft updates its live exercise catalogues over time, so the linked catalogues may not always contain the same historical set or wording.
 
-**Progress:** 1 of 30 labs run hands-on in my own subscription (3%) · module quizzes completed: Prepare for Azure AI development (score pending)
+**Progress:** 2 of 30 labs run hands-on in my own subscription (7%) · module quizzes completed: Prepare for Azure AI development (score pending)
 
 ## How labs are run
 
@@ -35,7 +35,7 @@ The exercise names and numbering follow the local AI-103 course pack retained in
 | # | Exercise | Lab run | Portfolio status | Supply-chain adaptation |
 |---:|---|---|---|---|
 | 1.1 | [Plan and prepare to develop AI solutions on Azure](https://microsoftlearning.github.io/mslearn-ai-studio/Instructions/Exercises/01-Explore-ai-studio.html) | 2026-09-06 (own subscription; VS Code step pending) | [Lab evidence](1-1-prepare-ai-development/) · [Shared evidence - DAX #1](../ai-engineering-bootcamp/01-foundry-project-setup/) | Foundry project set up as the shared base for all later labs |
-| 1.2 | [Select, deploy, and evaluate Microsoft Foundry models](https://microsoftlearning.github.io/mslearn-ai-studio/Instructions/Exercises/02-model-catalog-evaluation.html) | | Related work - verify | Compare models on carrier email triage and freight-rate questions |
+| 1.2 | [Select, deploy, and evaluate Microsoft Foundry models](https://microsoftlearning.github.io/mslearn-ai-studio/Instructions/Exercises/02-model-catalog-evaluation.html) | 2026-09-07 (own subscription) | [Lab evidence](1-2-explore-compare-models/) | Compare models on carrier email triage and freight-rate questions |
 | 1.3 | [Develop a generative AI chat app with Microsoft Foundry](https://microsoftlearning.github.io/mslearn-ai-studio/Instructions/Exercises/03-foundry-sdk.html) | | [Validation blocked - DAX #2](../ai-engineering-bootcamp/02-generative-ai-chat-app/) | Transport operations assistant answering dispatch and booking questions |
 | 1.4 | [Develop generative AI apps that use tools](https://microsoftlearning.github.io/mslearn-ai-studio/Instructions/Exercises/04a-use-own-data.html) | | [Validation blocked - DAX #3](../ai-engineering-bootcamp/03-generative-ai-tools-app/) | Tools for freight-cost lookup and delivery ETA calculation |
 | 1.5 | [Optimize generative AI model performance with Microsoft Foundry](https://microsoftlearning.github.io/mslearn-ai-studio/Instructions/Exercises/04b-finetune-model.html) | | Planned | Fine-tune on synthetic carrier-communication examples for a consistent tone |

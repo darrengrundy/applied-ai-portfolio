@@ -17,7 +17,7 @@ Later AI-103 labs need a working Foundry project, a model deployment and a signe
 ## Solution
 
 - Created Foundry project `grundy-darren-5550` and its parent resource `grundy-darren-5550-resource` in East US 2 (6–7 September 2026)
-- Deployed `gpt-5-mini` on 7 September 2026 and tested it in the portal playground with a system instruction. The current lab names `gpt-5.2`, but the exercise only needs a deployed chat model. A second model, `gpt-6-astra`, was added on 13 October 2026 for later labs
+- Deployed `gpt-4.1` on 6 September 2026 and tested it in the portal playground with a system instruction. The current lab names `gpt-5.2`, but the exercise only needs a deployed chat model. `gpt-5-mini` (7 September, for [Lab 1.2](../1-2-explore-compare-models/)) and `gpt-6-astra` (13 October) were added later
 - Found the key, project endpoint and Azure OpenAI endpoint, and recorded what each one is for
 - Installed Foundry Toolkit for VS Code, connected it to the project and used the model playground from VS Code _(pending)_
 
@@ -29,7 +29,7 @@ flowchart LR
     Dev --> VSCode["VS Code<br/>Foundry Toolkit"]
     VSCode -->|Azure sign-in| Project
     Project --> Parent["Parent Foundry resource<br/>grundy-darren-5550-resource"]
-    Project --> Model["gpt-5-mini deployment"]
+    Project --> Model["gpt-4.1 deployment"]
 ```
 
 Resource names are shown. Subscription and tenant IDs, keys and endpoint URLs are left out.
@@ -37,7 +37,7 @@ Resource names are shown. Subscription and tenant IDs, keys and endpoint URLs ar
 ## Technologies
 
 - Microsoft Foundry portal (New Foundry experience): project, model catalog, playground
-- Azure OpenAI `gpt-5-mini`: chat model deployment (the current lab uses gpt-5.2)
+- Azure OpenAI `gpt-4.1`: chat model deployment (the current lab uses gpt-5.2)
 - Foundry Toolkit for VS Code: project browsing and model playground
 - Azure CLI: sign-in and resource verification
 
@@ -64,7 +64,7 @@ _Pending: a fresh playground excerpt, plus redacted screenshots of the project h
 | Requirement | Evidence | Assessment |
 |---|---|---|
 | Foundry project created | Activity log: project and resource created in rg-grundy_darren-4177, East US 2, 6–7 Sep 2026 | Verified |
-| Model deployed | Activity log: `gpt-5-mini` deployment succeeded 7 Sep 2026 | Verified |
+| Model deployed | `gpt-4.1` deployment on 6 Sep 2026, shown in the project's deployments | Verified |
 | Model responding in playground | Not recorded by Azure. Pending a fresh playground screenshot | Not independently verifiable |
 | Key and endpoints viewed | Activity log: List Keys events 7–8 Sep and 13 Oct 2026 (values withheld) | Verified |
 | VS Code connected to project | Pending screenshot | Pending |
